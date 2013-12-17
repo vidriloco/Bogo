@@ -1,0 +1,5 @@
+es_MX:
+  actions:
+    panels:
+      show: "Mostrar paneles"
+      hide: "Ocultar paneles"

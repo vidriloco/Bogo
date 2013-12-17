@@ -1,0 +1,141 @@
+// Place all the styles related to the welcome controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic,300italic);
+
+body, html {
+	margin: 0;
+	padding: 0;
+	font-family: 'Open Sans', sans-serif;
+}
+
+/* COMMONS BEGIN */
+
+.hidden {
+	display: none !important;
+}
+
+a {
+	text-decoration: none;
+}
+
+/* COMMONS END */
+
+#map-basic { position:absolute; width:100%; height:100%; }
+
+#panels {
+	position: absolute;
+	width: 300px;
+	right: 30px;
+	top: 100px;
+	height: 20px;
+	
+	.layers-list {
+		width: 95%;
+		padding: 10px;
+		margin-left: auto;
+		margin-right: auto;
+		background-color: rgba(255,255,255,0.7);
+		-moz-box-shadow: 0 0 3px #888;
+		-webkit-box-shadow: 0 0 3px#888;
+		box-shadow: 0 0 3px #888;
+		border-radius: 3px;
+		
+		.title {
+			text-align: center;
+			text-transform: uppercase;
+			font-size: 14px;
+			font-weight: 700;
+			color: #757575;
+			border-bottom: 1px solid #4BB64A;
+			
+			p {
+				margin: 0;
+				padding: 5px;
+			}
+		}
+
+		
+		.content {
+			margin-top: 10px;
+			
+			.selected {
+				background-color: rgba(115, 196, 98, 0.2);
+			}
+			
+			.layer:hover {
+				border: 1px solid #EBEBEB;
+			}
+			
+			.layer {
+				border: 1px solid white;
+				line-height: 10px;
+				padding: 10px;
+
+				p {
+					font-size: 13px;
+					margin: 0;
+					padding: 0;
+
+					a {
+						
+						.pic {
+							display: inline-block;
+							width: 60px;
+						}
+
+						.title {
+							font-size: 12px;
+							border: none;
+							text-align: left;
+							color: #4A4A4A;
+						}
+
+						.name {
+							vertical-align: 90%;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+#navbar {
+	position: absolute;
+	width: 800px;
+	height: 50px;
+	left: 50%;
+	margin-left: -400px;
+	background-color: white;
+	-moz-box-shadow: 0 0 3px #888;
+	-webkit-box-shadow: 0 0 3px#888;
+	box-shadow: 0 0 3px #888;
+	border-radius: 3px;
+	
+	ul {
+		margin: 0;
+		margin-left: 20px;
+		padding: 7px;
+		list-style: none;
+		
+		li {
+			display: inline-block;
+		}
+		
+		li.app-name {
+			font-size: 20px;
+			font-weight: bold;
+			color: #4BB64A;
+		}
+		
+		li.actions {
+			text-align: right;
+			width: 600px;
+			ul {
+				font-size: 13px;
+			}
+		}
+	}
+}
