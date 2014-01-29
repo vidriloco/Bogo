@@ -24,31 +24,57 @@ a {
 
 #map-basic { position:absolute; width:100%; height:100%; }
 
-#panels {
-	position: absolute;
-	width: 300px;
+#polygon-panel {
+	height: 400px ;
+	overflow-y: scroll;
+}
+
+.right-sided {
 	right: 30px;
+	width: 300px;
+}
+
+.left-sided {
+	left: 30px;
+	width: 200px;
+}
+
+.panels {
+	position: absolute;
 	top: 100px;
-	height: 20px;
 	
 	.layers-list {
-		width: 95%;
+		width: 90%;
 		padding: 10px;
 		margin-left: auto;
 		margin-right: auto;
 		background-color: rgba(255,255,255,0.7);
-		-moz-box-shadow: 0 0 3px #888;
-		-webkit-box-shadow: 0 0 3px#888;
-		box-shadow: 0 0 3px #888;
+		-moz-box-shadow: 0 0 3px #D7D7D7;
+		-webkit-box-shadow: 0 0 3px#D7D7D7;
+		box-shadow: 0 0 3px #D7D7D7;
 		border-radius: 3px;
+		
+		.stats-table {
+			width: 100%;
+			font-size: 12px;
+			text-align: center;
+			> div {
+				margin: 10px 0 5px 0;
+			}
+		}
+		
+		.value {
+			font-size: 25px;
+			color: #1061FE;
+		}
 		
 		.title {
 			text-align: center;
 			text-transform: uppercase;
 			font-size: 14px;
 			font-weight: 700;
-			color: #757575;
-			border-bottom: 1px solid #4BB64A;
+			color: #0066CC;
+			border-bottom: 2px solid #0066CC;
 			
 			p {
 				margin: 0;
@@ -138,4 +164,22 @@ a {
 			}
 		}
 	}
+}
+
+// Commons
+
+.contents-to-right {
+	text-align: right;
+	
+	a {
+		opacity: 0.4;
+	}
+	
+	a:hover, a.selected {
+		opacity: 1;
+	}
+}
+
+.hidden {
+	display: none;
 }

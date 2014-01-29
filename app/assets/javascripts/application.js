@@ -13,4 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require AGEBS2
+//= require radius500
 //= require_tree .
