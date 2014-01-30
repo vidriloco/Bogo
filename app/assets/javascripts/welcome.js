@@ -6,11 +6,12 @@ $(document).ready(function() {
 	var baseLayer = new L.TileLayer(layerUrl, {maxZoom: 19, attribution: layerAttribution });
 	map.addLayer(baseLayer);
 	
-	var metrobus = L.mapbox.tileLayer('vidriloco.44p9ej6i');
+	var metrobus = L.mapbox.tileLayer('vidriloco.xg62e187');
 	var metro = L.mapbox.tileLayer('vidriloco.59rkxcf9');
 	var suburbano = L.mapbox.tileLayer('vidriloco.l0ofaqiq');
-	var electricos = L.mapbox.tileLayer('vidriloco.mwen90ov');
+	var electricos = L.mapbox.tileLayer('vidriloco.3vgjbd6g');
 	var radiusManager = null;
+	var stationsManager = null;
 	
 	function toggleLayer(layer, zIndex, dom) {
 		if (map.hasLayer(layer)) {
@@ -22,21 +23,21 @@ $(document).ready(function() {
     }
 	}
 	
-	
 	$('.layer a').bind('click', function() {
 		if($(this).attr('id') == "metrobus") {
 			toggleLayer(metrobus, 1, $(this).attr('id'));
+			stationsManager.toggleMetrobus();
 		} else if($(this).attr('id') == "metro") {
 			toggleLayer(metro, 2, $(this).attr('id'));
 		} else if($(this).attr('id') == "trensuburbano") {
 			toggleLayer(suburbano, 3, $(this).attr('id'));
 		} else if($(this).attr('id') == "transporteselectricos") {
 			toggleLayer(electricos, 4, $(this).attr('id'));
+			stationsManager.toggleSTE();
 		} else if($(this).attr('id') == "radio500") {
 			radiusManager.enableRadius(500);
 		}
 	});
-	
 	
 	var loadTogglersIn = function(parentDom) {
 		var hideAll = function() {
@@ -59,6 +60,77 @@ $(document).ready(function() {
 	
 	loadTogglersIn('.right-panel');
 	loadTogglersIn('.left-panel');
+	
+	var StationsManager = function() {
+		var metrobus = null;
+		var ste = null;
+		
+		var initialize = function() {
+			// Add vector data to map
+		  metrobus = L.geoJson(metrobusStations, {
+				style: {
+					weight: 0.1,
+					color: 'transparent'
+				},
+				pointToLayer: function (feature, latlng) {                    
+             return new L.CircleMarker(latlng, {
+                 radius: 5,
+                 fillColor: "transparent",
+                 color: "transparent",
+                 weight: 1,
+                 opacity: 0,
+                 fillOpacity: 0
+             });
+         },
+		    onEachFeature: function (feature, layer) {
+						layer.bindPopup("<p style='margin-top: 10px !important; margin-bottom: 0px !important; font-size: 13px'>"+feature.properties.Name+"</p>");
+				}
+		  });
+		
+			ste = L.geoJson(steStations, {
+				style: {
+					weight: 0.1,
+					color: 'transparent'
+				},
+				pointToLayer: function (feature, latlng) {                    
+             return new L.CircleMarker(latlng, {
+                 radius: 5,
+                 fillColor: "transparent",
+                 color: "transparent",
+                 weight: 1,
+                 opacity: 0,
+                 fillOpacity: 0
+             });
+         },
+		    onEachFeature: function (feature, layer) {
+						layer.bindPopup("<p style='margin-top: 10px !important; margin-bottom: 0px !important; font-size: 13px'>"+feature.properties.Name+"</p>");
+				}
+		  });
+		}
+		
+		this.toggleMetrobus = function() {
+			if(map.hasLayer(metrobus)) {
+				map.removeLayer(metrobus);
+			} else {
+				map.addLayer(metrobus);
+			}
+		}
+		
+		this.toggleSTE = function() {
+			if(map.hasLayer(ste)) {
+				map.removeLayer(ste);
+			} else {
+				map.addLayer(ste);
+			}
+		}
+		
+		initialize();
+	}
+	
+	/*
+	 *  Stations Manager
+	 *
+	 */
 	
 	var RadiusManager = function() {
 		var r500 = null;
@@ -155,7 +227,6 @@ $(document).ready(function() {
 	 *   Agebs Manager
 	 *
 	 */
-	
 	
 	var AgebsManager = function() {
 		var geoLayer = null;
@@ -285,4 +356,5 @@ $(document).ready(function() {
 	
 	var agebsManager = new AgebsManager();
 	radiusManager = new RadiusManager();
+	stationsManager = new StationsManager();
 });
