@@ -6,12 +6,13 @@ $(document).ready(function() {
 	var baseLayer = new L.TileLayer(layerUrl, {maxZoom: 19, attribution: layerAttribution });
 	map.addLayer(baseLayer);
 	
-	var metrobus = L.mapbox.tileLayer('vidriloco.xg62e187');
+	var metrobus = L.mapbox.tileLayer('vidriloco.cq7j5lcu');
 	var metro = L.mapbox.tileLayer('vidriloco.59rkxcf9');
 	var suburbano = L.mapbox.tileLayer('vidriloco.l0ofaqiq');
 	var electricos = L.mapbox.tileLayer('vidriloco.3vgjbd6g');
 	var radiusManager = null;
 	var stationsManager = null;
+	var agebsManager = null;
 	
 	function toggleLayer(layer, zIndex, dom) {
 		if (map.hasLayer(layer)) {
@@ -29,14 +30,30 @@ $(document).ready(function() {
 			stationsManager.toggleMetrobus();
 		} else if($(this).attr('id') == "metro") {
 			toggleLayer(metro, 2, $(this).attr('id'));
+			stationsManager.toggleMetro();
 		} else if($(this).attr('id') == "trensuburbano") {
 			toggleLayer(suburbano, 3, $(this).attr('id'));
+			stationsManager.toggleSuburbano();
 		} else if($(this).attr('id') == "transporteselectricos") {
 			toggleLayer(electricos, 4, $(this).attr('id'));
 			stationsManager.toggleSTE();
 		} else if($(this).attr('id') == "radio500") {
 			radiusManager.enableRadius(500);
+		}	else if($(this).attr('id') == "radio800") {
+			radiusManager.enableRadius(800);
+		}	else if($(this).attr('id') == "radio1000") {
+			radiusManager.enableRadius(1000);
+		}	else if($(this).attr('id') == "radio2000") {
+			radiusManager.enableRadius(2000);
 		}
+	});
+	
+	$('#statistics-toggler').click(function() {
+		agebsManager.detach();
+	});
+	
+	$('#polygon-toggler').click(function() {
+		radiusManager.detach();
 	});
 	
 	var loadTogglersIn = function(parentDom) {
@@ -62,12 +79,22 @@ $(document).ready(function() {
 	loadTogglersIn('.left-panel');
 	
 	var StationsManager = function() {
-		var metrobus = null;
-		var ste = null;
+		var stations = null;
+		var enabledLayers = new buckets.Set();
 		
-		var initialize = function() {
+		var loadLayer = function(layerStr) {
+			if(enabledLayers.contains(layerStr)) {
+				enabledLayers.remove(layerStr);
+			} else {
+				enabledLayers.add(layerStr);
+			}
+			
+			if(stations != null) {
+				map.removeLayer(stations);
+			}
+			
 			// Add vector data to map
-		  metrobus = L.geoJson(metrobusStations, {
+		  stations = L.geoJson(allStations, {
 				style: {
 					weight: 0.1,
 					color: 'transparent'
@@ -75,56 +102,46 @@ $(document).ready(function() {
 				pointToLayer: function (feature, latlng) {                    
              return new L.CircleMarker(latlng, {
                  radius: 5,
-                 fillColor: "transparent",
-                 color: "transparent",
+                 fillColor: "blue",
+                 color: "blue",
                  weight: 1,
-                 opacity: 0,
-                 fillOpacity: 0
+                 opacity: 1,
+                 fillOpacity: 1
              });
          },
 		    onEachFeature: function (feature, layer) {
-						layer.bindPopup("<p style='margin-top: 10px !important; margin-bottom: 0px !important; font-size: 13px'>"+feature.properties.Name+"</p>");
-				}
-		  });
-		
-			ste = L.geoJson(steStations, {
-				style: {
-					weight: 0.1,
-					color: 'transparent'
+						layer.bindPopup("<p style='margin-top: 10px !important; margin-bottom: 0px !important; font-size: 13px'>"+feature.properties.stop_name+"</p>");
 				},
-				pointToLayer: function (feature, latlng) {                    
-             return new L.CircleMarker(latlng, {
-                 radius: 5,
-                 fillColor: "transparent",
-                 color: "transparent",
-                 weight: 1,
-                 opacity: 0,
-                 fillOpacity: 0
-             });
-         },
-		    onEachFeature: function (feature, layer) {
-						layer.bindPopup("<p style='margin-top: 10px !important; margin-bottom: 0px !important; font-size: 13px'>"+feature.properties.Name+"</p>");
+				filter: function(feature, layer) {
+						return enabledLayers.contains(feature.properties.agency_id);
 				}
-		  });
+		  });		
+			
+			if(enabledLayers.size() > 0) {
+				map.addLayer(stations);
+			}
+		}
+						
+		this.toggleSuburbano = function() {
+			loadLayer('SUB');
 		}
 		
 		this.toggleMetrobus = function() {
-			if(map.hasLayer(metrobus)) {
-				map.removeLayer(metrobus);
-			} else {
-				map.addLayer(metrobus);
-			}
+			loadLayer('MB');
 		}
 		
 		this.toggleSTE = function() {
-			if(map.hasLayer(ste)) {
-				map.removeLayer(ste);
-			} else {
-				map.addLayer(ste);
-			}
+			loadLayer('STE');
 		}
 		
-		initialize();
+		this.toggleMetro = function() {
+			loadLayer('METRO');
+		}
+		
+		this.toggleMexibus = function() {
+			loadLayer('Mexibus');
+		}
+		
 	}
 	
 	/*
@@ -134,11 +151,12 @@ $(document).ready(function() {
 	
 	var RadiusManager = function() {
 		var r500 = null;
-		var r900 = null;
+		var r800 = null;
 		var r1000 = null;
 		var r2000 = null;
 		var currentRadiusSelected = null;
 		var geolayer = null;
+		var thisInstance = null;
 		
 		var style = {
 			weight: 0.5,
@@ -146,8 +164,24 @@ $(document).ready(function() {
 		}
 		
 		var initialize = function() {
+			thisInstance = this;
 			// Add vector data to map
 		  r500 = L.geoJson(radius500, {
+				style: style,
+		    onEachFeature: onEachFeature
+		  });
+		
+		  r800 = L.geoJson(radius800, {
+				style: style,
+		    onEachFeature: onEachFeature
+		  });
+		
+		  r1000 = L.geoJson(radius1000, {
+				style: style,
+		    onEachFeature: onEachFeature
+		  });
+		
+		  r2000 = L.geoJson(radius2000, {
 				style: style,
 		    onEachFeature: onEachFeature
 		  });
@@ -209,15 +243,32 @@ $(document).ready(function() {
 	    });
 	  }
 	
-		this.enableRadius = function(number) {
+		var removeCurrentLayer = function() {
 			if(geolayer != null) {
 				map.removeLayer(geolayer);
 			}
+		}
+	
+		this.enableRadius = function(number) {
+			removeCurrentLayer();
 			
 			if(number == 500) {
 				map.addLayer(r500);
 				geolayer = r500;
+			} else if(number == 800) {
+				map.addLayer(r800);
+				geolayer = r800;
+			}	else if(number == 1000) {
+				map.addLayer(r1000);
+				geolayer = r1000;
+			}	else if(number == 2000) {
+				map.addLayer(r2000);
+				geolayer = r2000;
 			}
+		}
+		
+		this.detach = function() {
+			removeCurrentLayer();
 		}
 
 		initialize();
@@ -351,10 +402,14 @@ $(document).ready(function() {
 			map.removeLayer(geoLayer);
 		}
 		
+		this.detach = function() {
+			disable();
+		}
+		
 		initialize();
 	}
 	
-	var agebsManager = new AgebsManager();
+	agebsManager = new AgebsManager();
 	radiusManager = new RadiusManager();
 	stationsManager = new StationsManager();
 });
