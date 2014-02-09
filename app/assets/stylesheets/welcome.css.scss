@@ -44,11 +44,10 @@ a {
 	top: 100px;
 	
 	.layers-list {
-		width: 90%;
 		padding: 10px;
 		margin-left: auto;
 		margin-right: auto;
-		background-color: rgba(255,255,255,0.7);
+		background-color: white;
 		-moz-box-shadow: 0 0 3px #D7D7D7;
 		-webkit-box-shadow: 0 0 3px#D7D7D7;
 		box-shadow: 0 0 3px #D7D7D7;
@@ -87,24 +86,28 @@ a {
 			margin-top: 10px;
 			
 			.selected {
-				background-color: rgba(115, 196, 98, 0.2);
+				opacity: 1 !important;
 			}
 			
 			.layer:hover {
-				border: 1px solid #EBEBEB;
+				opacity: 0.6;
 			}
 			
 			.layer {
-				border: 1px solid white;
+				opacity: 0.2;
 				line-height: 10px;
-				padding: 10px;
-
+				text-align: center;
+				padding: 10px 0 10px 0;
+				border: 1px solid white;
+				
 				p {
 					font-size: 13px;
 					margin: 0;
 					padding: 0;
-
+					
 					a {
+						color: black;
+						text-decoration: none;
 						
 						.pic {
 							display: inline-block;
@@ -186,3 +189,16 @@ a {
 
 // Map element styles
 
+#network-panel {
+	width: 80px !important;
+	float: right;
+	margin-top: 10px;
+	margin-right: 5px;
+}
+
+#map-panel {
+	width: 130px;
+	float: right;
+	margin-top: 10px;
+	margin-right: 5px;
+}
