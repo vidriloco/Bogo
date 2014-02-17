@@ -1,54 +1,22 @@
-<div id='map-basic'></div>
-
 <div id="navbar">
 	<ul>
-		<li class="app-name">ITDP Transporte</li>
-		<li class="actions">
-
-		</li>
+		<li><%= link_to image_tag('ITDP_logo.png'), "http://itdp.mx", :target => "_blank" %></li>
+		<li><%= link_to image_tag('uk_embassy_logo.png'), "https://www.gov.uk/government/world/mexico", :target => "_blank" %></li>
 	</ul>
 </div>
+<div class="loading-cover">
+	<div class="spinner"></div>
+</div>
 
+<div id='map-basic'></div>
 <div class="panels left-sided left-panel">
-	<div class="panel-togglers contents-to-right">
-		<%= link_to image_tag('polygon_button.png'), 'javascript:void(0);', id: 'polygon-toggler', :class => 'toggler' %>
-		<%= link_to image_tag('statistics_button.png'), 'javascript:void(0);', id: 'statistics-toggler', :class => 'toggler' %>
+	<div class="panel-togglers">
+		<%= link_to image_tag('polygon_button.png'), 'javascript:void(0);', id: 'agebs', :class => 'toggler polygon-layer' %>
+		<%= link_to image_tag('statistics_button.png'), 'javascript:void(0);', id: 'radius', :class => 'toggler polygon-layer' %>
 	</div>
-	<div id="polygon-panel" class="layers-list panel hidden">
-		<div class="title"><p>AGEBS</p></div>
-		
-		<div class="content stats-table">
-			<div><div><b>Población total</b></div> <div id="ageb_population" class="value">--</div> </div>
-			<div><div><b>Viviendas totales</b></div> <div id="ageb_houses" class="value">--</div> </div>
-			<div><div><b>Población por hectárea</b></div> <div id="ageb_density" class="value">--</div> </div>
-			<div><div><b>Población ocupada</b></div> <div id="ageb_population_with_job" class="value">--</div> </div>
-			<div><div><b>Población desocupada</b></div> <div id="ageb_population_without_job" class="value">--</div> </div>
-			<div><div><b>Población con discapacidad</b></div> <div id="ageb_population_handicap" class="value">--</div> </div>
-			<div><div><b>Viviendas con auto</b></div> <div id="ageb_population_with_car" class="value">--</div> </div>
-			<div><div><b>Viviendas desocupadas</b></div> <div id="ageb_houses_empty" class="value">--</div> </div>
-			<div><div><b>Nivel Socioeconómico</b></div> <div id="ageb_socioeconomic_level" class="value">--</div> </div>
-			<div><div><b>Grado de Marginación</b></div> <div id="ageb_margination" class="value">--</div> </div>
-		</div>
-	</div>
-	<div id="statistics-panel" class="layers-list panel hidden">
-		<div class="title"><p>Radios estadísticos</p></div>
-		
-		<div class="content">
-			<div class="content">
-				<div class="layer">
-					<p><a href="#/" id="radio500"><span class="pic"><%=  %></span><span class="name">Radio 500</span></a></p>
-				</div>
-				<div class="layer">
-					<p><a href="#/" id="radio800"><span class="pic"><%=  %></span><span class="name">Radio 800</span></a></p>
-				</div>
-				<div class="layer">
-					<p><a href="#/" id="radio1000"><span class="pic"><%=  %></span><span class="name">Radio 1000</span></a></p>
-				</div>
-				<div class="layer">
-					<p><a href="#/" id="radio2000"><span class="pic"><%=  %></span><span class="name">Radio 2000</span></a></p>
-				</div>
-			</div>
-		</div>
+	<div class="panel-container">
+		<%= render 'welcome/radius' %>
+		<%= render 'welcome/agebs' %>
 	</div>
 </div>
 
@@ -57,47 +25,7 @@
 		<%= link_to image_tag('network_button.png'), 'javascript:void(0);', id: 'network-toggler', :class => 'toggler selected' %>
 		<%= link_to image_tag('map_button.png'), 'javascript:void(0);', id: 'map-toggler', :class => 'toggler' %>
 	</div>
-	<div id="network-panel" class="layers-list panel">
-		<div class="title"><p>Redes</p></div>
-		
-		<div class="content">
-			<div class="layer" data-toggle="tooltip" data-placement="top" title="STC Metro">
-				<p><a href="#/" id="metro"><span class="pic"><%= image_tag('metro.png') %></span></a></p>
-			</div>
-			<div class="layer" data-toggle="tooltip" data-placement="top" title="Metrobús">
-				<p><a href="#/" id="metrobus"><span class="pic"><%= image_tag('metrobus.png') %></span></a></p>
-			</div>
-			<div class="layer" data-toggle="tooltip" data-placement="top" title="Tren Ligero">
-				<p><a href="#/" id="transporteselectricos"><span class="pic"><%= image_tag('trenligero.jpg') %></span></a></p>
-			</div>
-			<div class="layer" data-toggle="tooltip" data-placement="top" title="Tren Suburbano">
-				<p><a href="#/" id="trensuburbano"><span class="pic"><%= image_tag('trensuburbano.gif') %></span></a></p>
-			</div>
-		</div>
-	</div>
 	
-	<div id="map-panel" class="layers-list panel hidden">
-		<div class="title"><p>Mapa</p></div>
-		
-		<div class="content features">
-			<div class="layer">
-				<p><a href="#/" id="streets">Calles</a></p>
-			</div>
-			<div class="layer">
-				<p><a href="#/" id="satelite">Satélite</a></p>
-			</div>
-		</div>
-		
-		<div class="title"><p>Colores</p></div>
-		
-		<div class="content colors">
-			<div class="layer">
-				<p><a href="#/" id="streets">Encendido</a></p>
-			</div>
-			<div class="layer hidden">
-				<p><a href="#/" id="satelite">Apagado</a></p>
-			</div>
-		</div>
-	</div>
-
+	<%= render 'welcome/network' %>
+	<%= render 'welcome/map' %>
 </div>

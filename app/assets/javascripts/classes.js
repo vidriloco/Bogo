@@ -1,11 +1,29 @@
 /*
- *  Stations Manager
+ *  Transports Manager
  */
-var StationsManager = function(map) {
+var TransportsManager = function(map) {
 	var stations = null;
+	// Set structure for keeping track of currently displayed path layers
 	var enabledLayers = new buckets.Set();
 	
-	var loadLayer = function(layerStr) {
+	var MetrobusDom = 'metrobus';
+	var MetroDom = 'metro';
+	var SuburbanoDom = 'trensuburbano';
+	var STEDom = 'transporteselectricos';
+	var MexibusDom = 'mexibus';
+	
+	var metrobus = null;
+	var metro = null;
+	var suburbano = null;
+	var electricos = null;
+	var mexibus = null;
+	
+	/*
+	 *   Private function: toggleStationsFor
+	 *
+	 *   Draws or clears the stations points defined in the given string layerStr parameter
+	 */
+	var toggleStationsFor = function(layerStr) {
 		if(enabledLayers.contains(layerStr)) {
 			enabledLayers.remove(layerStr);
 		} else {
@@ -44,242 +62,186 @@ var StationsManager = function(map) {
 			map.addLayer(stations);
 		}
 	}
-					
-	this.toggleSuburbano = function() {
-		loadLayer('SUB');
+	
+	/*
+	 *   Private function: togglePathLayerFor
+	 *
+	 *   Adds or removes a *layer* from the map and adds or removes
+	 *   a the class selected to the given dom element
+	 */
+	var togglePathLayerFor = function(layer, dom) {
+		if (map.hasLayer(layer)) {
+        map.removeLayer(layer);
+				$('#'+dom).parent().parent().removeClass('selected');
+    } else {
+        map.addLayer(layer);
+				$('#'+dom).parent().parent().addClass('selected');
+    }
 	}
 	
-	this.toggleMetrobus = function() {
-		loadLayer('MB');
+	/*
+	 *   Private functions: toggle*
+	 *   Loads and sets (if not yet set) the layer which includes the lines paths for the given transport 
+	 *	 then adds/removes the path
+	 *   and shows/hides the stations that are part of each transporte line
+	 */
+	
+	var toggleSuburbano = function() {
+		if(suburbano == null) {
+			suburbano = L.mapbox.tileLayer('vidriloco.l0ofaqiq');
+		}
+		
+		togglePathLayerFor(suburbano, SuburbanoDom);
+		toggleStationsFor('SB');
 	}
 	
-	this.toggleSTE = function() {
-		loadLayer('STE');
+	var toggleMetro = function() {
+		if(metro == null) {
+			metro = L.mapbox.tileLayer('vidriloco.59rkxcf9');
+		}
+		
+		togglePathLayerFor(metro, MetroDom);
+		toggleStationsFor('METRO');
 	}
 	
-	this.toggleMetro = function() {
-		loadLayer('METRO');
+	var toggleMetrobus = function() {
+		if(metrobus == null) {
+			metrobus = L.mapbox.tileLayer('vidriloco.nrr1yo7v');
+		}
+		
+		togglePathLayerFor(metrobus, MetrobusDom);
+		toggleStationsFor('MB');
 	}
 	
-	this.toggleMexibus = function() {
-		loadLayer('Mexibus');
+	var toggleSTE = function() {
+		if(electricos == null) {
+			electricos = L.mapbox.tileLayer('vidriloco.3vgjbd6g');
+		}
+		
+		togglePathLayerFor(electricos, STEDom);
+		toggleStationsFor('STE');
+	}
+	
+	var toggleMexibus = function() {
+		if(mexibus == null) {
+			mexibus = L.mapbox.tileLayer('vidriloco.jxwkt7sa');
+		}
+		
+		togglePathLayerFor(mexibus, MexibusDom);
+		toggleStationsFor('Mexibus');
+	}
+	
+	/*
+	 *  Public function: toggle
+	 *
+	 *  Enables the transport layers (stations and paths) for the
+	 *  passed public transportation service (layerDom)
+	 */
+	this.toggle = function(layerDom) {
+		if(layerDom == MetrobusDom) {
+			toggleMetrobus();
+		} else if(layerDom == MetroDom) {
+			toggleMetro();
+		} else if(layerDom == SuburbanoDom) {
+			toggleSuburbano();
+		} else if(layerDom == STEDom) {
+			toggleSTE();
+		} else if(layerDom == MexibusDom) {
+			toggleMexibus();
+		}
 	}
 	
 }
 
 /*
- *  Radius Manager
+ *   Polygons Manager
  */
-var RadiusManager = function(map) {
+var PolygonsManager = function(map, callback) {
+	var currentLayerMode = null;
+	var agebsVector = null;
+	var agebsLayer = null;
+	
+	var rSelectedVector = null;
 	var r500 = null;
 	var r800 = null;
 	var r1000 = null;
 	var r2000 = null;
-	var currentRadiusSelected = null;
-	var geolayer = null;
-	var thisInstance = null;
+		
+	var defaultStyle = {
+		weight: 0.1,
+		color: '#A4D1FF',
+		fillColor: '#A4D1FF',
+		fillOpacity: 0.3
+	};
 	
-	var style = {
-		weight: 0.5,
-		color: 'red'
-	}
+	var highlightDefaultStyle = {
+      weight: 2,
+			color: '#4886FF',
+      fillColor: '#4886FF',
+      dashArray: '',
+      fillOpacity: 0.4
+  };
 	
-	var initialize = function() {
-		thisInstance = this;
-		// Add vector data to map
-	  r500 = L.geoJson(radius500, {
-			style: style,
+	var initialize = function(callback_fnc) {
+		// Load agebs vector and layer
+	  agebsVector = L.geoJson(agebs, {
+			style: defaultStyle,
+	    onEachFeature: onEachFeature
+	  });
+	
+	  /*agebsVector = L.geoJson(null, {});
+		d3.json('/assets/AGEBS.json', function(error, data) {
+			var feature = topojson.feature(data, data.objects.layer1);
+			agebsVector.addData(feature);
+		})*/
+		
+		// Load radius vectors
+		r500 = L.geoJson(radius500, {
+			style: defaultStyle,
 	    onEachFeature: onEachFeature
 	  });
 	
 	  r800 = L.geoJson(radius800, {
-			style: style,
+			style: defaultStyle,
 	    onEachFeature: onEachFeature
 	  });
 	
 	  r1000 = L.geoJson(radius1000, {
-			style: style,
+			style: defaultStyle,
 	    onEachFeature: onEachFeature
 	  });
 	
 	  r2000 = L.geoJson(radius2000, {
-			style: style,
+			style: defaultStyle,
 	    onEachFeature: onEachFeature
 	  });
-	}
-
 	
-	// Set hover colors
-  var selectFeature = function(e) {
-		resetHighlight(e);
-		if(currentRadiusSelected != null) {
-			currentRadiusSelected.setStyle(style);
+		if(callback_fnc != null) {
+			callback_fnc();
 		}
-		assignStats(e.target.feature);
-    currentRadiusSelected = e.target;
-    currentRadiusSelected.setStyle({
-        weight: 3,
-        color: '#666',
-        dashArray: '',
-        fillOpacity: 0.7
-    });
-		
-  }
-
-	var highlightFeature = function(e) {
-		var highlightedFeature = e.target;
-		
-		if(highlightedFeature != currentRadiusSelected) {
-	    highlightedFeature.setStyle({
-	        weight: 3,
-	        color: '#666',
-	        dashArray: '',
-	        fillOpacity: 0.2
-	    });
-		} 
-	}
-	
-	var deHighlightFeature = function(e) {
-		var highlightedFeature = e.target;
-		
-		if(highlightedFeature != currentRadiusSelected) {
-	    highlightedFeature.setStyle(style);
-		} 
-	}
-	
-	var assignStats = function(feature) {
-	}
-
-	// A function to reset the colors when a neighborhood is not longer 'hovered'
-  var resetHighlight = function(e) {
-    geoLayer.resetStyle(e.target);
-  }
-
-  // Tell MapBox.js what functions to call when mousing over and out of a neighborhood
-  var onEachFeature = function(feature, layer) {
-    layer.on({
-			click: selectFeature,
-			mouseover: highlightFeature,
-			mouseout: deHighlightFeature
-    });
-  }
-
-	var removeCurrentLayer = function() {
-		if(geolayer != null) {
-			map.removeLayer(geolayer);
-		}
-	}
-
-	this.enableRadius = function(number) {
-		removeCurrentLayer();
-		
-		if(number == 500) {
-			map.addLayer(r500);
-			geolayer = r500;
-		} else if(number == 800) {
-			map.addLayer(r800);
-			geolayer = r800;
-		}	else if(number == 1000) {
-			map.addLayer(r1000);
-			geolayer = r1000;
-		}	else if(number == 2000) {
-			map.addLayer(r2000);
-			geolayer = r2000;
-		}
-	}
-	
-	this.detach = function() {
-		removeCurrentLayer();
-	}
-
-	initialize();
-}
-
-/*
- *   Agebs Manager
- */
-var AgebsManager = function(map) {
-	var geoLayer = null;
-	var agebsLayer;
-	var layer = null;
-	
-	var initialize = function() {
-		// Add vector data to map
-	  geoLayer = L.geoJson(agebs, {
-			style: {
-				weight: 0.1,
-				color: 'transparent'
-			},
-	    onEachFeature: onEachFeature
-	  });
-		agebsLayer = L.mapbox.tileLayer('vidriloco.aohg0k9c');
-		
-		$('#polygon-toggler').bind('click', function() {
-			if($(this).hasClass('selected')) {
-				enable();
-			} else {
-				disable();
-			}
-		});
-	}
-	
-	// Set hover colors
-  var selectFeature = function(e) {
-		//resetHighlight(e);
-		if(layer != null) {
-			layer.setStyle({
-				weight: 0.1,
-				color: 'transparent'
-			});
-		}
-		assignStats(e.target.feature);
-    layer = e.target;
-    layer.setStyle({
-        weight: 3,
-        color: '#666',
-        dashArray: '',
-        fillOpacity: 0.7
-    });
-
-  }
-
-	var highlightFeature = function(e) {
-		var highlightedFeature = e.target;
-		
-		if(highlightedFeature != layer) {
-	    highlightedFeature.setStyle({
-	        weight: 3,
-	        color: '#666',
-	        dashArray: '',
-	        fillOpacity: 0.2
-	    });
-		} 
-	}
-	
-	var deHighlightFeature = function(e) {
-		var highlightedFeature = e.target;
-		
-		if(highlightedFeature != layer) {
-	    highlightedFeature.setStyle({
-				weight: 0.1,
-				color: 'transparent'
-			});
-		} 
 	}
 
 	var assignStats = function(feature) {
-		
 		$('#ageb_population').html(feature.properties.pob1 || '--');
 		$('#ageb_houses').html(feature.properties.viv0 || '--');
 		$('#ageb_density').html(feature.properties.densidad_av || '--');
-		
+
 		$('#ageb_population_with_job').html("% "+new Number(feature.properties.eco4_r).toPrecision(3) || '--');
 		$('#ageb_population_without_job').html("% "+new Number(feature.properties.eco25_r).toPrecision(3) || '--');
 		$('#ageb_population_handicap').html("% "+new Number(feature.properties.disc1_r).toPrecision(3) || '--');
 		
-		$('#ageb_population_with_car').html("% "+new Number(feature.properties.viv28_r).toPrecision(3) || '--');
-		$('#ageb_houses_empty').html("% "+new Number(feature.properties.viv1_r).toPrecision(3) || '--');
+		if(feature.properties.viv28_r != undefined) {
+			$('#ageb_population_with_car').html("% "+new Number(feature.properties.viv28_r).toPrecision(3) || '--');
+		} else {
+			$('#ageb_population_with_car').html('--');
+		}
 		
+		if(feature.properties.viv1_r != undefined) {
+			$('#ageb_houses_empty').html("% "+new Number(feature.properties.viv1_r).toPrecision(3) || '--');
+		} else {
+			$('#ageb_houses_empty').html('--');
+		}
+
 		var margination = null;
 		if(feature.properties.NSE_proxy == 'C_menos' || feature.properties.NSE_proxy == 'C_me') {
 			margination = "C -";
@@ -292,38 +254,104 @@ var AgebsManager = function(map) {
 		} else {
 			margination = feature.properties.NSE_proxy;
 		}
-		
+
 		$('#ageb_socioeconomic_level').html(margination || '--');
 		$('#ageb_margination').html(feature.properties.GMU2010 || '--');
 	}
 
-	// A function to reset the colors when a neighborhood is not longer 'hovered'
-  var resetHighlight = function(e) {
-    geoLayer.resetStyle(e.target);
-  }
+	var highlightFeature = function(e) {
+		var highlightedFeature = e.target;
+		assignStats(e.target.feature);
+    highlightedFeature.setStyle(highlightDefaultStyle);
+	}
+	
+	var deHighlightFeature = function(e) {
+		
+		var highlightedFeature = e.target;
+		highlightedFeature.setStyle(defaultStyle);
+	}
 
   // Tell MapBox.js what functions to call when mousing over and out of a neighborhood
   var onEachFeature = function(feature, layer) {
     layer.on({
-			click: selectFeature,
 			mouseover: highlightFeature,
 			mouseout: deHighlightFeature
     });
   }
 
-	var enable = function() {
-		map.addLayer(agebsLayer);
-		geoLayer.addTo(map);
+	var enableAgebs = function() {
+		currentLayerMode = 'AGEBS';
+		agebsVector.addTo(map);
+		$('#agebs-panel').removeClass('hidden');
 	}
 	
-	var disable = function() {
-		map.removeLayer(agebsLayer);
-		map.removeLayer(geoLayer);
+	var disableAgebs = function() {
+		currentLayerMode = null;
+		map.removeLayer(agebsVector);
+		$('#agebs-panel').addClass('hidden');
 	}
 	
-	this.detach = function() {
-		disable();
+	var removeCurrentAgebWithRadius = function() {
+		if(rSelectedVector != null) {
+			map.removeLayer(rSelectedVector);
+		}
 	}
 	
-	initialize();
+	var enablePanelsForRadius = function() {
+		currentLayerMode = 'RADIUS';
+		
+		$('#agebs-panel').removeClass('hidden');
+		$('#radius-panel').removeClass('hidden');
+	}
+	
+	var disablePanelsForRadius = function() {
+		currentLayerMode = null;
+		removeCurrentAgebWithRadius();
+		
+		$('#agebs-panel').addClass('hidden');
+		$('#radius-panel').addClass('hidden');
+		$('#radius-panel .radius').removeClass('selected');
+	}
+	
+	this.toggleAgebsPanel = function() {
+		
+		if(currentLayerMode != 'AGEBS') {
+			disablePanelsForRadius();
+			enableAgebs();
+		} else {
+			disableAgebs();
+		}
+	}
+	
+	this.toggleRadiusPanel = function() {
+		map.removeLayer(agebsVector);
+		
+		if(currentLayerMode != 'RADIUS') {
+			enablePanelsForRadius();
+		} else {
+			disablePanelsForRadius();
+		}
+	}
+	
+	this.showRadiusPanel = function(number) {
+		$('#radius-panel .radius').removeClass('selected');
+		$('#agebs-radius-'+number).addClass('selected');
+		removeCurrentAgebWithRadius();
+		
+		if(number == 500) {
+			map.addLayer(r500);
+			rSelectedVector = r500;
+		} else if(number == 800) {
+			map.addLayer(r800);
+			rSelectedVector = r800;
+		}	else if(number == 1000) {
+			map.addLayer(r1000);
+			rSelectedVector = r1000;
+		}	else if(number == 2000) {
+			map.addLayer(r2000);
+			rSelectedVector = r2000;
+		}
+	}
+	
+	initialize(callback);
 }

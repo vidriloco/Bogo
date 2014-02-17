@@ -4,10 +4,33 @@ $(document).ready(function() {
 	var metro = null;
 	var suburbano = null;
 	var electricos = null;
-	var radiusManager = null;
-	var stationsManager = null;
-	var agebsManager = null;
 	
+	var transportsManager = null;
+	var polygonsManager = null;
+	
+	/*
+	   $('.layer a').removeClass('selected');
+	$(this).addClass('selected');
+	$('#radius-panel').removeClass('hidden');
+	if($(this).attr('id') == "radio500") {
+		radiusManager.enableRadius(500);
+	}	else if($(this).attr('id') == "radio800") {				
+		radiusManager.enableRadius(800);
+	}	else if($(this).attr('id') == "radio1000") {
+		radiusManager.enableRadius(1000);
+	}	else if($(this).attr('id') == "radio2000") {
+		radiusManager.enableRadius(2000);
+	}
+	*
+	*/
+	
+	/*
+	 *  loadMain
+	 *
+	 *  Loads and wires the interface for interacting with the map layers
+	 *  and also initializes the managers for: stations and agebs
+	 *
+	 */
 	var loadMain = function() {
 
 		var layerUrl = 'http://{s}.tiles.mapbox.com/v3/atogle.map-vo4oycva/{z}/{x}/{y}.png';
@@ -15,58 +38,19 @@ $(document).ready(function() {
 		var baseLayer = new L.TileLayer(layerUrl, {maxZoom: 19, attribution: layerAttribution });
 		map.addLayer(baseLayer);
 
-		function toggleLayer(layer, zIndex, dom) {
-			if (map.hasLayer(layer)) {
-	        map.removeLayer(layer);
-					$('#'+dom).parent().parent().removeClass('selected');
-	    } else {
-	        map.addLayer(layer);
-					$('#'+dom).parent().parent().addClass('selected');
-	    }
-		}
-
-		$('.layer a').bind('click', function() {
-			if($(this).attr('id') == "metrobus") {
-				if(metrobus == null) {
-					metrobus = L.mapbox.tileLayer('vidriloco.nrr1yo7v');
-				}
-				toggleLayer(metrobus, 1, $(this).attr('id'));
-				stationsManager.toggleMetrobus();
-			} else if($(this).attr('id') == "metro") {
-				if(metro == null) {
-					metro = L.mapbox.tileLayer('vidriloco.59rkxcf9');
-				}
-				toggleLayer(metro, 2, $(this).attr('id'));
-				stationsManager.toggleMetro();
-			} else if($(this).attr('id') == "trensuburbano") {
-				if(suburbano == null) {
-					suburbano = L.mapbox.tileLayer('vidriloco.l0ofaqiq');
-				}
-				toggleLayer(suburbano, 3, $(this).attr('id'));
-				stationsManager.toggleSuburbano();
-			} else if($(this).attr('id') == "transporteselectricos") {
-				if(electricos == null) {
-					electricos = L.mapbox.tileLayer('vidriloco.3vgjbd6g');
-				}
-				toggleLayer(electricos, 4, $(this).attr('id'));
-				stationsManager.toggleSTE();
-			} else if($(this).attr('id') == "radio500") {
-				radiusManager.enableRadius(500);
-			}	else if($(this).attr('id') == "radio800") {
-				radiusManager.enableRadius(800);
-			}	else if($(this).attr('id') == "radio1000") {
-				radiusManager.enableRadius(1000);
-			}	else if($(this).attr('id') == "radio2000") {
-				radiusManager.enableRadius(2000);
+		$('.transport-layer a').bind('click', function() {
+			transportsManager.toggle($(this).attr('id'));
+		});
+		
+		$('a.polygon-layer').bind('click', function() {
+			if($(this).attr('id') == 'agebs') {
+				polygonsManager.toggleAgebsPanel();
+			} else if($(this).attr('id') == 'radius') {
+				polygonsManager.toggleRadiusPanel();
+			} else if($(this).hasClass('radius')) {
+				var size = $(this).attr('data-size');
+				polygonsManager.showRadiusPanel(size);
 			}
-		});
-
-		$('#statistics-toggler').click(function() {
-			agebsManager.detach();
-		});
-
-		$('#polygon-toggler').click(function() {
-			radiusManager.detach();
 		});
 
 		$('.layer').mouseover(function() {
@@ -97,11 +81,15 @@ $(document).ready(function() {
 		}
 
 		loadTogglersIn('.right-panel');
-		loadTogglersIn('.left-panel');
 		
-		agebsManager = new AgebsManager(map);
-		radiusManager = new RadiusManager(map);
-		stationsManager = new StationsManager(map);
+		transportsManager = new TransportsManager(map);
+		
+		setTimeout(function() {
+			polygonsManager = new PolygonsManager(map, function() {
+				$('.loading-cover').fadeOut();
+			});
+		}, 1200);
+		
 	}
 	
 	loadMain();

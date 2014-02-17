@@ -15,12 +15,14 @@
 //= require jquery_ujs
 //= require bucket.min
 //= require turbolinks
+//= require parallel
 //= require AGEBS2
 //= require radius500
 //= require radius800
 //= require radius1000
 //= require radius2000
 //= require metrobusStations
+//= require mexibusEstaciones
 //= require steStations
 //= require stationsAll
 //= require_tree .
