@@ -11,12 +11,14 @@ var TransportsManager = function(map) {
 	var SuburbanoDom = 'trensuburbano';
 	var STEDom = 'transporteselectricos';
 	var MexibusDom = 'mexibus';
+	var itdpDom = 'itdp';
 	
 	var metrobus = null;
 	var metro = null;
 	var suburbano = null;
 	var electricos = null;
 	var mexibus = null;
+	var itdp = null;
 	
 	/*
 	 *   Private function: toggleStationsFor
@@ -97,7 +99,7 @@ var TransportsManager = function(map) {
 	
 	var toggleMetro = function() {
 		if(metro == null) {
-			metro = L.mapbox.tileLayer('vidriloco.59rkxcf9');
+			metro = L.mapbox.tileLayer('vidriloco.xeh1mnlr');
 		}
 		
 		togglePathLayerFor(metro, MetroDom);
@@ -131,6 +133,14 @@ var TransportsManager = function(map) {
 		toggleStationsFor('Mexibus');
 	}
 	
+	var toggleITDP = function() {
+		if(itdp == null) {
+			itdp = L.mapbox.tileLayer('vidriloco.d8q0xo2e');
+		}
+		
+		togglePathLayerFor(itdp, itdpDom);
+	}
+	
 	/*
 	 *  Public function: toggle
 	 *
@@ -148,6 +158,8 @@ var TransportsManager = function(map) {
 			toggleSTE();
 		} else if(layerDom == MexibusDom) {
 			toggleMexibus();
+		} else if(layerDom == itdpDom) {
+			toggleITDP();
 		}
 	}
 	
