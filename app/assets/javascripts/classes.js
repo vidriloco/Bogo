@@ -169,7 +169,6 @@ var TransportsManager = function(map) {
  *   Polygons Manager
  */
 var PolygonsManager = function(map, callback) {
-	var currentLayerMode = null;
 	var agebsVector = null;
 	var agebsLayer = null;
 	
@@ -232,8 +231,24 @@ var PolygonsManager = function(map, callback) {
 			callback_fnc();
 		}
 	}
+	
+	var clearFields = function() {
+		$('#ageb_population').html('--');
+		$('#ageb_houses').html('--');
+		$('#ageb_density').html('--');
+
+		$('#ageb_population_with_job').html('--');
+		$('#ageb_population_without_job').html('--');
+		$('#ageb_population_handicap').html('--');
+		$('#ageb_population_with_car').html('--');
+		$('#ageb_houses_empty').html('--');
+
+		$('#ageb_socioeconomic_level').html('--');
+		$('#ageb_margination').html('--');
+	}
 
 	var assignStats = function(feature) {
+		
 		$('#ageb_population').html(feature.properties.pob1 || '--');
 		$('#ageb_houses').html(feature.properties.viv0 || '--');
 		$('#ageb_density').html(feature.properties.densidad_av || '--');
@@ -291,63 +306,28 @@ var PolygonsManager = function(map, callback) {
     });
   }
 
-	var enableAgebs = function() {
-		currentLayerMode = 'AGEBS';
-		agebsVector.addTo(map);
-		$('#agebs-panel').removeClass('hidden');
-	}
-	
-	var disableAgebs = function() {
-		currentLayerMode = null;
-		map.removeLayer(agebsVector);
-		$('#agebs-panel').addClass('hidden');
-	}
-	
 	var removeCurrentAgebWithRadius = function() {
 		if(rSelectedVector != null) {
 			map.removeLayer(rSelectedVector);
 		}
 	}
 	
-	var enablePanelsForRadius = function() {
-		currentLayerMode = 'RADIUS';
-		
-		$('#agebs-panel').removeClass('hidden');
-		$('#radius-panel').removeClass('hidden');
+	var enablePanelsForRadius = function() {		
+		$('.radius-list .action').removeClass('hidden');
+		$('#stats-panel').removeClass('hidden');
 	}
 	
 	var disablePanelsForRadius = function() {
-		currentLayerMode = null;
 		removeCurrentAgebWithRadius();
-		
-		$('#agebs-panel').addClass('hidden');
-		$('#radius-panel').addClass('hidden');
-		$('#radius-panel .radius').removeClass('selected');
-	}
-	
-	this.toggleAgebsPanel = function() {
-		
-		if(currentLayerMode != 'AGEBS') {
-			disablePanelsForRadius();
-			enableAgebs();
-		} else {
-			disableAgebs();
-		}
-	}
-	
-	this.toggleRadiusPanel = function() {
-		map.removeLayer(agebsVector);
-		
-		if(currentLayerMode != 'RADIUS') {
-			enablePanelsForRadius();
-		} else {
-			disablePanelsForRadius();
-		}
-	}
-	
+		$('#stats-panel').addClass('hidden');
+		$('.radius-list .action').addClass('hidden');
+	}	
+
 	this.showRadiusPanel = function(number) {
-		$('#radius-panel .radius').removeClass('selected');
-		$('#agebs-radius-'+number).addClass('selected');
+		enablePanelsForRadius();
+		clearFields();
+		$('.radius-list .layer').removeClass('selected');
+		$('#agebs-radius-'+number).parent().addClass('selected');
 		removeCurrentAgebWithRadius();
 		
 		if(number == 500) {
@@ -362,6 +342,11 @@ var PolygonsManager = function(map, callback) {
 		}	else if(number == 2000) {
 			map.addLayer(r2000);
 			rSelectedVector = r2000;
+		} else if(number == "all") {
+			map.addLayer(agebsVector);
+			rSelectedVector = agebsVector;
+		} else if(number == "hide") {
+			disablePanelsForRadius();
 		}
 	}
 	

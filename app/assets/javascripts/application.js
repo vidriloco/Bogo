@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require transit
 //= require bootstrap.min
 //= require jquery_ujs
 //= require bucket.min

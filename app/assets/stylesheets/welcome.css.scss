@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic,300italic);
+@import "colors.css.scss";
 
 body, html {
 	margin: 0;
@@ -48,241 +49,224 @@ a {
 
 #map-basic { position:absolute; width:100%; height:100%; }
 
-.right-sided {
-	right: 30px;
-	width: 300px;
+.hidden {
+	display: none;
 }
 
-.left-sided {
-	left: 30px;
-	width: 200px;
+// New design
+
+
+.blue {
+	background-color: $blue;
 }
 
-.panels {
+.yellow {
+	background-color: $yellow;
+}
+
+.transitable {
+	  -webkit-backface-visibility: hidden;
+}
+
+.container-panel {
+	width: 550px;
 	position: absolute;
-	top: 100px;
-	pointer-events: none;
+	left: 0px;
+	top: 0px;
+	z-index: 99999;
 	
-	a, .panel-container {
-		pointer-events: auto;
+	.transports-list {
+		.transport-layer a {
+			opacity: 0.4;
+		}
+		
+		.selected a,.transport-layer a:hover {
+			opacity: 1;
+		}
 	}
 	
-	.layers-list {
-		padding: 10px;
-		margin-left: auto;
-		margin-right: auto;
+	.app-bar, .panel {
 		background-color: white;
 		-moz-box-shadow: 0 0 2px #D7D7D7;
 		-webkit-box-shadow: 0 0 2px #D7D7D7;
 		box-shadow: 0 0 2px #D7D7D7;
 		border-radius: 3px;
 		border: 0.3px solid #BABABA;
+		z-index: 9999;
 		
-		.instruction {
-			font-weight: bold;
-			font-size: 11px;
-			margin: 0;
-			padding: 0;
-		}
-			
-		.menu {
+		ul {
 			list-style: none;
-			padding: 0px;
-			margin: 5px 0px 0px 0px;
-			font-size: 12px;
-			margin-left: auto;
-			margin-right: auto;
-			
+
 			li {
 				display: inline-block;
-				margin-right: 5px;
-				
-				a {
-					text-decoration: none;
+			}
+		}
+	}
+	
+	.app-bar {
+		margin-top: 20px;
+		width: 500px;
+		height: 80px;
+		
+		ul {
+			margin: 5px 0 0 0;
+			text-align: right;
+
+			li {
+				margin-right: 20px;
+			}
+		}
+	}
+	
+	.content {
+		margin-top: 40px;
+		width: 500px;
+		
+		.panel-section {
+
+			border-radius: 3px;
+			color: white;
+			text-transform: uppercase;
+			font-size: 14px;
+			font-weight: bold;
+			
+			p {
+				padding: 20px;
+				margin: 10px;
+			}
+			
+			ul {
+				position: relative;
+				top: -75px;
+				float: right !important;
+				right: 10px !important;
+				list-style: none;
+				padding: 0px;
+				li.title {
+					margin-right: 40px;
+
 				}
 				
-				a:hover, a.selected {
-					font-weight: bold;
+				li {
+					display: inline-block;
 				}
 			}
 		}
 		
-		.stats-table {
-			width: 100%;
+		.panel {
+			margin-top: -5px;
+			text-align: right;
+			ul {
+				margin: 0px;
+				padding: 0px;
+				li {
+					text-align: center;
+					font-size: 12px;
+					font-weight: bold;
+					margin: 13px;
+					text-transform: uppercase;
+				}
+				
+				li.selected a {
+					color: $blue;
+				}
+				
+				li a {
+					text-decoration: none;
+					color: $gray_light;
+				}
+				
+				li a:hover {
+					color: $gray;
+				}
+				
+				.action a {
+					color: $yellow !important;
+					opacity: 0.7;
+				}
+				
+				.action a:hover {
+					opacity: 1;
+				}
+			}
 			
 			.separator {
 				height: 1px;
 				background-color: #EAEAEA;
-				margin-top: 5px;
+				margin-top: 2px;
+				margin-bottom: 2px;
 			}
 			
-			.group {
-				
-				.title {
-					font-size: 12px;
-					font-weight: bold;
-					color: #CCC;
-					text-align: center;
-					border: none !important;
-				}
-				
-				.value {
-					font-size: 18px;
-					color: #1061FE;
-				}
-				
-				.two-spaces, .three-spaces {
-					margin-top: 5px;
-					text-align: center;
-					margin-left: auto;
-					margin-right: auto;
-					
-					p.subtitle {
-						font-size: 10px;
-						margin: 0px;
-						padding: 0px;
-					}
-					
-					div {
-						display: inline-block;
-					}
-				}
-				
-				.two-spaces {
-					> div {
-						width: 100px !important;
-					}
-				}
-				
-				.three-spaces {
-					> div {
-						width: 75px !important;
-					}
-				}
-			}
-		}
-		
-		.title {
-			text-align: center;
-			text-transform: uppercase;
-			font-size: 14px;
-			font-weight: 700;
-			color: #0066CC;
-			border-bottom: 2px solid #0066CC;
-			
-			p {
-				margin: 0;
-				padding: 5px;
-			}
-		}
+			.stats-table {
 
-		
-		.content {
-			margin-top: 10px;
-			
-			.selected {
-				opacity: 1 !important;
-			}
-			
-			.layer:hover {
-				opacity: 0.6;
-			}
-			
-			.layer {
-				opacity: 0.2;
-				line-height: 10px;
-				text-align: center;
-				padding: 10px 0 10px 0;
-				border: 1px solid white;
-				
-				p {
-					font-size: 13px;
-					margin: 0;
-					padding: 0;
-					
-					a {
-						color: black;
-						text-decoration: none;
-						
-						.pic {
+				.group {
+
+					.title {
+						margin-top: 10px;
+						margin-bottom: 5px;
+						font-size: 15px;
+						font-weight: bold;
+						color: #CCC;
+						text-align: center;
+						border: none !important;
+					}
+
+					.value {
+						font-size: 18px;
+						color: #1061FE;
+					}
+
+					.three-spaces, .two-spaces, .n-spaces {
+						margin-top: 15px;
+						margin-bottom: 15px;
+						text-align: center;
+						margin-left: auto;
+						margin-right: auto;
+
+						p.subtitle {
+							font-size: 13px;
+							margin: 0px;
+							padding: 0px;
+						}
+
+						div {
 							display: inline-block;
-							width: 60px;
 						}
+					}
 
-						.title {
-							font-size: 12px;
-							border: none;
-							text-align: left;
-							color: #4A4A4A;
+					.two-spaces {
+						> div {
+							width: 45% !important;
 						}
+					}
 
-						.name {
-							vertical-align: 90%;
+					.three-spaces {
+						> div {
+							width: 25% !important;
+						}
+					}
+					
+					.n-spaces {
+
+						> div {
+							margin-right: 4px;
+							margin-left: 4px;
+							width: 85px !important;
 						}
 					}
 				}
 			}
 		}
-	}
-}
-
-#navbar {
-	position: absolute;
-	width: 500px;
-	height: 80px;
-	right: 35px;
-	top: 10px;
-	background-color: white;
-	-moz-box-shadow: 0 0 2px #D7D7D7;
-	-webkit-box-shadow: 0 0 2px #D7D7D7;
-	box-shadow: 0 0 2px #D7D7D7;
-	border-radius: 3px;
-	border: 0.3px solid #BABABA;
-	z-index: 9999;
-	
-	.logo {
 		
 	}
-	
-	ul {
-		margin: 5px 0 0 0;
-		text-align: right;
-		list-style: none;
-		
-		li {
-			margin-right: 20px;
-			display: inline-block;
-		}
-	}
 }
 
-// Commons
-
-.contents-to-right {
-	text-align: right;
-	
-	a {
-		opacity: 0.4;
-	}
-	
-	a:hover, a.selected {
-		opacity: 1;
-	}
-}
-
-.hidden {
-	display: none;
-}
 
 // Map element styles
 
 .panel-container {
 	width: 270px;
 	margin-top: 10px;
-}
-
-#agebs-panel {
-	height: 360px;
 }
 
 #radius-panel {
