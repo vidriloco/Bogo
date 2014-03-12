@@ -29,21 +29,29 @@ $(document).ready(function() {
 		
 		$('a.polygon-layer').bind('click', function() {
 			var size = $(this).attr('data-size');
+			$('.select-radius').addClass('hidden');
+			$('.radius-options .'+size+'-message').clone().appendTo('.radius-header');
+			
+			$('#radius-close').on('click', function() {
+				$('.select-radius').removeClass('hidden');
+				polygonsManager.disablePanelsForRadius();
+			});
+			
 			polygonsManager.showRadiusPanel(size);
 		});
 
-		$('.layer').mouseover(function() {
+		$('.icon-section').mouseover(function() {
 			$(this).tooltip('show');
 		});
 
-		$('.layer').mouseout(function() {
+		$('.icon-section').mouseout(function() {
 			$(this).tooltip('hide');
 		});
 		
 		$('.toggler').bind('click', function() {
 			var targetId = '#'+$(this).attr('id').split('-')[0];
 			if(!$(targetId).hasClass('off')) {
-				$(targetId).transition({x: '-440px'}, function() {
+				$(targetId).transition({x: '-260px'}, function() {
 					$(targetId).addClass('off');
 				});
 				$(targetId+' .panel').transition({opacity : 0});
@@ -54,7 +62,7 @@ $(document).ready(function() {
 				$(targetId+' .panel').transition({opacity : 1});
 			}
 		});
-		
+
 		transportsManager = new TransportsManager(map);
 		
 		setTimeout(function() {

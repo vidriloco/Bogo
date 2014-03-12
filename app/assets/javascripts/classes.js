@@ -90,11 +90,11 @@ var TransportsManager = function(map) {
 	
 	var toggleSuburbano = function() {
 		if(suburbano == null) {
-			suburbano = L.mapbox.tileLayer('vidriloco.l0ofaqiq');
+			suburbano = L.mapbox.tileLayer('vidriloco.lypnteuc');
 		}
 		
 		togglePathLayerFor(suburbano, SuburbanoDom);
-		toggleStationsFor('SB');
+		toggleStationsFor('SUB');
 	}
 	
 	var toggleMetro = function() {
@@ -135,7 +135,7 @@ var TransportsManager = function(map) {
 	
 	var toggleITDP = function() {
 		if(itdp == null) {
-			itdp = L.mapbox.tileLayer('vidriloco.d8q0xo2e');
+			itdp = L.mapbox.tileLayer('spalatin.58c8lc25');
 		}
 		
 		togglePathLayerFor(itdp, itdpDom);
@@ -317,7 +317,7 @@ var PolygonsManager = function(map, callback) {
 		$('#stats-panel').removeClass('hidden');
 	}
 	
-	var disablePanelsForRadius = function() {
+	this.disablePanelsForRadius = function() {
 		removeCurrentAgebWithRadius();
 		$('#stats-panel').addClass('hidden');
 		$('.radius-list .action').addClass('hidden');
@@ -326,8 +326,6 @@ var PolygonsManager = function(map, callback) {
 	this.showRadiusPanel = function(number) {
 		enablePanelsForRadius();
 		clearFields();
-		$('.radius-list .layer').removeClass('selected');
-		$('#agebs-radius-'+number).parent().addClass('selected');
 		removeCurrentAgebWithRadius();
 		
 		if(number == 500) {
@@ -345,9 +343,7 @@ var PolygonsManager = function(map, callback) {
 		} else if(number == "all") {
 			map.addLayer(agebsVector);
 			rSelectedVector = agebsVector;
-		} else if(number == "hide") {
-			disablePanelsForRadius();
-		}
+		} 
 	}
 	
 	initialize(callback);

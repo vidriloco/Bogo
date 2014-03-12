@@ -69,21 +69,11 @@ a {
 }
 
 .container-panel {
-	width: 550px;
+	width: 320px;
 	position: absolute;
 	left: 0px;
 	top: 0px;
 	z-index: 99999;
-	
-	.transports-list {
-		.transport-layer a {
-			opacity: 0.4;
-		}
-		
-		.selected a,.transport-layer a:hover {
-			opacity: 1;
-		}
-	}
 	
 	.app-bar, .panel {
 		background-color: white;
@@ -105,7 +95,7 @@ a {
 	
 	.app-bar {
 		margin-top: 20px;
-		width: 500px;
+		width: 320px;
 		height: 80px;
 		
 		ul {
@@ -120,138 +110,110 @@ a {
 	
 	.content {
 		margin-top: 40px;
-		width: 500px;
+		width: 320px;
 		
 		.panel-section {
 
 			border-radius: 3px;
 			color: white;
 			text-transform: uppercase;
-			font-size: 14px;
+			font-size: 12px;
 			font-weight: bold;
 			
 			p {
-				padding: 20px;
-				margin: 10px;
+				display: inline-block;
+				margin: 0;
+				padding: 0;
 			}
 			
-			ul {
-				position: relative;
-				top: -75px;
-				float: right !important;
-				right: 10px !important;
-				list-style: none;
-				padding: 0px;
-				li.title {
-					margin-right: 40px;
+			p.title {
+				padding: 20px;
+				width: 240px;
+			}
 
-				}
-				
-				li {
-					display: inline-block;
-				}
+			p.icon-section {
+				width: 65px;
+				text-align: right;
+				margin-bottom: 10px !important;
 			}
 		}
 		
 		.panel {
 			margin-top: -5px;
-			text-align: right;
-			ul {
-				margin: 0px;
-				padding: 0px;
-				li {
+			
+			.alert {
+				margin-bottom: 0px !important;
+			}
+			
+			.select-radius {
+				.title {
 					text-align: center;
-					font-size: 12px;
+					padding: 3px;
+					margin: 0px;
+					font-size: 15px;
+					color: #999;
 					font-weight: bold;
-					margin: 13px;
-					text-transform: uppercase;
 				}
 				
-				li.selected a {
-					color: $blue;
+				.separator {
+					height: 1px;
+					background-color: #EAEAEA;
+					margin-top: 2px;
+					margin-bottom: 2px;
 				}
 				
-				li a {
-					text-decoration: none;
-					color: $gray_light;
+				ul.radius-list {
+					list-style: none;
+					margin: 0px;
+					padding: 0px;
+					text-align: center;
+
+					li {
+						display: inline-block;
+						font-size: 15px;
+						font-weight: bold;
+						color: #878787;
+						padding: 5px;
+					}
 				}
 				
-				li a:hover {
-					color: $gray;
-				}
-				
-				.action a {
-					color: $yellow !important;
-					opacity: 0.7;
-				}
-				
-				.action a:hover {
-					opacity: 1;
-				}
 			}
-			
-			.separator {
-				height: 1px;
-				background-color: #EAEAEA;
-				margin-top: 2px;
-				margin-bottom: 2px;
-			}
-			
+
 			.stats-table {
 
 				.group {
-
-					.title {
-						margin-top: 10px;
-						margin-bottom: 5px;
-						font-size: 15px;
+					.section {
+						font-size: 11px;
+						color: #5B88FF;
+						text-transform: uppercase;
+						padding: 5px 5px 2px 5px;
+						margin: 0px 0px 0px 7px;
+						text-align: left;
 						font-weight: bold;
-						color: #CCC;
-						text-align: center;
-						border: none !important;
-					}
-
-					.value {
-						font-size: 18px;
-						color: #1061FE;
-					}
-
-					.three-spaces, .two-spaces, .n-spaces {
-						margin-top: 15px;
-						margin-bottom: 15px;
-						text-align: center;
-						margin-left: auto;
-						margin-right: auto;
-
-						p.subtitle {
-							font-size: 13px;
-							margin: 0px;
-							padding: 0px;
-						}
-
-						div {
-							display: inline-block;
-						}
-					}
-
-					.two-spaces {
-						> div {
-							width: 45% !important;
-						}
-					}
-
-					.three-spaces {
-						> div {
-							width: 25% !important;
-						}
 					}
 					
-					.n-spaces {
-
+					.feature {
+						padding-top: 5px;
+						padding-bottom: 5px;
+						
 						> div {
-							margin-right: 4px;
-							margin-left: 4px;
-							width: 85px !important;
+							display: inline-block;
+							width: 45%;
+						}
+						
+						.title {
+							margin-left: 10px;
+							text-align: left;
+							font-size: 13px;
+							font-weight: bold;
+							color: #AEAEAE;
+						}
+						
+						.value {
+							text-align: right;
+							font-size: 18px;
+							margin-right: 20px;
+							color: #1061FE;
 						}
 					}
 				}
@@ -261,6 +223,71 @@ a {
 	}
 }
 
+.bottom-area {
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	left: 0px;
+	z-index: 99999;
+	pointer-events: none;
+	
+	.container {
+		width: 740px;
+		margin-left: auto;
+		margin-right: auto;
+		height: 100px;
+		margin-bottom: 20px;
+		
+		> div {
+			pointer-events: auto;
+			display: inline-block;
+			height: 100%;
+		}
+		
+		.controls {
+			width: 70px;
+			background-color: $yellow;
+			z-index: 9999;
+			border-radius: 3px;
+			color: white;
+			text-transform: uppercase;
+			font-size: 12px;
+			font-weight: bold;
+			vertical-align: top;
+			text-align: center;
+		}
+		
+		.panel {
+			width: 630px;
+			background-color: white;
+			-moz-box-shadow: 0 0 2px #D7D7D7;
+			-webkit-box-shadow: 0 0 2px #D7D7D7;
+			box-shadow: 0 0 2px #D7D7D7;
+			border-radius: 3px;
+			border: 0.3px solid #BABABA;
+			z-index: 9999;
+
+			ul {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+
+				.transport-layer a {
+					opacity: 0.4;
+				}
+
+				.selected a, .transport-layer a:hover {
+					opacity: 1;
+				}
+
+				li {
+					display: inline-block;
+					margin: 20px;
+				}
+			}
+		}
+	}
+}
 
 // Map element styles
 

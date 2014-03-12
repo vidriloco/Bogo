@@ -9,12 +9,10 @@
 	<div class="content">
 		<div id="polygons" class="transitable">
 			<div class="panel-section blue">
-				<p>Polígonos Geoestadísticos</p>
-				<ul>
-					<li class="layer" data-toggle="tooltip" data-placement="top" title="Polígonos">
-						<%= link_to image_tag('polygons.png', :size => '45x45'), 'javascript:void(0);', :class => 'toggler', :id => 'polygons-t' %>
-					</li>
-				</ul>
+				<p class="title">Polígonos Geoestadísticos</p>
+				<p class="icon-section" data-toggle="tooltip" data-placement="top" title="Polígonos">
+					<%= link_to image_tag('polygons.png', :size => '45x45'), 'javascript:void(0);', :class => 'toggler', :id => 'polygons-t' %>
+				</p>
 			</div>
 
 			<div class="panel">
@@ -26,21 +24,23 @@
 				</div>
 			</div>
 		</div>
-		<div id="map" class="transitable">
-			<div class="panel-section yellow">
-				<p>Mapa</p>
-				<ul>
-					<li class="layer" data-toggle="tooltip" data-placement="top" title="Mapa">
-						<%= link_to image_tag('map.png', :size => '45x45'), 'javascript:void(0);', :class => 'toggler', :id => 'map-t' %>
-					</li>
-				</ul>
-			</div>
-			<div class="panel">
-				<%= render 'welcome/network' %>
-			</div>
-		</div>
 	</div>
 	
+</div>
+
+<div class="bottom-area">
+	<div class="container">
+		<div class="controls">
+			<br>
+			<p class="icon-section" data-toggle="tooltip" data-placement="top" title="Red">
+				<%= link_to image_tag('map.png', :size => '45x45'), 'javascript:void(0);', :class => 'toggler', :id => 'map-t' %>
+			</p>
+			<p class="title">Red</p>
+		</div>
+		<div class="panel">
+			<%= render 'welcome/network' %>
+		</div>
+	</div>
 </div>
 
 <div class="loading-cover">
@@ -48,26 +48,3 @@
 </div>
 
 <div id='map-basic'></div>
-
-<% if 1 == 2 %>
-	<div class="panels left-sided left-panel">
-		<div class="panel-togglers">
-			<%= link_to image_tag('polygon_button.png'), 'javascript:void(0);', id: 'agebs', :class => 'toggler polygon-layer' %>
-			<%= link_to image_tag('statistics_button.png'), 'javascript:void(0);', id: 'radius', :class => 'toggler polygon-layer' %>
-		</div>
-		<div class="panel-container">
-			<%= render 'welcome/radius' %>
-			<%= render 'welcome/agebs' %>
-		</div>
-	</div>
-
-	<div class="panels right-sided right-panel">
-		<div class="panel-togglers contents-to-right">
-			<%= link_to image_tag('network_button.png'), 'javascript:void(0);', id: 'network-toggler', :class => 'toggler selected' %>
-			<%= link_to image_tag('map_button.png'), 'javascript:void(0);', id: 'map-toggler', :class => 'toggler' %>
-		</div>
-
-		<%= render 'welcome/network' %>
-		<%= render 'welcome/map' %>
-	</div>
-<% end %>
