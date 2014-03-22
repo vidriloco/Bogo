@@ -22,4 +22,5 @@
 //= require radius1000
 //= require radius2000
 //= require stationsAll
+//= require google
 //= require_tree .

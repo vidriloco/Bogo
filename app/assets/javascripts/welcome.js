@@ -8,7 +8,7 @@ $(document).ready(function() {
 	
 	var transportsManager = null;
 	var polygonsManager = null;
-	
+
 	/*
 	 *  loadMain
 	 *
@@ -17,11 +17,39 @@ $(document).ready(function() {
 	 *
 	 */
 	var loadMain = function() {
-
+		
 		var layerUrl = 'http://{s}.tiles.mapbox.com/v3/atogle.map-vo4oycva/{z}/{x}/{y}.png';
 		var layerAttribution = 'Map data &copy; OpenStreetMap contributors, CC-BY-SA <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>';
 		var baseLayer = new L.TileLayer(layerUrl, {maxZoom: 19, attribution: layerAttribution });
+		var googleHybrid = new L.Google('HYBRID');
+		
 		map.addLayer(baseLayer);
+		
+		$('a.show-carto').bind('click', function() {
+			map.removeLayer(googleHybrid);
+			map.addLayer(baseLayer);
+			$(this).parent().addClass('hidden');
+			$('a.show-satellite').parent().removeClass('hidden');
+		});
+		
+		$('a.show-satellite').bind('click', function() {
+			map.removeLayer(baseLayer);
+			map.addLayer(googleHybrid);
+			$(this).parent().addClass('hidden');
+			$('a.show-carto').parent().removeClass('hidden');
+		});
+		
+		$('a.polygons-off').bind('click', function() {
+			polygonsManager.disablePanelsForRadius();
+			$(this).parent().addClass('hidden');
+			$('a.polygons-on').parent().removeClass('hidden');
+		});
+		
+		$('a.polygons-on').bind('click', function() {
+			polygonsManager.reenablePanelsForRadius();
+			$(this).parent().addClass('hidden');
+			$('a.polygons-off').parent().removeClass('hidden');
+		});
 		
 		$('.transport-layer a').bind('click', function() {
 			transportsManager.toggle($(this).attr('id'));
@@ -34,7 +62,7 @@ $(document).ready(function() {
 			
 			$('#radius-close').on('click', function() {
 				$('.select-radius').removeClass('hidden');
-				polygonsManager.disablePanelsForRadius();
+				polygonsManager.disablePanelsForRadius(true);
 			});
 			
 			polygonsManager.showRadiusPanel(size);
@@ -62,7 +90,21 @@ $(document).ready(function() {
 				$(targetId+' .panel').transition({opacity : 1});
 			}
 		});
-
+		
+		$('#minimizer').bind('click', function() {
+			$(this).addClass('hidden');
+			$('#maximizer').removeClass('hidden');
+			$('.toggable-panel').addClass('opaque');
+		});
+		
+		$('#maximizer').bind('click', function() {
+			$(this).addClass('hidden');
+			$('#minimizer').removeClass('hidden');
+			$('.toggable-panel').removeClass('opaque');
+		});
+		
+		
+		//$('.loading-cover').fadeOut();
 		transportsManager = new TransportsManager(map);
 		
 		setTimeout(function() {

@@ -41,6 +41,11 @@ body, html {
 	display: none !important;
 }
 
+.opaque {
+	opacity: 0;
+	pointer-events: none !important;
+}
+
 a {
 	text-decoration: none;
 }
@@ -232,7 +237,7 @@ a {
 	pointer-events: none;
 	
 	.container {
-		width: 740px;
+		width: 1030px;
 		margin-left: auto;
 		margin-right: auto;
 		height: 100px;
@@ -242,6 +247,7 @@ a {
 			pointer-events: auto;
 			display: inline-block;
 			height: 100%;
+			vertical-align: top;
 		}
 		
 		.controls {
@@ -257,8 +263,7 @@ a {
 			text-align: center;
 		}
 		
-		.panel {
-			width: 630px;
+		.panel, .panel-mini {
 			background-color: white;
 			-moz-box-shadow: 0 0 2px #D7D7D7;
 			-webkit-box-shadow: 0 0 2px #D7D7D7;
@@ -266,6 +271,67 @@ a {
 			border-radius: 3px;
 			border: 0.3px solid #BABABA;
 			z-index: 9999;
+		}
+		
+		.controls-generic {
+			background-color: black;
+		}
+		
+		.control-minimizer {
+			vertical-align: bottom;
+			margin-bottom: 20px;
+			width: 40px;
+			background-color: $blue;
+			height: 40px;
+			-moz-box-shadow: 0 0 2px #D7D7D7;
+			-webkit-box-shadow: 0 0 2px #D7D7D7;
+			box-shadow: 0 0 2px #D7D7D7;
+			border-radius: 5px;
+			border: 0.3px solid #BABABA;
+			z-index: 9999;
+			text-align: center;
+			a {
+				line-height: 35px;
+				vertical-align: middle;
+			}
+		}
+		
+		.panel-mini {
+			width: 140px;
+			margin-right: 10px;
+			
+			ul {
+				margin: 0;
+				padding: 0px;
+				list-style: none;
+				
+				li.separator {
+					height: 1px !important;
+					padding: 0px;
+					margin: 0px;
+					background-color: #DEE2F9;
+					width: 100%;
+				}
+				
+				li:hover {
+					background: #DCE5F6;
+					border-radius: 3px;
+				}
+				
+				li {
+					padding: 6.5px;
+					padding-left: 10px;
+					a {
+						font-size: 14px;
+						font-weight: bold;
+						text-decoration: none;
+					}
+				}
+			}
+		}
+		
+		.panel {
+			width: 630px;
 
 			ul {
 				list-style: none;

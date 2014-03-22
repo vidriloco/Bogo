@@ -30,15 +30,39 @@
 
 <div class="bottom-area">
 	<div class="container">
-		<div class="controls">
+		<div class="controls controls-generic toggable-panel">
+			<br>
+			<p class="icon-section" data-toggle="tooltip" data-placement="top" title="Menú">
+				<%= link_to image_tag('menu.png', :size => '45x45'), 'javascript:void(0);', :class => 'toggler', :id => 'map-t' %>
+			</p>
+			<p class="title">Menú</p>
+		</div>
+		<div class="panel-mini toggable-panel">
+			<ul>
+				<li><%= link_to 'Modo Satélite', 'javascript:void(0);', :class => 'show-satellite' %></li>
+				<li class="hidden"><%= link_to 'Modo Cartografía', 'javascript:void(0);', :class => 'show-carto' %></li>
+				
+				<li class="hidden polygons-enabler-off"><%= link_to 'Ocultar Radios', 'javascript:void(0);', :class => 'polygons-off' %></li>
+				<li class="hidden polygons-enabler-on"><%= link_to 'Mostrar Radios', 'javascript:void(0);', :class => 'polygons-on' %></li>
+				
+				<li class="separator"></li>
+				<li><%= link_to 'Acerca de', 'javascript:void(0);' %></li>
+				
+			</ul>
+		</div>
+		<div class="controls toggable-panel">
 			<br>
 			<p class="icon-section" data-toggle="tooltip" data-placement="top" title="Red">
-				<%= link_to image_tag('map.png', :size => '45x45'), 'javascript:void(0);', :class => 'toggler', :id => 'map-t' %>
+				<%= link_to image_tag('network.png', :size => '45x45'), 'javascript:void(0);', :class => 'toggler', :id => 'map-t' %>
 			</p>
 			<p class="title">Red</p>
 		</div>
-		<div class="panel">
+		<div class="panel toggable-panel">
 			<%= render 'welcome/network' %>
+		</div>
+		<div class="control-minimizer">
+			<%= link_to image_tag('minimize.png', :size => '35x35'), 'javascript:void(0);', :id => 'minimizer' %>
+			<%= link_to image_tag('maximize.png', :size => '35x35'), 'javascript:void(0);', :class => 'hidden', :id => 'maximizer' %>
 		</div>
 	</div>
 </div>

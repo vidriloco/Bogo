@@ -182,7 +182,7 @@ var PolygonsManager = function(map, callback) {
 		weight: 0.1,
 		color: '#A4D1FF',
 		fillColor: '#A4D1FF',
-		fillOpacity: 0.3
+		fillOpacity: 0.05
 	};
 	
 	var highlightDefaultStyle = {
@@ -190,7 +190,7 @@ var PolygonsManager = function(map, callback) {
 			color: '#4886FF',
       fillColor: '#4886FF',
       dashArray: '',
-      fillOpacity: 0.4
+      fillOpacity: 0.10
   };
 	
 	var initialize = function(callback_fnc) {
@@ -287,19 +287,18 @@ var PolygonsManager = function(map, callback) {
 	}
 
 	var highlightFeature = function(e) {
-		var highlightedFeature = e.target;
-		assignStats(e.target.feature);
-    highlightedFeature.setStyle(highlightDefaultStyle);
+			var highlightedFeature = e.target;
+			assignStats(e.target.feature);
+    	highlightedFeature.setStyle(highlightDefaultStyle);
 	}
 	
 	var deHighlightFeature = function(e) {
-		
 		var highlightedFeature = e.target;
 		highlightedFeature.setStyle(defaultStyle);
 	}
 
   // Tell MapBox.js what functions to call when mousing over and out of a neighborhood
-  var onEachFeature = function(feature, layer) {
+  var onEachFeature = function(feature, layer) {		
     layer.on({
 			mouseover: highlightFeature,
 			mouseout: deHighlightFeature
@@ -315,13 +314,31 @@ var PolygonsManager = function(map, callback) {
 	var enablePanelsForRadius = function() {		
 		$('.radius-list .action').removeClass('hidden');
 		$('#stats-panel').removeClass('hidden');
+		$('.polygons-enabler-off').removeClass('hidden');
+		$('.polygons-enabler-on').addClass('hidden');
 	}
 	
-	this.disablePanelsForRadius = function() {
+	this.disablePanelsForRadius = function(hideAllEnablers) {
 		removeCurrentAgebWithRadius();
 		$('#stats-panel').addClass('hidden');
 		$('.radius-list .action').addClass('hidden');
+		$('.polygons-enabler-off').addClass('hidden');
+		if(hideAllEnablers) {
+			$('.polygons-enabler-on').addClass('hidden');
+		} else {
+			$('.polygons-enabler-on').removeClass('hidden');
+		}
 	}	
+	
+	this.reenablePanelsForRadius = function() {
+		if(rSelectedVector != null) {
+			map.addLayer(rSelectedVector);
+		}
+		$('#stats-panel').removeClass('hidden');
+		$('.radius-list .action').removeClass('hidden');
+		$('.polygons-enabler-off').removeClass('hidden');
+		$('.polygons-enabler-on').addClass('hidden');
+	}
 
 	this.showRadiusPanel = function(number) {
 		enablePanelsForRadius();
@@ -344,6 +361,7 @@ var PolygonsManager = function(map, callback) {
 			map.addLayer(agebsVector);
 			rSelectedVector = agebsVector;
 		} 
+		$('.polygons-enabler').removeClass('hidden');
 	}
 	
 	initialize(callback);
