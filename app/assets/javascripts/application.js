@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require transit
+//= require fullpage
 //= require jquery_ujs
 //= require bucket.min
 //= require turbolinks

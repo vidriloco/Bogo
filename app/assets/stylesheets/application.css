@@ -10,6 +10,7 @@
  *
  *= require_self
  *= require_tree .
+ *= require fullpage
  *= require bootstrap.min
  *= require bootstrap-theme.min
  */
