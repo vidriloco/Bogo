@@ -1,5 +1,18 @@
 es_MX:
+  app:
+    menu:
+      start: "Inicio"
+      map: "Mapa"
+      about: "Acerca de"
+      dot: "¿Qué es DOT?"
+    sections:
+      start:
+        title: "¿Por qué implementar el Desarrollo Orientado al Transporte en el DF?"
+        core: "Por Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent diam sem, pulvinar a purus ut, lacinia molestie mauris. Suspendisse volutpat sapien sed ultrices semper. Mauris est mi, tempus vel eros id, consectetur feugiat augue."
+        intro: "Por Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent diam sem, pulvinar a purus ut, lacinia molestie mauris. Suspendisse volutpat sapien sed ultrices semper. Mauris est mi, tempus vel eros id, consectetur feugiat augue. Por Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent diam sem, pulvinar a purus ut, lacinia molestie mauris. Suspendisse volutpat sapien sed ultrices semper. Mauris est mi, tempus vel eros id, consectetur feugiat augue. Por Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent diam sem, pulvinar a purus ut, lacinia molestie mauris. Suspendisse volutpat sapien sed ultrices semper. Mauris est mi, tempus vel eros id, consectetur feugiat augue."
+        action: "Conoce el mapa del DF en el DOT >"
   actions:
     panels:
       show: "Mostrar paneles"
       hide: "Ocultar paneles"
+  

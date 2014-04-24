@@ -1,11 +1,41 @@
-<div class="section" data-anchor="main">
-	
+<div class="section main-section" data-anchor="main">
+	<div class="core-image"></div>
+	<%= render :partial => 'welcome/menu', :locals => {:selected => { :main => "selected" }} %>
+	<div class="scontent">
+		<p class="title"><%= t('app.sections.start.title') %></p>
+		
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-6 col-md-4"><p class="core"><%= t('app.sections.start.core') %></p></div>
+				<div class="col-xs-6 col-md-4">
+					<p class="intro"><%= t('app.sections.start.intro') %></p>
+					<p class="action"><%= t('app.sections.start.action') %></p>
+				</div>
+				<div class="col-xs-6 col-md-4"><%= image_tag('heat.png') %></div>
+			</div>
+		</div>
+		
+	</div>
 </div>
-<div class="section" data-anchor="map">
+
+<div class="section map-section" data-anchor="map">
+	<%= render :partial => 'welcome/menu', :locals => {:selected => { :map => "selected" }} %>
 	<div class="container">
-		<%= render 'welcome/map_section' %>
+		<%= render :partial => 'welcome/map_section' %>
 	</div>
 	<div class="right-positioned">
 		
 	</div>
+</div>
+
+<div class="section dot-section" data-anchor="dot">
+	<%= render :partial => 'welcome/menu', :locals => {:selected => { :dot => "selected" }} %>
+	
+	<div class="scontent">
+		<iframe src="//player.vimeo.com/video/92182340?badge=0" width="1500" height="700" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="http://vimeo.com/92182340">Paris in Motion (Part 4)</a> from <a href="http://vimeo.com/mayeul">Mayeul Akpovi</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+	</div>
+</div>
+
+<div class="section about-section" data-anchor="about">
+	<%= render :partial => 'welcome/menu', :locals => {:selected => { :about => "selected" }} %>
 </div>

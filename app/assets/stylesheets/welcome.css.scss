@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic,300italic);
+@import url(http://fonts.googleapis.com/css?family=Oswald:400,300,700);
 @import "colors.css.scss";
 
 body, html {
@@ -355,6 +356,40 @@ a {
 	}
 }
 
+.menu {
+	font-family: 'Oswald', 'sans-serif';
+	background-color: white;
+	border-radius: 10px;
+	border: 3px solid #498EFF;
+	padding: 10px;
+	position: absolute;
+	top: 30px;
+	right: 100px;
+	
+	width: 530px;
+	height: 70px;
+	z-index: 999999;
+	
+	
+	ul {
+		margin: 0px;
+		list-style: none;
+		font-size: 20px;
+		li {
+			padding: 10px;
+			display: inline-block;
+			.selected {
+				color: #FFB000;
+			}
+		}
+		
+	}
+}
+
+.main-section {
+	background-color: #FFF5F3;
+}
+
 // Map element styles
 
 .panel-container {
@@ -379,4 +414,61 @@ a {
 	float: right;
 	margin-top: 10px;
 	margin-right: 5px;
+}
+
+// Main page
+
+.core-image {
+	width: 100%;
+	height: 300px;
+	top: 0;
+	left: 0;
+	background: url('tod.png');
+	position: fixed;
+}
+
+.scontent {
+	font-family: 'Oswald', 'sans-serif';
+	text-align: center;
+	
+	.container-fluid {
+		width: 65%;
+		margin-left: auto;
+		margin-right: auto;
+		 .row div  {
+			text-align: center;
+		}
+	}
+	
+	p {
+		text-align: center;
+	}
+	
+	.core, .intro, .action {
+		font-weight: 200;
+		color: #747474;
+		text-align: justify;
+	}
+	
+	.core {
+		font-size: 22px;
+	}
+	
+	.intro {
+		font-size: 18px;
+	}
+	
+	.action {
+		margin-top: 50px;
+		font-size: 26px;
+		color: #5389CE;
+		font-weight: 400;
+		text-align: right;
+	}
+	
+	.title {
+		font-size: 35px;
+		margin-top: 200px;
+		margin-bottom: 50px;
+	}
 }

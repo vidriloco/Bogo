@@ -7,7 +7,7 @@ $(document).ready(function() {
 
 	var transportsManager = null;
 	var polygonsManager = null;
-	
+
 	var loadMap = function() {
 		if(map == null) { 
 			map = L.mapbox.map('map-basic', null, { zoomControl:false }).setView([19.4368, -99.1173], 15);
@@ -58,6 +58,7 @@ $(document).ready(function() {
 
 				$('.transport-layer a').bind('click', function() {
 					transportsManager.toggle($(this).attr('id'));
+					polygonsManager.redrawActiveLayer();
 				});
 
 				$('a.polygon-layer').bind('click', function() {
@@ -113,7 +114,7 @@ $(document).ready(function() {
 				transportsManager = new TransportsManager(map);
 
 				setTimeout(function() {
-					polygonsManager = new PolygonsManager(map, function() {
+					polygonsManager = new PolygonsManager(map, transportsManager, function() {
 						$('.loading-cover').fadeOut();
 					});
 				}, 1200);
@@ -121,15 +122,15 @@ $(document).ready(function() {
 			loadMain();
 		}
 	}
-	
-	
-	
-	
+
+
+
+
 	$.fn.fullpage({
 		css3: true,
-		navigation: true,
+		navigation: false,
 		resize : true,
-		anchors:['main', 'map'], 
+		anchors:['main', 'map', 'dot', 'about'],
 		afterLoad: function(anchorLink, index){
        //using index
        if(index == '2'){
