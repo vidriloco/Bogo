@@ -14,7 +14,6 @@
 				<div class="col-xs-6 col-md-4"><%= image_tag('heat.png') %></div>
 			</div>
 		</div>
-		
 	</div>
 </div>
 
@@ -32,10 +31,87 @@
 	<%= render :partial => 'welcome/menu', :locals => {:selected => { :dot => "selected" }} %>
 	
 	<div class="scontent">
-		<iframe src="//player.vimeo.com/video/92182340?badge=0" width="1500" height="700" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="http://vimeo.com/92182340">Paris in Motion (Part 4)</a> from <a href="http://vimeo.com/mayeul">Mayeul Akpovi</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+		
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-12 col-md-8">
+					<iframe class="youtube-player" type="text/html" width="800" height="450" src="http://www.youtube.com/embed/8IsU0RdgPCw" allowfullscreen frameborder="0">
+					</iframe>
+				</div>
+				<div class="col-xs-12 col-md-4">
+					<p class="intro"><%= t('app.sections.dot.intro') %></p>
+					<p class="action"><%= t('app.sections.dot.action') %></p>
+				</div>
+			</div>
+		</div>
+
 	</div>
 </div>
 
 <div class="section about-section" data-anchor="about">
 	<%= render :partial => 'welcome/menu', :locals => {:selected => { :about => "selected" }} %>
+	
+	<div class="scontent">
+		
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-7 col-md-5 supporters">
+					<div class="box">
+						<h3><%= t('app.sections.about.thanks_to') %></h3>
+						<ul class="thanks-to">
+							<li><%= link_to image_tag('uk_embassy_logo.png'), nil %></li>
+							<li><%= link_to image_tag('ITDP-small.png'), nil %></li>
+						</ul>
+					</div>
+
+				</div>
+				<div class="col-xs-11 col-md-7 developers">
+					<div class="box">
+						<h3><%= t('app.sections.about.dedication_of') %></h3>
+						<ul class="dedication-of">
+							<li>
+								<div class="person">
+									<div class="circle"></div>
+									<p class="title">Salvador Medina</p>
+									<p class="subtitle">Coordinación</p>
+								</div>
+							</li>
+							<li>
+								<div class="person">
+									<div class="circle"></div>
+									<p class="title">Alejandro Cruz</p>
+									<p class="subtitle">Desarrollo web y SIG</p>
+								</div>
+							</li>
+							<li>
+								<div class="person">
+									<div class="circle"></div>
+									<p class="title">Nely Patlán</p>
+									<p class="subtitle">Curaduría de datos y SIG</p>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	
+	
+	<div class="bar">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-24 col-md-12">
+					<ul>
+						<li><p>Av. México 69 Col. Hipódromo Condesa Del. Cuauhtémoc México DF, C.P. 06100</p></li>
+						<li><a href="mailto:mexico@itdp.org" target="_top">mexico@itdp.org</a></li>
+						<li class="smaller"><p>+52 (55) 3626-2963  +52 (55) 3626-2964</p></li>
+						<li class="social"><%= link_to image_tag('twitter.png', :size => '30x30'), nil %> <%= link_to image_tag('facebook.png', :size => '30x30'), nil %></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+	</div>
 </div>

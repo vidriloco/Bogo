@@ -133,9 +133,9 @@ $(document).ready(function() {
 		anchors:['main', 'map', 'dot', 'about'],
 		afterLoad: function(anchorLink, index){
        //using index
-       if(index == '2'){
+       if(index == '2') {
 					loadMap();
-       }
+       } 
      }
 	});
 });

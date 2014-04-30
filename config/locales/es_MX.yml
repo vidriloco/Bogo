@@ -1,16 +1,25 @@
 es_MX:
   app:
+    bar:
+      contact: "Contacto"
     menu:
       start: "Inicio"
       map: "Mapa"
       about: "Acerca de"
-      dot: "¿Qué es DOT?"
+      dot: "Conoce el DOT"
     sections:
       start:
         title: "¿Por qué implementar el Desarrollo Orientado al Transporte en el DF?"
-        core: "Por Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent diam sem, pulvinar a purus ut, lacinia molestie mauris. Suspendisse volutpat sapien sed ultrices semper. Mauris est mi, tempus vel eros id, consectetur feugiat augue."
-        intro: "Por Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent diam sem, pulvinar a purus ut, lacinia molestie mauris. Suspendisse volutpat sapien sed ultrices semper. Mauris est mi, tempus vel eros id, consectetur feugiat augue. Por Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent diam sem, pulvinar a purus ut, lacinia molestie mauris. Suspendisse volutpat sapien sed ultrices semper. Mauris est mi, tempus vel eros id, consectetur feugiat augue. Por Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent diam sem, pulvinar a purus ut, lacinia molestie mauris. Suspendisse volutpat sapien sed ultrices semper. Mauris est mi, tempus vel eros id, consectetur feugiat augue."
+        core: "El Desarrollo Orientado al Transporte (DOT) reduce la necesidad de viajar grandes distancias y ofrece una oportunidad para la densificación, de manera que los viajes se puedan hacer caminando, usando la bicicleta y el transporte público. "
+        intro: "Esta estrategia posible de implementar en el DF, y su zona metropolitana, gracias a la existencia de una red de 547 km de transporte público de calidad, compuesta por Metro, Metrobús, el Servicio de Transportes Eléctricos, un tren suburbano – y el Mexibús (en el Estado de México). ITDP presenta una visualización que permite explorar las redes de transporte público existentes, más las propuestas de BRT de ITDP, y su relación con variables poblacionales, de vivienda y de económicas, con el fin de detectar oportunidades de Desarrollo Orientado al Transporte en la ciudad."
         action: "Conoce el mapa del DF en el DOT >"
+      dot:
+        title: "El DOT a detalle"
+        intro: "En el DF, en un radio de 800 metros alrededor de las 1004 estaciones de transporte público, existen muchas oportunidades, por ejemplo: se localizan 163,355 viviendas desocupadas, que permitiría cubrir el 29% de las necesidades de vivienda  a 2020. Oportunidades que se multiplican con la implementación de transporte público, como con la propuesta de ITDP de 20 líneas más de BRT en las cuales se localizan xxx,xxx viviendas desocupadas, que permitirían cubrir las necesidades de vivienda del XX% del crecimiento poblacional a 2020. Con lo cual se podría evitar la expansión urbana de la ciudad y con ello, avanzar hacía su sustentabilidad real."
+        action: "Visualiza el DOT"
+      about:
+        thanks_to: "Este trabajo es posible gracias al apoyo de"
+        dedication_of: "Y con la dedicación de"
   actions:
     panels:
       show: "Mostrar paneles"
