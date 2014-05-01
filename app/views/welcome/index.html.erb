@@ -1,4 +1,6 @@
 <div class="section main-section" data-anchor="main">
+	<div class="background-art"><%= image_tag('map-dot.png', alt: t('attributions.blueprint_icon'), title: t('attributions.blueprint_icon')) %></div>
+	
 	<div class="core-image"></div>
 	<%= render :partial => 'welcome/menu', :locals => {:selected => { :main => "selected" }} %>
 	<div class="scontent">
@@ -11,7 +13,7 @@
 					<p class="intro"><%= t('app.sections.start.intro') %></p>
 					<p class="action"><%= t('app.sections.start.action') %></p>
 				</div>
-				<div class="col-xs-6 col-md-4"><%= image_tag('heat.png') %></div>
+				<div class="col-xs-6 col-md-4"><%= image_tag('df-logo.png') %></div>
 			</div>
 		</div>
 	</div>
@@ -29,6 +31,7 @@
 
 <div class="section dot-section" data-anchor="dot">
 	<%= render :partial => 'welcome/menu', :locals => {:selected => { :dot => "selected" }} %>
+	<div class="background-art"><%= image_tag('train-icon.png', alt: t('attributions.train_icon'), title: t('attributions.train_icon')) %></div>
 	
 	<div class="scontent">
 		
@@ -51,6 +54,8 @@
 <div class="section about-section" data-anchor="about">
 	<%= render :partial => 'welcome/menu', :locals => {:selected => { :about => "selected" }} %>
 	
+	<div class="background-art"><%= image_tag('blueprint-icon.png') %></div>
+	
 	<div class="scontent">
 		
 		<div class="container-fluid">
@@ -71,25 +76,32 @@
 						<ul class="dedication-of">
 							<li>
 								<div class="person">
-									<div class="circle"></div>
+									<%= image_tag('salvador.png', :class => "circle circle-blue") %>
 									<p class="title">Salvador Medina</p>
 									<p class="subtitle">Coordinación</p>
 								</div>
 							</li>
 							<li>
 								<div class="person">
-									<div class="circle"></div>
+									<%= image_tag('alex.png', :class => "circle circle-yellow") %>
 									<p class="title">Alejandro Cruz</p>
 									<p class="subtitle">Desarrollo web y SIG</p>
 								</div>
 							</li>
 							<li>
 								<div class="person">
-									<div class="circle"></div>
+									<%= image_tag('alex.png', :class => "circle circle-blue") %>
 									<p class="title">Nely Patlán</p>
 									<p class="subtitle">Curaduría de datos y SIG</p>
 								</div>
 							</li>
+						</ul>
+					</div>
+					<div class="box box-downloads">
+						<ul>
+							<li><%= image_tag('note-icon.png', size: '30x30', alt: t('attributions.note_icon'), title: t('attributions.note_icon')) %> 
+							<%= link_to t('app.sections.about.methodological_note'), nil %></li>
+							<li><%= image_tag('download-icon.png', :size => '30x30') %> <%= link_to t('app.sections.about.data'), nil %></li>
 						</ul>
 					</div>
 				</div>

@@ -1,4 +1,8 @@
 es_MX:
+  attributions:
+    note_icon: 'Notebook by Carlo Prina from The Noun Project'
+    train_icon: 'Train by Jamison Wieser from The Noun Project'
+    blueprint_icon: 'Blueprint by Dimitry Sokolov from The Noun Project'
   app:
     bar:
       contact: "Contacto"
@@ -20,6 +24,8 @@ es_MX:
       about:
         thanks_to: "Este trabajo es posible gracias al apoyo de"
         dedication_of: "Y con la dedicación de"
+        methodological_note: "Descarga la nota metodológica"
+        data: "Descarga los datos"
   actions:
     panels:
       show: "Mostrar paneles"

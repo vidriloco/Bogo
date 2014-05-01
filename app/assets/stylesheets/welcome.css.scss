@@ -10,6 +10,7 @@ body, html {
 	margin: 0;
 	padding: 0;
 	font-family: 'Open Sans', sans-serif;
+	background: asset-data-url('gradient.png') repeat-x !important;
 }
 
 .loading-cover {
@@ -20,20 +21,6 @@ body, html {
 	top: 0;
 	left: 0;
 	z-index: 99999999;
-}
-
-.spinner {
-	width: 180px;
-	height: 180px;
-	background: url('/assets/spinloader.gif');
-	background-position: center center;
-  background-repeat: no-repeat;
-  border-radius: 50%; /* Rounds out the halo */
-  opacity: .4; /* Some subtle opacity to help blend with variable background colors */
-	
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 20%;
 }
 
 /* COMMONS BEGIN */
@@ -388,10 +375,6 @@ a {
 	}
 }
 
-.main-section {
-	
-}
-
 // Map element styles
 
 .panel-container {
@@ -425,8 +408,7 @@ a {
 	height: 200px;
 	top: 0;
 	left: 0;
-	//background-image: url('/assets/tod.png') ;
-	background-image: asset-data-url('/assets/tod.png');
+	background-image: asset-data-url('tod.png');
 	position: fixed;
 }
 
@@ -510,15 +492,40 @@ a {
 	}
 }
 
+.main-section {
+	.background-art {
+		position: absolute;
+		bottom: 5px;
+		left: 50px;
+		opacity: 0.7;
+	}
+}
+
+.dot-section {
+	.background-art {
+		position: absolute;
+		bottom: 5px;
+		right: 50px;
+		opacity: 0.7;
+	}
+}
+
 .about-section {
 	
+	.background-art {
+		position: absolute;
+		bottom: 5px;
+		right: 50px;
+		opacity: 0.7;
+	}
+	
 	h3 {
-		color: #B9B9B9;
+		color: $yellow;
 		font-weight: 300;
 	}
 	
 	ul.thanks-to {
-		margin-top: 100px;
+		margin-top: 60px;
 		padding: 0px;
 		list-style: none;
 	}
@@ -531,12 +538,13 @@ a {
 		
 		.box {
 			border-radius: 5px;
-			border: 1px solid #D6D6D6;
+			border: 1px solid #CEEEFF;
 		}
 	}
 
 	ul.dedication-of {
-		margin-top: 100px;
+		margin-top: 40px;
+		margin-bottom: 40px;
 		padding: 0px;
 		list-style: none;
 		
@@ -545,33 +553,68 @@ a {
 			
 			.person {
 				padding: 20px;
+				color: #646464;
 				
 				.circle {
-					border-radius: 100px;
-					height: 200px;
-					width: 200px;
-					border: 1px solid #3571FF;
+					padding: 0px;
+					border-radius: 75px;
+					height: 150px;
+					width: 150px;
+				}
+				
+				.circle-blue {
+					border: 5px solid $blue;
+				}
+				
+				.circle-yellow {
+					border: 5px solid $yellow;
 				}
 				
 				.title {
 					margin-top: 20px;
 					margin-bottom: 0px;
 					font-size: 18px;
-					color: #646464;
 				}
 				
 				.subtitle {
-					font-weight: 200;
+					font-weight: 100;
 					margin: 0px;
+					font-size: 18px;
 				}
 			}
 		}
 	}
 	
+	.box-downloads {
+		margin-top: 20px;
+		
+		ul {
+			list-style: none;
+
+
+			li {
+				
+				img {
+					margin-right: 10px;
+				}
+				
+				margin-top: 10px;
+				margin-right: 30px;
+				display: inline-block;
+				
+				a {
+					vertical-align: middle;
+					font-size: 18px;
+				}
+			}
+		}
+	}
+	
+	
 	.developers {
 		.box {
 			border-radius: 5px;
-			border: 1px solid #C8C8C8;
+			border: 1px solid #CEEEFF;
 		}
 	}
 }
