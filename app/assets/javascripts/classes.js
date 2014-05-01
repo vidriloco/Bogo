@@ -264,7 +264,6 @@ var PolygonsManager = function(map, tm, callback) {
 		} else if(feature.properties.Agencia == "Sistema de Transporte Colectivo") {
 			name = "METRO";
 		} else {
-			console.log(feature.properties.Agencia);
       name = feature.properties.Agencia;
     }
 		return transportsManager.isTransportEnabled(name);
@@ -358,12 +357,12 @@ var PolygonsManager = function(map, tm, callback) {
 		highlightedFeature.setStyle(defaultStyle);
 	}
 
-  // Tell MapBox.js what functions to call when mousing over and out of a neighborhood
   var onEachFeature = function(feature, layer) {
     layer.on({
 			mouseover: highlightFeature,
 			mouseout: deHighlightFeature
     });
+		layer.bindPopup("<p style='margin-top: 10px !important; margin-bottom: 0px !important; font-size: 13px'> Transporte en este radio:<br><b>"+feature.properties.Agencia+"</b> - "+feature.properties.Name+"</p>");
   }
 
 	var removeCurrentAgebWithRadius = function() {
