@@ -27,6 +27,7 @@ var TransportsManager = function(map) {
 	 *   Draws or clears the stations points defined in the given string layerStr parameter
 	 */
 	var toggleStationsFor = function(layerStr) {
+		
 		if(enabledLayers.contains(layerStr)) {
 			enabledLayers.remove(layerStr);
 		} else {
@@ -36,7 +37,6 @@ var TransportsManager = function(map) {
 		if(stations != null) {
 			map.removeLayer(stations);
 		}
-
 		// Add vector data to map
 	  stations = L.geoJson(allStations, {
 			style: {
@@ -184,11 +184,8 @@ var PolygonsManager = function(map, tm, callback) {
 
 	var transportsManager = tm;
 
-	var rSelectedVector = null;
-	var r500 = null;
-	var r800 = null;
-	var r1000 = null;
-	var r2000 = null;
+	var currentRadius = null;
+	var radiusDict = {};
 
 	var defaultStyle = {
 		weight: 0.1,
@@ -206,35 +203,6 @@ var PolygonsManager = function(map, tm, callback) {
   };
 
 	var initialize = function(callback_fnc) {
-		// Load agebs vector and layer
-	  agebsVector = L.geoJson(agebs, {
-			style: defaultStyle,
-	    onEachFeature: onEachFeature
-	  });
-
-	  /*agebsVector = L.geoJson(null, {});
-		d3.json('/assets/AGEBS.json', function(error, data) {
-			var feature = topojson.feature(data, data.objects.layer1);
-			agebsVector.addData(feature);
-		})*/
-
-		// Load radius vectors
-		/*r500 = L.geoJson(radius500, {
-			style: defaultStyle,
-	    onEachFeature: onEachFeature
-	  });*/
-
-		/*
-	  r1000 = L.geoJson(radius1000, {
-			style: defaultStyle,
-	    onEachFeature: onEachFeature
-	  });
-
-	  r2000 = L.geoJson(radius2000, {
-			style: defaultStyle,
-	    onEachFeature: onEachFeature
-	  });*/
-
 		if(callback_fnc != null) {
 			callback_fnc();
 		}
@@ -257,54 +225,60 @@ var PolygonsManager = function(map, tm, callback) {
 
 	var filterByAgency = function(feature, layer) {
 		var name = null;
-		if(feature.properties.Agencia == "Tren Suburbano") {
+		var agency = (feature.properties.AGENCIA || feature.properties.Agencia);
+		
+		if(agency == "Tren Suburbano") {
 			name = "SUB";
-		} else if(feature.properties.Agencia == "Metrobús") {
+		} else if(agency == "Metrobús") {
 			name = "MB";
-		} else if(feature.properties.Agencia == "Sistema de Transporte Colectivo") {
+		} else if(agency == "Sistema de Transporte Colectivo") {
 			name = "METRO";
+		} else if(agency == "Mexibús") {
+			name = "Mexibus";
 		} else {
-      name = feature.properties.Agencia;
+      name = agency;
     }
 		return transportsManager.isTransportEnabled(name);
 	}
-
-	var load800r = function() {
-    if(r800 != null) {
-      map.removeLayer(r800);
-    }
-		r800 = L.geoJson(radius800, {
-			style: defaultStyle,
-	    onEachFeature: onEachFeature,
-			filter: filterByAgency
-	  });
-    rSelectedVector = r800;
-    map.addLayer(r800);
-	}
 	
-	var load500r = function() {
-    if(r500 != null) {
-      map.removeLayer(r500);
-    }
-		r500 = L.geoJson(radius500, {
+	var loadRadius = function(radius) {
+		if(radiusDict[radius] != null) {
+			map.removeLayer(radiusDict[radius]);
+		}
+		var radiusLayer = null
+		if(radius == 500) {
+			radiusLayer = radius500;	    
+		} else if(radius == 800) {
+			radiusLayer = radius800;	    
+		} else if(radius == 1000) {
+			radiusLayer = radius1000;	    
+		} else if(radius == 2000) {
+			radiusLayer = radius2000;	    
+		} else {
+			radiusLayer = agebs;	    
+		}
+		
+		var geoJsonObj = {
 			style: defaultStyle,
-	    onEachFeature: onEachFeature,
-			filter: filterByAgency
-	  });
-    rSelectedVector = r500;
-    map.addLayer(r500);
+    	onEachFeature: onEachFeature
+		};
+		
+		if(radiusLayer != agebs) {
+			geoJsonObj.filter = filterByAgency;
+		}
+
+		radiusDict[radius] = L.geoJson(radiusLayer, geoJsonObj);
+
+		currentRadius = radius;
+    map.addLayer(radiusDict[radius]);
 	}
 
   this.redrawActiveLayer = function() {
-    if(rSelectedVector == null) {
+    if(currentRadius == null) {
       return;
     }
 
-    if(rSelectedVector == r800) {
-      load800r();
-    } else if(rSelectedVector == r500) {
-	    load500r();
-		}
+		loadRadius(currentRadius);
   }
 
 	var assignStats = function(feature) {
@@ -362,12 +336,15 @@ var PolygonsManager = function(map, tm, callback) {
 			mouseover: highlightFeature,
 			mouseout: deHighlightFeature
     });
-		layer.bindPopup("<p style='margin-top: 10px !important; margin-bottom: 0px !important; font-size: 13px'> "+$('#transport-radius').html()+'<b>'+feature.properties.Agencia+"</b> - "+feature.properties.Name+"</p>");
+
+		var agency = (feature.properties.AGENCIA || feature.properties.Agencia);
+		layer.bindPopup("<p style='margin-top: 10px !important; margin-bottom: 0px !important; font-size: 13px'> "+$('#transport-radius').html()+'<b>'+agency+"</b> - "+feature.properties.Name+"</p>");
   }
 
-	var removeCurrentAgebWithRadius = function() {
-		if(rSelectedVector != null) {
-			map.removeLayer(rSelectedVector);
+	var removeCurrentRadius = function() {
+		if(currentRadius != null) {
+			map.removeLayer(radiusDict[currentRadius]);
+			currentRadius = null;
 		}
 	}
 
@@ -379,7 +356,7 @@ var PolygonsManager = function(map, tm, callback) {
 	}
 
 	this.disablePanelsForRadius = function(hideAllEnablers) {
-		removeCurrentAgebWithRadius();
+		removeCurrentRadius();
 		$('#stats-panel').addClass('hidden');
 		$('.radius-list .action').addClass('hidden');
 		$('.polygons-enabler-off').addClass('hidden');
@@ -391,8 +368,8 @@ var PolygonsManager = function(map, tm, callback) {
 	}
 
 	this.reenablePanelsForRadius = function() {
-		if(rSelectedVector != null) {
-			map.addLayer(rSelectedVector);
+		if(currentRadius != null) {
+			map.addLayer(radiusDict[currentRadius]);
 		}
 		$('#stats-panel').removeClass('hidden');
 		$('.radius-list .action').removeClass('hidden');
@@ -403,22 +380,9 @@ var PolygonsManager = function(map, tm, callback) {
 	this.showRadiusPanel = function(number) {
 		enablePanelsForRadius();
 		clearFields();
-		removeCurrentAgebWithRadius();
-
-		if(number == 500) {
-			load500r();
-		} else if(number == 800) {
-			load800r();
-		}	else if(number == 1000) {
-			map.addLayer(r1000);
-			rSelectedVector = r1000;
-		}	else if(number == 2000) {
-			map.addLayer(r2000);
-			rSelectedVector = r2000;
-		} else if(number == "all") {
-			map.addLayer(agebsVector);
-			rSelectedVector = agebsVector;
-		}
+		removeCurrentRadius();
+		
+		loadRadius(number);
 		$('.polygons-enabler').removeClass('hidden');
 	}
 

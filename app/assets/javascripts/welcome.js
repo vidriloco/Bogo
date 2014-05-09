@@ -123,9 +123,6 @@ $(document).ready(function() {
 		}
 	}
 
-
-
-
 	$.fn.fullpage({
 		css3: true,
 		navigation: false,
