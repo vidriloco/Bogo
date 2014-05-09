@@ -11,7 +11,7 @@
 				<div class="col-xs-6 col-md-4"><p class="core"><%= t('app.sections.start.core') %></p></div>
 				<div class="col-xs-6 col-md-4">
 					<p class="intro"><%= t('app.sections.start.intro') %></p>
-					<p class="action"><%= t('app.sections.start.action') %></p>
+					<p class="action"><%= link_to t('app.sections.start.action'), root_path.concat('#map') %></p>
 				</div>
 				<div class="col-xs-6 col-md-4"><%= image_tag('df-logo.png') %></div>
 			</div>
@@ -20,6 +20,7 @@
 </div>
 
 <div class="section map-section" data-anchor="map">
+	<p id="transport-radius" class="hidden"><%= t('app.sections.map.popups.nearby').html_safe %></p>
 	<%= render :partial => 'welcome/menu', :locals => {:selected => { :map => "selected" }} %>
 	<div class="container">
 		<%= render :partial => 'welcome/map_section' %>
@@ -43,7 +44,7 @@
 				</div>
 				<div class="col-xs-12 col-md-4">
 					<p class="intro"><%= t('app.sections.dot.intro') %></p>
-					<p class="action"><%= t('app.sections.dot.action') %></p>
+					<p class="action"><%= link_to t('app.sections.dot.action'), root_path.concat('#map') %></p>
 				</div>
 			</div>
 		</div>
@@ -78,21 +79,21 @@
 								<div class="person">
 									<%= image_tag('salvador.png', :class => "circle circle-blue") %>
 									<p class="title">Salvador Medina</p>
-									<p class="subtitle">Coordinación</p>
+									<p class="subtitle"><%= t('app.sections.about.team.coordination') %></p>
 								</div>
 							</li>
 							<li>
 								<div class="person">
 									<%= image_tag('alex.png', :class => "circle circle-yellow") %>
 									<p class="title">Alejandro Cruz</p>
-									<p class="subtitle">Desarrollo web y SIG</p>
+									<p class="subtitle"><%= t('app.sections.about.team.web_development') %></p>
 								</div>
 							</li>
 							<li>
 								<div class="person">
 									<%= image_tag('alex.png', :class => "circle circle-blue") %>
 									<p class="title">Nely Patlán</p>
-									<p class="subtitle">Curaduría de datos y SIG</p>
+									<p class="subtitle"><%= t('app.sections.about.team.data_selection') %></p>
 								</div>
 							</li>
 						</ul>

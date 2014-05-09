@@ -1,23 +1,84 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  attributions:
+    note_icon: 'Notebook por Carlo Prina de The Noun Project'
+    train_icon: 'Train por Jamison Wieser de The Noun Project'
+    blueprint_icon: 'Blueprint por Dimitry Sokolov de The Noun Project'
+  app:
+    bar:
+      contact: "Contact"
+    menu:
+      start: "Start"
+      map: "Map"
+      about: "About"
+      dot: "Get to know DOT"
+      lang:
+        english: "On english"
+        spanish: "En español"
+    sections:
+      start:
+        title: "¿Por qué implementar el Desarrollo Orientado al Transporte en el DF?"
+        core: "El Desarrollo Orientado al Transporte (DOT) reduce la necesidad de viajar grandes distancias y ofrece una oportunidad para la densificación, de manera que los viajes se puedan hacer caminando, usando la bicicleta y el transporte público. "
+        intro: "Esta estrategia posible de implementar en el DF, y su zona metropolitana, gracias a la existencia de una red de 547 km de transporte público de calidad, compuesta por Metro, Metrobús, el Servicio de Transportes Eléctricos, un tren suburbano – y el Mexibús (en el Estado de México). ITDP presenta una visualización que permite explorar las redes de transporte público existentes, más las propuestas de BRT de ITDP, y su relación con variables poblacionales, de vivienda y de económicas, con el fin de detectar oportunidades de Desarrollo Orientado al Transporte en la ciudad."
+        action: "Know the Mexico City DOT map >"
+      dot:
+        title: "The DOT at detail"
+        intro: "En el DF, en un radio de 800 metros alrededor de las 1004 estaciones de transporte público, existen muchas oportunidades, por ejemplo: se localizan 163,355 viviendas desocupadas, que permitiría cubrir el 29% de las necesidades de vivienda a 2020. Oportunidades que se multiplican con la implementación de transporte público, como con la propuesta de ITDP de 29 líneas más de BRT en las cuales se localizan otras 28,847 viviendas desocupadas, que permitirían cubrir las necesidades de vivienda del 34.7% del crecimiento poblacional a 2020. Con lo cual se podría evitar la expansión urbana de la ciudad y con ello, avanzar hacía su sustentabilidad real."
+        action: "Visualize the DOT map of Mexico City"
+      about:
+        thanks_to: "This work is possible thanks to"
+        dedication_of: "With the dedication of this team"
+        methodological_note: "Download the methodology notes"
+        data: "Download the data"
+        team:
+          coordination: "Coordination"
+          web_development: "Web development and GIS"
+          data_selection: "Data selection and GIS"
+      map:
+        popups:
+          nearby: "Main transport on this radius:<br>"
+        left_menu:
+          title: "Statistical polygons"
+          subtitle: "Select a radius"
+          options:
+            all: "AGEB"
+            five: "500 m"
+            eight: "800 m"
+            onet: "1000 m"
+            twot: "2000 m"
+          selections:
+            all: "Selected <strong>AGEB</strong>"
+            five: "Selected <strong>500 Meters</strong> radius"
+            eight: "Selected <strong>800 Meters</strong> radius"
+            onet: "Selected <strong>1000 Meters</strong> radius"
+            twot: "Selected <strong>2000 Meters</strong> radius"
+          aspects:
+            total: "Total"
+            population:
+              title: "Population"
+              hectare: "By hectare"
+              handicapped: "Handicapped"
+              employed: "Employed"
+              unemployed: "Unemployed"
+            housing:
+              title: "Housing"
+              with_car: "With car"
+              unoccupied: "Unoccupied"
+            others:
+              title: "Others"
+              socioeconomic_level: "Socio-economic level"
+              margination_level: "Marginalization level"
+        bottom_menu:
+          titles:
+            menu: "Menu"
+            network: "Network"
+          options:
+            satellite: "Satellite Mode"
+            plain: "Plain Mode"
+            radius:
+              show: "Show radius"
+              hide: "Hide radius" 
+  actions:
+    panels:
+      show: "Show panels"
+      hide: "Hide panels"
+  

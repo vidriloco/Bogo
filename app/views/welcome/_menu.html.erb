@@ -4,5 +4,10 @@
 		<li><%= link_to t('app.menu.map'), '#map', :class => selected[:map] %></li>
 		<li><%= link_to t('app.menu.dot'), '#dot', :class => selected[:dot] %></li>
 		<li><%= link_to t('app.menu.about'), '#about', :class => selected[:about] %></li>
+		<% if I18n.locale == I18n.default_locale %>
+			<li><%= link_to t('app.menu.lang.english'), :locale => 'en' %></li>
+		<% else %>
+			<li><%= link_to t('app.menu.lang.spanish'), :locale => 'es_MX' %></li>
+		<% end %>
 	</ul>
 </div>

@@ -1,13 +1,33 @@
 <div class="radius-header">
 	<div class="select-radius">
-		<p class="title">Selecciona un radio (en metros)</p>
+		<p class="title"><%= t('app.sections.map.left_menu.subtitle') %></p>
 		<div class="separator"></div>
 		<ul class="radius-list">
-			<li class="layer"><a href="javascript:void(0);" id="agebs-radius-all" data-size="all" class="polygon-layer radius"><span class="pic"><%=  %></span><span class="name">Completo</span></a></li>
-			<li class="layer"><a href="javascript:void(0);" id="agebs-radius-500" data-size="500" class="polygon-layer radius"><span class="pic"><%=  %></span><span class="name">500</span></a></li>
-			<li class="layer"><a href="javascript:void(0);" id="agebs-radius-800" data-size="800" class="polygon-layer radius"><span class="pic"><%=  %></span><span class="name">800</span></a></li>
-			<li class="layer"><a href="javascript:void(0);" id="agebs-radius-1000" data-size="1000" class="polygon-layer radius"><span class="pic"><%=  %></span><span class="name">1000</span></a></li>
-			<li class="layer"><a href="javascript:void(0);" id="agebs-radius-2000" data-size="2000" class="polygon-layer radius"><span class="pic"><%=  %></span><span class="name">2000</span></a></li>
+			<li class="layer">
+				<a href="javascript:void(0);" id="agebs-radius-all" data-size="all" class="polygon-layer radius">
+					<span class="name"><%= t('app.sections.map.left_menu.options.all') %></span>
+				</a>
+			</li>
+			<li class="layer">
+				<a href="javascript:void(0);" id="agebs-radius-500" data-size="500" class="polygon-layer radius">
+					<span class="name"><%= t('app.sections.map.left_menu.options.five') %></span>
+				</a>
+			</li>
+			<li class="layer">
+				<a href="javascript:void(0);" id="agebs-radius-800" data-size="800" class="polygon-layer radius">
+					<span class="name"><%= t('app.sections.map.left_menu.options.eight') %></span>
+				</a>
+			</li>
+			<li class="layer">
+				<a href="javascript:void(0);" id="agebs-radius-1000" data-size="1000" class="polygon-layer radius">
+					<span class="name"><%= t('app.sections.map.left_menu.options.onet') %></span>
+				</a>
+			</li>
+			<li class="layer">
+				<a href="javascript:void(0);" id="agebs-radius-2000" data-size="2000" class="polygon-layer radius">
+					<span class="name"><%= t('app.sections.map.left_menu.options.twot') %></span>
+				</a>
+			</li>
 		</ul>
 	</div>
 </div>
@@ -15,22 +35,22 @@
 <div class="radius-options hidden">
 	<div class="500-message alert alert-info alert-dismissable">
 	  <button id="radius-close" type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-	  Seleccionado radio de <strong>500 Metros</strong>
+	  <%= t('app.sections.map.left_menu.selections.five').html_safe %>
 	</div>
 	<div class="800-message alert alert-info alert-dismissable">
 	  <button id="radius-close" type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-	  Seleccionado radio de <strong>800 Metros</strong>
+	  <%= t('app.sections.map.left_menu.selections.eight').html_safe %>
 	</div>
 	<div class="1000-message alert alert-info alert-dismissable">
 	  <button id="radius-close" type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-	  Seleccionado radio de <strong>1000 Metros</strong>
+	  <%= t('app.sections.map.left_menu.selections.onet').html_safe %>
 	</div>
 	<div class="2000-message alert alert-info alert-dismissable">
 	  <button id="radius-close" type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-	  Seleccionado radio de <strong>2000 Metros</strong>
+	  <%= t('app.sections.map.left_menu.selections.twot').html_safe %>
 	</div>
 	<div class="all-message alert alert-info alert-dismissable">
 	  <button id="radius-close" type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-	  Seleccionado AGEB <strong>completo</strong>
+	  <%= t('app.sections.map.left_menu.selections.all').html_safe %>
 	</div>
 </div>
