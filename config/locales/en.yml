@@ -10,20 +10,20 @@ en:
       start: "Start"
       map: "Map"
       about: "About"
-      dot: "Get to know DOT"
+      dot: "Know TOD"
       lang:
         english: "On english"
-        spanish: "En español"
+        spanish: "Spanish"
     sections:
       start:
-        title: "¿Por qué implementar el Desarrollo Orientado al Transporte en el DF?"
-        core: "El Desarrollo Orientado al Transporte (DOT) reduce la necesidad de viajar grandes distancias y ofrece una oportunidad para la densificación, de manera que los viajes se puedan hacer caminando, usando la bicicleta y el transporte público. "
-        intro: "Esta estrategia posible de implementar en el DF, y su zona metropolitana, gracias a la existencia de una red de 547 km de transporte público de calidad, compuesta por Metro, Metrobús, el Servicio de Transportes Eléctricos, un tren suburbano – y el Mexibús (en el Estado de México). ITDP presenta una visualización que permite explorar las redes de transporte público existentes, más las propuestas de BRT de ITDP, y su relación con variables poblacionales, de vivienda y de económicas, con el fin de detectar oportunidades de Desarrollo Orientado al Transporte en la ciudad."
-        action: "Know the Mexico City DOT map >"
+        title: "Why should DF implement Transit Oriented Development (TOD)?"
+        core: "Transit Oriented Development (TOD) reduces the need to travel long distances and provides an opportunity for densification, so that a travel can make by walking, cycling or using public transit. "
+        intro: "This strategy can be implemented in Mexico City and its metropolitan area, thanks to the existence of a good network of 547 km of public transit, comprising Metro, Metrobus, Electric Transport Service (trolleybus), a commuter train - and Mexibus (in the State of Mexico). ITDP has made this data visualization that allows exploring the existing public transit networks, plus the new BRT lines proposed by ITDP and its relation to the demographic, housing and economic variables, in order to identify opportunities for Transit Oriented Development in the city."
+        action: "Know the Mexico City TOD map >"
       dot:
-        title: "The DOT at detail"
-        intro: "En el DF, en un radio de 800 metros alrededor de las 1004 estaciones de transporte público, existen muchas oportunidades, por ejemplo: se localizan 163,355 viviendas desocupadas, que permitiría cubrir el 29% de las necesidades de vivienda a 2020. Oportunidades que se multiplican con la implementación de transporte público, como con la propuesta de ITDP de 29 líneas más de BRT en las cuales se localizan otras 28,847 viviendas desocupadas, que permitirían cubrir las necesidades de vivienda del 34.7% del crecimiento poblacional a 2020. Con lo cual se podría evitar la expansión urbana de la ciudad y con ello, avanzar hacía su sustentabilidad real."
-        action: "Visualize the DOT map of Mexico City"
+        title: "The TOD at detail"
+        intro: "In Mexico City, within 800 meters around 1004 public transit stations, there are many opportunities, for example: 163,355 vacant homes, which would cover 29% of the housing needs to 2020, are located. Opportunities that multiply with the implementation the proposed 29 lines of BRT proposed by ITDP, in which surroundings are, located other 28,847 vacant homes, which would meet the housing needs of 34.7% of the population growth to 2020. Whit this could prevent urban sprawl of the city and thus, driving their actual development toward sustainability."
+        action: "Visualize the TOD map of Mexico City"
       about:
         thanks_to: "This work is possible thanks to"
         dedication_of: "With the dedication of this team"
@@ -34,6 +34,9 @@ en:
           web_development: "Web development and GIS"
           data_selection: "Data selection and GIS"
       map:
+        heatmap:
+          title: "Ranges"
+          back: "Return to the aspects listing"
         popups:
           nearby: "Main transport on this radius:<br>"
         left_menu:

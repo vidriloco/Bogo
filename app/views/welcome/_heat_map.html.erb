@@ -1,0 +1,18 @@
+<div id="heatmap-container" class="hidden">
+	<div id="heatmap">
+		<h4><%= t('app.sections.map.heatmap.title') %></h4>
+		<ul class="range"><li class="colored"> <span class="color-box yellow-pale"> </span> </li><li class="text yellow-pale-field"> 0 - 20</li></ul>
+		<ul class="range"><li class="colored"> <span class="color-box yellow"> </span> </li><li class="text yellow-field"> 21 - 30</li></ul>
+		<ul class="range"><li class="colored"> <span class="color-box orange"> </span> </li><li class="text orange-field"> 31 - 90</li></ul>
+		<ul class="range"><li class="colored"> <span class="color-box red"> </span> </li><li class="text red-field"> 91 - 200</li></ul>
+		<ul class="range"><li class="colored"> <span class="color-box dark-red"> </span> </li><li class="text dark-red-field"> 201 - 1209</li></ul>
+	</div>
+	
+	<p>
+		<a href="javascript:void(0);" id="dismiss-heatmap-container">
+			<span class="glyphicon glyphicon-chevron-left"></span>&nbsp;
+			<%= t('app.sections.map.heatmap.back') %>
+		</a>
+	</p>
+	
+</div>

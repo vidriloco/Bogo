@@ -67,6 +67,7 @@ $(document).ready(function() {
 					$('.radius-options .'+size+'-message').clone().appendTo('.radius-header');
 
 					$('#radius-close').on('click', function() {
+						revealAspectsList();
 						$('.select-radius').removeClass('hidden');
 						polygonsManager.disablePanelsForRadius(true);
 					});
@@ -107,6 +108,33 @@ $(document).ready(function() {
 					$(this).addClass('hidden');
 					$('#minimizer').removeClass('hidden');
 					$('.toggable-panel').removeClass('opaque');
+				});
+				
+				var revealAspectsList = function() {
+					$('.stats-table .feature').removeClass('hidden');
+					$('.stats-table .section-title').removeClass('hidden');
+					$('#heatmap-placeholder').html("");
+					polygonsManager.resetMapColoring();
+				};
+				
+				var updateRangeTableWith = function(data) {
+					$('.stats-table .yellow-pale-field').html(data.yellowPale);
+					$('.stats-table .yellow-field').html(data.yellow);
+					$('.stats-table .orange-field').html(data.orange);
+					$('.stats-table .red-field').html(data.red);
+					$('.stats-table .dark-red-field').html(data.darkRed);
+				}
+				
+				$('.feature').bind('click', function() {
+					var aspect = $(this).attr('id');
+					$('.feature').addClass('hidden');
+					$(this).removeClass('hidden');
+					$('.section-title').addClass('hidden');
+					$(this).siblings('.section-title').removeClass('hidden');
+					$('#heatmap-placeholder').html($('#heatmap-container').html());
+					polygonsManager.setMapColoringTo(aspect);
+					updateRangeTableWith(polygonsManager.tableRangeForCurrentAspect());
+					$('#dismiss-heatmap-container').bind('click', revealAspectsList);
 				});
 
 

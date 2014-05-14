@@ -12,7 +12,7 @@ es_MX:
       about: "Acerca de"
       dot: "Conoce el DOT"
       lang:
-        english: "On english"
+        english: "Inglés"
         spanish: "En español"
     sections:
       start:
@@ -34,6 +34,9 @@ es_MX:
           web_development: "Desarrollo web y SIG"
           data_selection: "Selección de datos y SIG"
       map:
+        heatmap:
+          title: "Rangos"
+          back: "Regresar a la lista de rubros"
         popups:
           nearby: "Transporte principal en este radio:<br>"
         left_menu:

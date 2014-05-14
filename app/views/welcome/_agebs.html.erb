@@ -1,43 +1,46 @@
 <div class="stats-table layers-list">
 	<div class="group">
 		<p class="section-title"><%= t('app.sections.map.left_menu.aspects.population.title') %></p> 
-		<div class="feature">
+		<div class="feature" id="ageb_population-aspect">
 			<div class="title"><%= t('app.sections.map.left_menu.aspects.total') %></div><div id="ageb_population" class="value">---</div>
 		</div>
-		<div class="feature">
+		<div class="feature" id="ageb_density-aspect">
 			<div class="title"><%= t('app.sections.map.left_menu.aspects.population.hectare') %></div><div id="ageb_density" class="value">---</div>
 		</div>
-		<div class="feature">
+		<div class="feature" id="ageb_population_handicap-aspect">
 			<div class="title"><%= t('app.sections.map.left_menu.aspects.population.handicapped') %></div><div id="ageb_population_handicap" class="value">---</div>
 		</div>
-		<div class="feature">
+		<div class="feature" id="ageb_population_with_job-aspect">
 			<div class="title"><%= t('app.sections.map.left_menu.aspects.population.employed') %></div><div id="ageb_population_with_job" class="value">---</div>
 		</div>
-		<div class="feature">
+		<div class="feature" id="ageb_population_without_job-aspect">
 			<div class="title"><%= t('app.sections.map.left_menu.aspects.population.unemployed') %></div><div id="ageb_population_without_job" class="value">---</div>
 		</div>
 	</div>
 	
 	<div class="group">
 		<p class="section-title"><%= t('app.sections.map.left_menu.aspects.housing.title') %></p> 
-		<div class="feature">
+		<div class="feature" id="ageb_houses-aspect">
 			<div class="title"><%= t('app.sections.map.left_menu.aspects.population.title') %></div><div id="ageb_houses" class="value">---</div>
 		</div>
-		<div class="feature">
+		<div class="feature" id="ageb_population_with_car-aspect">
 			<div class="title"><%= t('app.sections.map.left_menu.aspects.housing.with_car') %></div><div id="ageb_population_with_car" class="value">---</div>
 		</div>
-		<div class="feature">
+		<div class="feature" id="ageb_houses_empty-aspect">
 			<div class="title"><%= t('app.sections.map.left_menu.aspects.housing.unoccupied') %></div><div id="ageb_houses_empty" class="value">---</div>
 		</div>
 	</div>
 	
 	<div class="group">
 		<p class="section-title"><%= t('app.sections.map.left_menu.aspects.others.title') %></p> 
-		<div class="feature">
+		<div class="feature" id="ageb_socioeconomic_level-aspect">
 			<div class="title"><%= t('app.sections.map.left_menu.aspects.others.socioeconomic_level') %></div><div id="ageb_socioeconomic_level" class="value">---</div>
 		</div>
-		<div class="feature">
+		<div class="feature" id="ageb_margination-aspect">
 			<div class="title"><%= t('app.sections.map.left_menu.aspects.others.margination_level') %></div><div id="ageb_margination" class="value">---</div>
 		</div>
 	</div>
+	
+	<div id="heatmap-placeholder"></div>
+	<%= render 'heat_map' %>
 </div>
