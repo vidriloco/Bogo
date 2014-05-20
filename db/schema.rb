@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140519033920) do
+ActiveRecord::Schema.define(version: 20140520053036) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20140519033920) do
     t.string  "mxb",        limit: 50
     t.string  "tren",       limit: 50
     t.spatial "the_geom",   limit: {:srid=>4326, :type=>"multi_polygon"}
+    t.text    "geom"
   end
 
 end

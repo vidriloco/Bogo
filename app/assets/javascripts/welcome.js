@@ -1,4 +1,6 @@
 var AGEBUpdater;
+var prod_server = "http://50.56.30.227:3001";
+var dev_server = "http://127.0.0.1:3000";
 
 $(document).ready(function() {
 	var map = null;
@@ -141,7 +143,7 @@ $(document).ready(function() {
 
 				AGEBUpdater = function() {
 					if(polygonsManager.isAGEBLayerOn()) {
-						var url = "http://127.0.0.1:3000/api/agebs.json";
+						var url = dev_server+"/api/agebs.json";
 						var bounds = map.getBounds();
 						var params = {viewport: {
 							sw : bounds["_southWest"].lat+","+bounds["_southWest"].lng,
