@@ -382,7 +382,6 @@ var PolygonsManager = function(map, tm, callback) {
 
 	this.disablePanelsForRadius = function(hideAllEnablers) {
 		map.removeLayer(radiusDict[currentRadius]);
-		$('#stats-panel').addClass('hidden');
 		$('.radius-list .action').addClass('hidden');
 		$('.polygons-enabler-off').addClass('hidden');
 		if(hideAllEnablers) {

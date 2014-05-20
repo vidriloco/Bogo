@@ -65,16 +65,17 @@ $(document).ready(function() {
 					polygonsManager.redrawActiveLayer();
 				});
 
+				$(document.body).on('click', '.radius-close' ,function(){
+					$('#stats-panel').addClass('hidden');
+					revealAspectsList();
+					$('.select-radius').removeClass('hidden');
+					polygonsManager.disablePanelsForRadius(true);
+				});
+
 				$('a.polygon-layer').bind('click', function() {
 					var size = $(this).attr('data-size');
 					$('.select-radius').addClass('hidden');
 					$('.radius-options .'+size+'-message').clone().appendTo('.radius-header');
-
-					$('#radius-close').on('click', function() {
-						revealAspectsList();
-						$('.select-radius').removeClass('hidden');
-						polygonsManager.disablePanelsForRadius(true);
-					});
 
 					polygonsManager.showRadiusPanel(size);
 				});
@@ -118,6 +119,7 @@ $(document).ready(function() {
 					$('.stats-table .feature').removeClass('hidden');
 					$('.stats-table .section-title').removeClass('hidden');
 					$('#heatmap-placeholder').html("");
+
 					polygonsManager.resetMapColoring();
 				};
 
@@ -142,7 +144,7 @@ $(document).ready(function() {
 				});
 
 				AGEBUpdater = function() {
-					if(polygonsManager.isAGEBLayerOn()) {
+					if(polygonsManager.isAGEBLayerOn() && !$('#stats-panel').hasClass('hidden')) {
 						var url = dev_server+"/api/agebs.json";
 						var bounds = map.getBounds();
 						var params = {viewport: {
