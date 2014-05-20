@@ -1,3 +1,5 @@
+var AGEBUpdater;
+
 $(document).ready(function() {
 	var map = null;
 	var metrobus = null;
@@ -10,7 +12,7 @@ $(document).ready(function() {
 
 	var loadMap = function() {
 		if(map == null) { 
-			map = L.mapbox.map('map-basic', null, { zoomControl:false }).setView([19.4368, -99.1173], 15);
+			map = L.mapbox.map('map-basic', null, { zoomControl:false, minZoom: 15 }).setView([19.4368, -99.1173], 15);
 			new L.Control.Zoom({ position: 'topright' }).addTo(map);
 
 			/*
@@ -109,14 +111,14 @@ $(document).ready(function() {
 					$('#minimizer').removeClass('hidden');
 					$('.toggable-panel').removeClass('opaque');
 				});
-				
+
 				var revealAspectsList = function() {
 					$('.stats-table .feature').removeClass('hidden');
 					$('.stats-table .section-title').removeClass('hidden');
 					$('#heatmap-placeholder').html("");
 					polygonsManager.resetMapColoring();
 				};
-				
+
 				var updateRangeTableWith = function(data) {
 					$('.stats-table .yellow-pale-field').html(data.yellowPale);
 					$('.stats-table .yellow-field').html(data.yellow);
@@ -124,7 +126,7 @@ $(document).ready(function() {
 					$('.stats-table .red-field').html(data.red);
 					$('.stats-table .dark-red-field').html(data.darkRed);
 				}
-				
+
 				$('.feature').bind('click', function() {
 					var aspect = $(this).attr('id');
 					$('.feature').addClass('hidden');
@@ -137,6 +139,24 @@ $(document).ready(function() {
 					$('#dismiss-heatmap-container').bind('click', revealAspectsList);
 				});
 
+				AGEBUpdater = function() {
+					if(polygonsManager.isAGEBLayerOn()) {
+						var url = "http://127.0.0.1:3000/api/agebs.json";
+						var bounds = map.getBounds();
+						var params = {viewport: {
+							sw : bounds["_southWest"].lat+","+bounds["_southWest"].lng,
+							ne: bounds["_northEast"].lat+","+bounds["_northEast"].lng }}
+
+						$.get(url, params).done(function(data) {
+							var agebs = {"bbox":[-99.4853934353288,18.947871426163275,-98.62768607005094,19.9915355810107], "type":"FeatureCollection", "features": data};
+							polygonsManager.displayAGEBLayerWithData(agebs);
+						});
+					}
+				}
+
+				map.on('dragend', function(e) {
+					AGEBUpdater();
+				});
 
 				//$('.loading-cover').fadeOut();
 				transportsManager = new TransportsManager(map);
@@ -145,6 +165,7 @@ $(document).ready(function() {
 					polygonsManager = new PolygonsManager(map, transportsManager, function() {
 						$('.loading-cover').fadeOut();
 					});
+					AGEBUpdater();
 				}, 1200);
 			}
 			loadMain();
@@ -160,7 +181,7 @@ $(document).ready(function() {
        //using index
        if(index == '2') {
 					loadMap();
-       } 
+       }
      }
 	});
 });

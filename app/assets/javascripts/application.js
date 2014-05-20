@@ -17,7 +17,6 @@
 //= require bucket.min
 //= require turbolinks
 //= require parallel
-//= require AGEBS
 //= require radius500
 //= require radius800
 //= require radius1000

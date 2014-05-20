@@ -5,8 +5,14 @@ Bogo::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 
+  namespace 'api' do
+    resources :agebs, only: :index
+  end
+  
   get '/:locale' => 'welcome#index'
-
+  
+  
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

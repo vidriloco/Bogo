@@ -27,7 +27,7 @@ var TransportsManager = function(map) {
 	 *   Draws or clears the stations points defined in the given string layerStr parameter
 	 */
 	var toggleStationsFor = function(layerStr) {
-		
+
 		if(enabledLayers.contains(layerStr)) {
 			enabledLayers.remove(layerStr);
 		} else {
@@ -212,7 +212,7 @@ var PolygonsManager = function(map, tm, callback) {
 	var filterByAgency = function(feature, layer) {
 		var name = null;
 		var agency = (feature.properties.AGENCIA || feature.properties.Agencia);
-		
+
 		if(agency == "Tren Suburbano") {
 			name = "SUB";
 		} else if(agency == "Metrobús") {
@@ -226,38 +226,56 @@ var PolygonsManager = function(map, tm, callback) {
     }
 		return transportsManager.isTransportEnabled(name);
 	}
-	
+
 	var loadRadius = function(radius) {
 		if(radiusDict[radius] != null) {
 			map.removeLayer(radiusDict[radius]);
 		}
-		var radiusLayer = null
+
+		var radiusLayer = null;
+    currentRadius = radius;
+
 		if(radius == 500) {
-			radiusLayer = radius500;	    
+			radiusLayer = radius500;
 		} else if(radius == 800) {
-			radiusLayer = radius800;	    
+			radiusLayer = radius800;
 		} else if(radius == 1000) {
-			radiusLayer = radius1000;	    
+			radiusLayer = radius1000;
 		} else if(radius == 2000) {
-			radiusLayer = radius2000;	    
+			radiusLayer = radius2000;
 		} else {
-			radiusLayer = agebs;	    
+      AGEBUpdater();
+      return;
 		}
-		
+
 		var geoJsonObj = {
 			style: coloringManager.colorForValueOnCurrentFeature,
-    	onEachFeature: onEachFeature
+    	onEachFeature: onEachFeature,
+      filter : filterByAgency
 		};
-		
-		if(radiusLayer != agebs) {
-			geoJsonObj.filter = filterByAgency;
-		}
 
 		radiusDict[radius] = L.geoJson(radiusLayer, geoJsonObj);
 
-		currentRadius = radius;
     map.addLayer(radiusDict[radius]);
 	}
+
+  this.displayAGEBLayerWithData = function(data) {
+    var geoJsonObj = {
+      style: coloringManager.colorForValueOnCurrentFeature,
+      onEachFeature: onEachFeature
+    };
+
+    if(radiusDict[currentRadius] != null) {
+      map.removeLayer(radiusDict[currentRadius]);
+    }
+
+    radiusDict[currentRadius] = L.geoJson(data, geoJsonObj);
+    map.addLayer(radiusDict[currentRadius]);
+  }
+
+  this.isAGEBLayerOn = function() {
+    return (currentRadius == 'all');
+  }
 
   this.redrawActiveLayer = function() {
     _redrawActiveLayer();
@@ -313,7 +331,7 @@ var PolygonsManager = function(map, tm, callback) {
 	var highlightFeature = function(e) {
 			var highlightedFeature = e.target;
 			assignStats(e.target.feature);
-			
+
 			highlightedFeature.setStyle(coloringManager.highlightedColor());
 	}
 
@@ -347,17 +365,17 @@ var PolygonsManager = function(map, tm, callback) {
 		$('.polygons-enabler-off').removeClass('hidden');
 		$('.polygons-enabler-on').addClass('hidden');
 	}
-	
+
 	this.setMapColoringTo = function(domElement) {
 		coloringManager.setSelectedAspect(domElement);
 		_redrawActiveLayer();
 	}
-	
+
 	this.resetMapColoring = function() {
 		coloringManager.reset();
 		_redrawActiveLayer();
 	}
-	
+
 	this.tableRangeForCurrentAspect = function() {
 		return coloringManager.tableRangeForAspect();
 	}
@@ -388,7 +406,7 @@ var PolygonsManager = function(map, tm, callback) {
 		enablePanelsForRadius();
 		clearFields();
 		removeCurrentRadius();
-		
+
 		loadRadius(number);
 		$('.polygons-enabler').removeClass('hidden');
 	}
@@ -399,7 +417,7 @@ var PolygonsManager = function(map, tm, callback) {
 var ColoringRanges = function() {
 	var selectedAspect = null;
 	var lastStyleUsed = null;
-	
+
 	var defaultStyle = {
       weight: 2,
 			color: '#A4D1FF',
@@ -425,68 +443,68 @@ var ColoringRanges = function() {
 
 	this.colorForValueOnCurrentFeature = function(feature) {
 		var fillColor = null;
-		
+
 		if (selectedAspect == 'ageb_population-aspect') {
 			var value = parseFloat(feature.properties.pob1);
 		} else if (selectedAspect == 'ageb_houses-aspect') {
 			var value = parseFloat(feature.properties.viv0);
 
-			fillColor = value > 15000 ? colors.darkRed : 
+			fillColor = value > 15000 ? colors.darkRed :
 						 value > 7000  ? colors.red :
 						 value > 3000  ? colors.orange :
 						 value > 1500  ? colors.yellow : colors.yellowPale;
 		} else if (selectedAspect == 'ageb_density-aspect') {
 			var value = parseFloat(feature.properties.densidad);
 
-			fillColor = value > 200 ? colors.darkRed : 
+			fillColor = value > 200 ? colors.darkRed :
 						 value > 90  ? colors.red :
 						 value > 30  ? colors.orange :
 						 value > 20  ? colors.yellow : colors.yellowPale;
 		} else if (selectedAspect == 'ageb_population_with_job-aspect') {
 			var value = parseFloat(feature.properties.eco4_r);
 
-			fillColor = value >= 9 ? colors.darkRed : 
+			fillColor = value >= 9 ? colors.darkRed :
 						 value >= 7  ? colors.red :
 						 value >= 5  ? colors.orange :
 						 value >= 3  ? colors.yellow : colors.yellowPale;
 		} else if (selectedAspect == 'ageb_population_without_job-aspect') {
 			var value = parseFloat(feature.properties.eco25_r);
 
-			fillColor = value >= 9 ? colors.darkRed : 
+			fillColor = value >= 9 ? colors.darkRed :
 						 value >= 7  ? colors.red :
 						 value >= 5  ? colors.orange :
 						 value >= 3  ? colors.yellow : colors.yellowPale;
 		} else if (selectedAspect == 'ageb_population_handicap-aspect') {
 			var value = parseFloat(feature.properties.disc_r);
 
-			fillColor = value > 6 ? colors.darkRed : 
+			fillColor = value > 6 ? colors.darkRed :
 						 value > 4  ? colors.red :
 						 value > 3  ? colors.orange :
 						 value > 1  ? colors.yellow : colors.yellowPale;
 		} else if (selectedAspect == 'ageb_population_with_car-aspect') {
 			var value = parseFloat(feature.properties.viv28_r);
 
-			fillColor = value > 80 ? colors.darkRed : 
+			fillColor = value > 80 ? colors.darkRed :
 						 value > 60  ? colors.red :
 						 value > 40  ? colors.orange :
 						 value > 20  ? colors.yellow : colors.yellowPale;
 		} else if (selectedAspect == 'ageb_houses_empty-aspect') {
 			var value = parseFloat(feature.properties.viv1_r);
 
-			fillColor = value > 50 ? colors.darkRed : 
+			fillColor = value > 50 ? colors.darkRed :
 						 value > 30  ? colors.red :
 						 value > 20  ? colors.orange :
 						 value > 10  ? colors.yellow : colors.yellowPale;
 		} else if (selectedAspect == 'ageb_socioeconomic_level-aspect') {
 			var value = feature.properties.nse;
-			fillColor = /E/.test(value) ? colors.darkRed : 
+			fillColor = /E/.test(value) ? colors.darkRed :
 						 /(D_menos|D_me|D_mas)/.test(value)  ? colors.red :
 						 /(C_menos|C_me|C_mas)/.test(value)  ? colors.orange :
 						 /A/.test(value)  ? colors.yellow : colors.yellowPale;
 		}	else if (selectedAspect == 'ageb_margination-aspect') {
 			var value = feature.properties.gmu;
 
-			fillColor = /Muy Alto/.test(value) ? colors.darkRed : 
+			fillColor = /Muy Alto/.test(value) ? colors.darkRed :
 						 /Alto/.test(value)  ? colors.red :
 						 /Medio/.test(value)  ? colors.orange :
 						 /Bajo/.test(value)  ? colors.yellow : colors.yellowPale;
@@ -499,9 +517,9 @@ var ColoringRanges = function() {
 		lastStyleUsed = heatStyle;
 		return lastStyleUsed;
 	};
-	
+
 	this.tableRangeForAspect = function() {
-		
+
 		if (selectedAspect == 'ageb_population-aspect') {
 			return {
 				yellowPale: '',
@@ -533,7 +551,7 @@ var ColoringRanges = function() {
 				orange: '5 - 6 %',
 				red: '7 -8 %',
 				darkRed: '9 - 10 %'
-			}	
+			}
 		} else if (selectedAspect == 'ageb_population_handicap-aspect') {
 			return {
 				yellowPale: '0 - 1 %',
@@ -583,9 +601,9 @@ var ColoringRanges = function() {
 		lastStyleUsed = heatStyle;
 		return lastStyleUsed;
 	};
-	
+
 	this.highlightedColor = function() {
-			if(lastStyleUsed != null) {				
+			if(lastStyleUsed != null) {
 				return {
 					weight: 2,
 					color: 'black',
@@ -594,7 +612,7 @@ var ColoringRanges = function() {
 	    	return highlightedStyle;
 			}
 	}
-	
+
 	this.deHighlightedColor = function() {
 		if(lastStyleUsed != null) {
 			return {
@@ -605,16 +623,16 @@ var ColoringRanges = function() {
 			return defaultStyle;
 		}
 	}
-	
+
 	this.setSelectedAspect = function(aspect) {
 		selectedAspect = aspect;
 	}
-	
+
 	this.reset = function() {
 		lastStyleUsed = null;
 		selectedAspect = null;
 	}
-	
+
 	var colors = {
 		yellowPale: '#FFE178',
 		yellow: '#FFAC00',
@@ -622,8 +640,8 @@ var ColoringRanges = function() {
 		red: '#FF2A00',
 		darkRed: '#AB1C00'
 	};
-	
+
 	var initialize = function() {
-		
+
 	}
 }
