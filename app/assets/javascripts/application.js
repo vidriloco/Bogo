@@ -17,10 +17,6 @@
 //= require bucket.min
 //= require turbolinks
 //= require parallel
-//= require radius500
-//= require radius800
-//= require radius1000
-//= require radius2000
 //= require stationsAll
 //= require google
 //= require_tree .

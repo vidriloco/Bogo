@@ -10,7 +10,7 @@ Bogo::Application.routes.draw do
   end
   
   get '/:locale' => 'welcome#index'
-  
+  get '/radius/:radius' => 'radius#index'
   
   
   # Example of regular route:
