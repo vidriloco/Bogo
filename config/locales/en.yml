@@ -49,12 +49,13 @@ en:
             onet: "1000 m"
             twot: "2000 m"
           selections:
-            all: "Selected <strong>AGEB</strong>"
+            all: "Selected <strong>AGEB</strong> layer"
             five: "Selected <strong>500 Meters</strong> radius"
             eight: "Selected <strong>800 Meters</strong> radius"
             onet: "Selected <strong>1000 Meters</strong> radius"
             twot: "Selected <strong>2000 Meters</strong> radius"
           aspects:
+            usage_notes: "Select an aspect for revealing the corresponding heatmap"
             total: "Total"
             population:
               title: "Population"

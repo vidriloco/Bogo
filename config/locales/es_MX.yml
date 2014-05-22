@@ -49,12 +49,13 @@ es_MX:
             onet: "1000 m"
             twot: "2000 m"
           selections:
-            all: "Seleccionado AGEB <strong>completo</strong>"
+            all: "Seleccionada capa <strong>AGEB</strong>"
             five: "Seleccionado radio de <strong>500 Metros</strong>"
             eight: "Seleccionado radio de <strong>800 Metros</strong>"
             onet: "Seleccionado radio de <strong>1000 Metros</strong>"
             twot: "Seleccionado radio de <strong>2000 Metros</strong>"
           aspects:
+            usage_notes: "Selecciona un rubro para acceder al mapa de calor correspondiente"
             total: "Total"
             population:
               title: "Población"
