@@ -14,7 +14,7 @@ $(document).ready(function() {
 
 	var loadMap = function() {
 		if(map == null) { 
-			map = L.mapbox.map('map-basic', null, { zoomControl:false, minZoom: 15 }).setView([19.4368, -99.1173], 15);
+			map = L.mapbox.map('map-basic', null, { zoomControl:false }).setView([19.4368, -99.1173], 15);
 			new L.Control.Zoom({ position: 'topright' }).addTo(map);
 
 			/*
@@ -77,6 +77,12 @@ $(document).ready(function() {
 					$('.select-radius').addClass('hidden');
 					$('.radius-options .'+size+'-message').clone().appendTo('.radius-header');
 
+					// Hide/Show the heatmap legend on AGEBs layer only
+					if(size=='all') {
+						$('.usage-note').fadeIn();
+					} else {
+						$('.usage-note').hide();
+					}
 					polygonsManager.showRadiusPanel(size);
 				});
 
@@ -132,15 +138,17 @@ $(document).ready(function() {
 				}
 
 				$('.feature').bind('click', function() {
-					var aspect = $(this).attr('id');
-					$('.feature').addClass('hidden');
-					$(this).removeClass('hidden');
-					$('.section-title').addClass('hidden');
-					$(this).siblings('.section-title').removeClass('hidden');
-					$('#heatmap-placeholder').html($('#heatmap-container').html());
-					polygonsManager.setMapColoringTo(aspect);
-					updateRangeTableWith(polygonsManager.tableRangeForCurrentAspect());
-					$('#dismiss-heatmap-container').bind('click', revealAspectsList);
+					if(polygonsManager.isAGEBLayerOn()) {
+						var aspect = $(this).attr('id');
+						$('.feature').addClass('hidden');
+						$(this).removeClass('hidden');
+						$('.section-title').addClass('hidden');
+						$(this).siblings('.section-title').removeClass('hidden');
+						$('#heatmap-placeholder').html($('#heatmap-container').html());
+						polygonsManager.setMapColoringTo(aspect);
+						updateRangeTableWith(polygonsManager.tableRangeForCurrentAspect());
+						$('#dismiss-heatmap-container').bind('click', revealAspectsList);
+					}
 				});
 
 				AGEBUpdater = function() {
