@@ -5,8 +5,8 @@ development:
   encoding: unicode
   database: bogo
   pool: 5
-  username: postgres
-  password: <%= ENV['PSQL_PASSWD'] %>
+  username: spalatin
+  password:
 
 test:
   adapter: postgis

@@ -17,10 +17,8 @@ ActiveRecord::Schema.define(version: 20140520053036) do
   enable_extension "plpgsql"
 
   create_table "agebs", primary_key: "gid", force: true do |t|
-    t.string  "cvegeo",     limit: 13
+    t.string  "cvegeo",         limit: 13
     t.float   "pob1"
-    t.float   "sup1"
-    t.float   "sup2"
     t.float   "eco4"
     t.float   "eco25"
     t.float   "eco25_r"
@@ -31,18 +29,17 @@ ActiveRecord::Schema.define(version: 20140520053036) do
     t.float   "viv0"
     t.float   "viv1"
     t.float   "viv1_r"
-    t.string  "nse_proxy",  limit: 254
-    t.string  "gmu2010",    limit: 254
-    t.integer "densidad",   limit: 2
-    t.integer "densidad_2", limit: 2
+    t.integer "densidad",       limit: 2
     t.float   "eco4_r"
-    t.string  "stc",        limit: 50
-    t.string  "ste",        limit: 50
-    t.string  "mb",         limit: 50
-    t.string  "mxb",        limit: 50
-    t.string  "tren",       limit: 50
-    t.spatial "the_geom",   limit: {:srid=>4326, :type=>"multi_polygon"}
-    t.text    "geom"
+    t.integer "empleo"
+    t.float   "sup"
+    t.integer "empleo_r"
+    t.string  "nse",            limit: 50
+    t.string  "gmu",            limit: 50
+    t.spatial "geom",           limit: {:srid=>4326, :type=>"multi_polygon"}
+    t.text    "processed_geom"
   end
+
+  add_index "agebs", ["geom"], :name => "agebs_geom_gist", :spatial => true
 
 end
