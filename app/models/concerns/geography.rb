@@ -14,7 +14,7 @@ module Geography
 
     def filter_nearby(viewport)
       window=build_polygon_from_params(viewport)
-      self.where{st_intersects(geom, window)}
+      self.where{st_intersects(the_geom, window)}
     end
 
     def find_nearby(viewport=nil)

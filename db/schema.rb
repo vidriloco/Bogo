@@ -36,10 +36,8 @@ ActiveRecord::Schema.define(version: 20140520053036) do
     t.integer "empleo_r"
     t.string  "nse",            limit: 50
     t.string  "gmu",            limit: 50
-    t.spatial "geom",           limit: {:srid=>4326, :type=>"multi_polygon"}
+    t.spatial "the_geom",       limit: {:srid=>4326, :type=>"multi_polygon"}
     t.text    "processed_geom"
   end
-
-  add_index "agebs", ["geom"], :name => "agebs_geom_gist", :spatial => true
 
 end

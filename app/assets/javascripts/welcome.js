@@ -2,6 +2,14 @@ var AGEBUpdater;
 var prod_server = "http://50.56.30.227:3001";
 var dev_server = "http://127.0.0.1:3000";
 
+var toggleActivityIndicator = function(command) {
+	if(command=='show') {
+		$('.spinner').removeClass('hidden');
+	} else if(command=='hide') {
+		$('.spinner').addClass('hidden');
+	}
+}
+
 $(document).ready(function() {
 	var map = null;
 	var metrobus = null;
@@ -153,6 +161,7 @@ $(document).ready(function() {
 
 				AGEBUpdater = function() {
 					if(polygonsManager.isAGEBLayerOn() && !$('#stats-panel').hasClass('hidden')) {
+						toggleActivityIndicator('show');
 						var url = dev_server+"/api/agebs.json";
 						var bounds = map.getBounds();
 						var params = {viewport: {
@@ -162,6 +171,7 @@ $(document).ready(function() {
 						$.get(url, params).done(function(data) {
 							var agebs = {"bbox":[-99.4853934353288,18.947871426163275,-98.62768607005094,19.9915355810107], "type":"FeatureCollection", "features": data};
 							polygonsManager.displayAGEBLayerWithData(agebs);
+							toggleActivityIndicator('hide');
 						});
 					}
 				}

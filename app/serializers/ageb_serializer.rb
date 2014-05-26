@@ -20,7 +20,7 @@ class AgebSerializer < ActiveModel::Serializer
       nse: object.nse,
       gmu: object.gmu,
       densidad: object.viv1,
-      eco4_r: object.eco4_r}
+      eco4_r: object.eco4_r }
   end
 
   def geometry

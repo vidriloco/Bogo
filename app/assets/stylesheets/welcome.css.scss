@@ -375,28 +375,39 @@ a {
 	background-color: white;
 	border-radius: 10px;
 	border: 3px solid #498EFF;
-	padding: 10px;
 	position: absolute;
 	top: 30px;
 	right: 100px;
 	text-align: center;
-	width: 500px;
-	height: 70px;
 	z-index: 999999;
-
-
+	
 	ul {
 		margin: 0px !important;
 		padding: 0px !important;
 
 		list-style: none;
-		font-size: 20px;
+		font-size: 17px;
+		
+		li.spinner {
+			margin-left: 5px;
+			margin-right: 0px;
+			padding-right: 0px;
+		}
+		
+		li.head {
+			margin-left: 10px;
+		}
+		
 		li {
 			padding: 10px;
+			margin-right: 10px;
 			display: inline-block;
 			.selected {
 				color: #FFB000;
 			}
+			
+			line-height: 30px;
+			vertical-align: middle;
 		}
 
 	}

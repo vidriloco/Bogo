@@ -245,9 +245,12 @@ var PolygonsManager = function(map, tm, callback) {
 			radiusDict[radius] = L.geoJson(radiusLayer, geoJsonObj);
 
 	    map.addLayer(radiusDict[radius]);
+			toggleActivityIndicator('hide');
 		}
 
 		if(radius == 500) {
+			toggleActivityIndicator('show');
+			
 			if(typeof radius500 === 'undefined') {
 				$.get('/radius/500').done(function() {
 					radiusLayer = radius500;
@@ -258,6 +261,8 @@ var PolygonsManager = function(map, tm, callback) {
 				radiusLoad();
 			}
 		} else if(radius == 800) {
+			toggleActivityIndicator('show');
+			
 			if(typeof radius800 === 'undefined') {
 				$.get('/radius/800').done(function() {
 					radiusLayer = radius800;
@@ -268,6 +273,7 @@ var PolygonsManager = function(map, tm, callback) {
 				radiusLoad();
 			}
 		} else if(radius == 1000) {
+			toggleActivityIndicator('show');
 			if(typeof radius1000 === 'undefined') {
 				$.get('/radius/1000').done(function() {
 					radiusLayer = radius1000;
@@ -278,6 +284,7 @@ var PolygonsManager = function(map, tm, callback) {
 				radiusLoad();
 			}
 		} else if(radius == 2000) {
+			toggleActivityIndicator('show');
 			if(typeof radius2000 === 'undefined') {
 				$.get('/radius/2000').done(function() {
 					radiusLayer = radius2000;

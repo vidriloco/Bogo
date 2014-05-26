@@ -1,6 +1,7 @@
 <div class="menu">
 	<ul>
-		<li><%= link_to t('app.menu.start'), '#main', :class => selected[:main] %></li>
+		<li class="spinner hidden"><%= image_tag('loader.gif') %></li>
+		<li class="head"><%= link_to t('app.menu.start'), '#main', :class => selected[:main] %></li>
 		<li><%= link_to t('app.menu.map'), '#map', :class => selected[:map] %></li>
 		<li><%= link_to t('app.menu.dot'), '#dot', :class => selected[:dot] %></li>
 		<li><%= link_to t('app.menu.about'), '#about', :class => selected[:about] %></li>
