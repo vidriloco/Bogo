@@ -77,7 +77,7 @@ $(document).ready(function() {
 					$('#stats-panel').addClass('hidden');
 					revealAspectsList();
 					$('.select-radius').removeClass('hidden');
-					polygonsManager.disablePanelsForRadius(true);
+					polygonsManager.disablePanelsForRadius(true, true);
 				});
 
 				$('a.polygon-layer').bind('click', function() {

@@ -301,28 +301,6 @@ var PolygonsManager = function(map, tm, callback) {
 
 	}
 
-  this.displayAGEBLayerWithData = function(data) {
-    var geoJsonObj = {
-      style: coloringManager.colorForValueOnCurrentFeature,
-      onEachFeature: onEachFeature
-    };
-
-    if(radiusDict[currentRadius] != null) {
-      map.removeLayer(radiusDict[currentRadius]);
-    }
-
-    radiusDict[currentRadius] = L.geoJson(data, geoJsonObj);
-    map.addLayer(radiusDict[currentRadius]);
-  }
-
-  this.isAGEBLayerOn = function() {
-    return (currentRadius == 'all');
-  }
-
-  this.redrawActiveLayer = function() {
-    _redrawActiveLayer();
-  }
-
 	var _redrawActiveLayer = function() {
 		if(currentRadius == null) {
       return;
@@ -410,6 +388,28 @@ var PolygonsManager = function(map, tm, callback) {
 		$('.polygons-enabler-on').addClass('hidden');
 	}
 
+  this.displayAGEBLayerWithData = function(data) {
+    var geoJsonObj = {
+      style: coloringManager.colorForValueOnCurrentFeature,
+      onEachFeature: onEachFeature
+    };
+
+    if(radiusDict[currentRadius] != null) {
+      map.removeLayer(radiusDict[currentRadius]);
+    }
+
+    radiusDict[currentRadius] = L.geoJson(data, geoJsonObj);
+    map.addLayer(radiusDict[currentRadius]);
+  }
+
+  this.isAGEBLayerOn = function() {
+    return (currentRadius == 'all');
+  }
+
+  this.redrawActiveLayer = function() {
+    _redrawActiveLayer();
+  }
+
 	this.setMapColoringTo = function(domElement) {
 		coloringManager.setSelectedAspect(domElement);
 		_redrawActiveLayer();
@@ -424,8 +424,11 @@ var PolygonsManager = function(map, tm, callback) {
 		return coloringManager.tableRangeForAspect();
 	}
 
-	this.disablePanelsForRadius = function(hideAllEnablers) {
+	this.disablePanelsForRadius = function(hideAllEnablers, clearCurrentRadius) {
 		map.removeLayer(radiusDict[currentRadius]);
+		if(clearCurrentRadius != undefined && clearCurrentRadius) {
+			removeCurrentRadius();
+		}
 		$('.radius-list .action').addClass('hidden');
 		$('.polygons-enabler-off').addClass('hidden');
 		if(hideAllEnablers) {
