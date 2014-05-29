@@ -6,21 +6,15 @@ class AgebSerializer < ActiveModel::Serializer
 
   def properties
     { pob1: object.pob1,
-      sup1: object.sup,
-      eco4: object.eco4,
-      eco25: object.eco25,
+      densidad: object.densidad,
+      eco4_r: object.eco4_r,
       eco25_r: object.eco25_r,
-      disc1: object.disc1,
       disc_r: object.disc1_r,
-      viv28: object.viv28,
-      viv28_r: object.viv28_r,
       viv0: object.viv0,
-      viv1: object.viv1,
-      viv1_r: object.viv28,
+      viv1_r: object.viv1_r,
+      viv28_r: object.viv28_r,
       nse: object.nse,
-      gmu: object.gmu,
-      densidad: object.viv1,
-      eco4_r: object.eco4_r }
+      gmu: object.gmu }
   end
 
   def geometry

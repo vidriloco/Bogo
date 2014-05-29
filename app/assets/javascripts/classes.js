@@ -211,15 +211,15 @@ var PolygonsManager = function(map, tm, callback) {
 
 	var filterByAgency = function(feature, layer) {
 		var name = null;
-		var agency = (feature.properties.AGENCIA || feature.properties.Agencia);
+		var agency = feature.properties.AGENCIA;
 
 		if(agency == "Tren Suburbano") {
 			name = "SUB";
-		} else if(agency == "Metrobús") {
+		} else if(agency == "Metrobs" || agency == "Metrobús") {
 			name = "MB";
 		} else if(agency == "Sistema de Transporte Colectivo") {
 			name = "METRO";
-		} else if(agency == "Mexibús") {
+		} else if(agency == "Mexibs" || agency == "Mexibús") {
 			name = "Mexibus";
 		} else {
       name = agency;
@@ -340,9 +340,11 @@ var PolygonsManager = function(map, tm, callback) {
 		$('#ageb_population_with_job').html(new Number(feature.properties.eco4_r).toPrecision(3) + " % " || '--');
 		$('#ageb_population_without_job').html(new Number(feature.properties.eco25_r).toPrecision(3) + " % " || '--');
 		$('#ageb_population_handicap').html(new Number(feature.properties.disc_r).toPrecision(3) + " % " || '--');
-
-		if(feature.properties.viv28_r != undefined) {
-			$('#ageb_population_with_car').html(new Number(feature.properties.viv28_r).toPrecision(3) + " % " || '--');
+		
+		var populationWithCar = feature.properties.viv28_r || feature.properties.viv28_R;
+		
+		if(populationWithCar != undefined) {
+			$('#ageb_population_with_car').html(new Number(populationWithCar).toPrecision(3) + " % " || '--');
 		} else {
 			$('#ageb_population_with_car').html('--');
 		}
