@@ -1,8 +1,11 @@
 es_MX:
   attributions:
-    note_icon: 'Notebook by Carlo Prina from The Noun Project'
-    train_icon: 'Train by Jamison Wieser from The Noun Project'
+    note_icon: 'Notebook por Carlo Prina de The Noun Project'
+    train_icon: 'Train por Jamison Wieser de The Noun Project'
     blueprint_icon: 'Blueprint by Dimitry Sokolov from The Noun Project'
+    building_icon: 'Blueprint por Ofer Lehr de The Noun Project'
+    proposal_icon: 'Rearrange por Istiko Rahadi de The Noun Project'
+    download_icon: 'Download por Johan H. W. Basberg de The Noun Project'
   app:
     bar:
       contact: "Contacto"
@@ -22,13 +25,15 @@ es_MX:
         action: "Conoce el mapa del DOT del DF >"
       dot:
         title: "El DOT a detalle"
-        intro: "En el DF, en un radio de 800 metros alrededor de las 1004 estaciones de transporte público, existen muchas oportunidades, por ejemplo: se localizan 163,355 viviendas desocupadas, que permitiría cubrir el 29% de las necesidades de vivienda a 2020. Oportunidades que se multiplican con la implementación de transporte público, como con la propuesta de ITDP de 29 líneas más de BRT en las cuales se localizan otras 28,847 viviendas desocupadas, que permitirían cubrir las necesidades de vivienda del 34.7% del crecimiento poblacional a 2020. Con lo cual se podría evitar la expansión urbana de la ciudad y con ello, avanzar hacía su sustentabilidad real."
-        action: "Visualiza el mapa del DOT del DF"
+        intro: "En el DF, en un radio de 800 metros alrededor de las 1004 estaciones de transporte público, existen muchas oportunidades, por ejemplo: se localizan 163,355 viviendas desocupadas, que permitiría cubrir el 29% de las necesidades de vivienda a 2020. Oportunidades que se multiplican con la implementación de transporte público, como con la <a href='http://mexico.itdp.org/wp-content/uploads/Resumen-Ejecutivo-ZMVMb.pdf' target='_blank'>propuesta de ITDP</a> de 29 líneas más de BRT en las cuales se localizan otras 28,847 viviendas desocupadas, que permitirían cubrir las necesidades de vivienda del 34.7% del crecimiento poblacional a 2020. Con lo cual se podría evitar la expansión urbana de la ciudad y con ello, avanzar hacía su sustentabilidad real."
+        action: "< Visualiza el mapa del DOT del DF"
       about:
+        download_section: "Sección de Descargas"
         thanks_to: "Este trabajo es posible gracias al apoyo de"
         dedication_of: "Y a la dedicación de este equipo"
-        methodological_note: "Descarga la nota metodológica"
-        data: "Descarga los datos"
+        methodological_note: "La nota metodológica"
+        data: "Los datos"
+        proposal: "La propuesta"
         team:
           coordination: "Coordinación"
           web_development: "Desarrollo web y SIG"
@@ -58,19 +63,19 @@ es_MX:
             usage_notes: "Selecciona un rubro para acceder al mapa de calor correspondiente"
             total: "Total"
             population:
-              title: "Población"
+              title: "Totales"
               hectare: "Por hectárea"
               handicapped: "Discapacitada"
               employed: "Ocupada"
               unemployed: "Desocupada"
             housing:
               title: "Viviendas"
-              with_car: "Con Auto"
+              with_car: "Con auto"
               unoccupied: "Desocupadas"
             others:
               title: "Otros"
-              socioeconomic_level: "Nivel Socioeconómico"
-              margination_level: "Grado de Marginación"
+              socioeconomic_level: "Nivel socioeconómico"
+              margination_level: "Grado de marginación"
         bottom_menu:
           titles:
             menu: "Menú"

@@ -11,7 +11,7 @@
 				<div class="col-xs-6 col-md-4"><p class="core"><%= t('app.sections.start.core') %></p></div>
 				<div class="col-xs-6 col-md-4">
 					<p class="intro"><%= t('app.sections.start.intro') %></p>
-					<p class="action"><%= link_to t('app.sections.start.action'), root_path.concat('#map') %></p>
+					<p class="action"><%= link_to t('app.sections.start.action'), root_path.concat('#map'), :class => "call-to-action" %></p>
 				</div>
 				<div class="col-xs-6 col-md-4"><%= image_tag('df-logo.png') %></div>
 			</div>
@@ -43,8 +43,8 @@
 					</iframe>
 				</div>
 				<div class="col-xs-12 col-md-4">
-					<p class="intro"><%= t('app.sections.dot.intro') %></p>
-					<p class="action"><%= link_to t('app.sections.dot.action'), root_path.concat('#map') %></p>
+					<p class="intro"><%= t('app.sections.dot.intro').html_safe %></p>
+					<p class="action"><%= link_to t('app.sections.dot.action'), root_path.concat('#map'), :class => "call-to-action" %></p>
 				</div>
 			</div>
 		</div>
@@ -55,7 +55,7 @@
 <div class="section about-section" data-anchor="about">
 	<%= render :partial => 'welcome/menu', :locals => {:selected => { :about => "selected" }} %>
 
-	<div class="background-art"><%= image_tag('blueprint-icon.png') %></div>
+	<div class="background-art"><%= image_tag('blueprint-icon.png', alt: t('attributions.building_icon'), title: t('attributions.building_icon')) %></div>
 
 	<div class="scontent">
 
@@ -96,10 +96,14 @@
 						</ul>
 					</div>
 					<div class="box box-downloads">
+						<h3><%= t('app.sections.about.download_section') %></h3>
+						<br>
 						<ul>
-							<li><%= image_tag('note-icon.png', size: '30x30', alt: t('attributions.note_icon'), title: t('attributions.note_icon')) %>
+							<li><%= image_tag('note-icon.png', size: '40x40', alt: t('attributions.note_icon'), title: t('attributions.note_icon')) %>
 							<%= link_to t('app.sections.about.methodological_note'), nil %></li>
-							<li><%= image_tag('download-icon.png', :size => '30x30') %> <%= link_to t('app.sections.about.data'), nil %></li>
+							<li><%= image_tag('download-icon.png', :size => '40x40', alt: t('attributions.download_icon'), title: t('attributions.download_icon')) %> 
+							<%= link_to t('app.sections.about.data'), nil %></li>
+							<li><%= image_tag('proposal-icon.png', :size => '40x40', alt: t('attributions.proposal_icon'), title: t('attributions.proposal_icon')) %> <%= link_to t('app.sections.about.proposal'), 'http://mexico.itdp.org/wp-content/uploads/Resumen-Ejecutivo-ZMVMb.pdf', :target => "_blank" %></li>
 						</ul>
 					</div>
 				</div>

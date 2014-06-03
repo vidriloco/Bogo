@@ -1,8 +1,11 @@
 en:
   attributions:
-    note_icon: 'Notebook por Carlo Prina de The Noun Project'
-    train_icon: 'Train por Jamison Wieser de The Noun Project'
-    blueprint_icon: 'Blueprint por Dimitry Sokolov de The Noun Project'
+    note_icon: 'Notebook by Carlo Prina from The Noun Project'
+    train_icon: 'Train by Jamison Wieser from The Noun Project'
+    blueprint_icon: 'Blueprint by Dimitry Sokolov from The Noun Project'
+    building_icon: 'Blueprint by Ofer Lehr from The Noun Project'
+    proposal_icon: 'Rearrange by Istiko Rahadi from The Noun Project'
+    download_icon: 'Download by Johan H. W. Basberg from The Noun Project'
   app:
     bar:
       contact: "Contact"
@@ -22,13 +25,15 @@ en:
         action: "Know the Mexico City TOD map >"
       dot:
         title: "The TOD at detail"
-        intro: "In Mexico City, within 800 meters around 1004 public transit stations, there are many opportunities, for example: 163,355 vacant homes, which would cover 29% of the housing needs to 2020, are located. Opportunities that multiply with the implementation the proposed 29 lines of BRT proposed by ITDP, in which surroundings are, located other 28,847 vacant homes, which would meet the housing needs of 34.7% of the population growth to 2020. Whit this could prevent urban sprawl of the city and thus, driving their actual development toward sustainability."
-        action: "Visualize the TOD map of Mexico City"
+        intro: "In Mexico City, within 800 meters around 1004 public transit stations, there are many opportunities, for example: 163,355 vacant homes, which would cover 29% of the housing needs to 2020, are located. Opportunities that multiply with the implementation the proposed 29 lines of BRT <a href='http://mexico.itdp.org/wp-content/uploads/Resumen-Ejecutivo-ZMVMb.pdf' target='_blank'>proposed by ITDP</a>, in which surroundings are, located other 28,847 vacant homes, which would meet the housing needs of 34.7% of the population growth to 2020. Whit this could prevent urban sprawl of the city and thus, driving their actual development toward sustainability."
+        action: "< Visualize the TOD map of Mexico City"
       about:
+        download_section: "Download Section"
         thanks_to: "This work is possible thanks to"
         dedication_of: "With the dedication of this team"
-        methodological_note: "Download the methodology notes"
-        data: "Download the data"
+        methodological_note: "The methodology notes"
+        data: "The data"
+        proposal: "The proposal"
         team:
           coordination: "Coordination"
           web_development: "Web development and GIS"
@@ -55,10 +60,10 @@ en:
             onet: "Selected <strong>1000 Meters</strong> radius"
             twot: "Selected <strong>2000 Meters</strong> radius"
           aspects:
-            usage_notes: "Select an aspect for revealing the corresponding heatmap"
+            usage_notes: "Select an aspect for revealing it's heatmap"
             total: "Total"
             population:
-              title: "Population"
+              title: "Total"
               hectare: "By hectare"
               handicapped: "Handicapped"
               employed: "Employed"

@@ -81,6 +81,9 @@ $(document).ready(function() {
 				});
 
 				$('a.polygon-layer').bind('click', function() {
+					if(polygonsManager == null) {
+						return;
+					}
 					var size = $(this).attr('data-size');
 					$('.select-radius').addClass('hidden');
 					$('.radius-options .'+size+'-message').clone().appendTo('.radius-header');
@@ -169,6 +172,7 @@ $(document).ready(function() {
 							ne: bounds["_northEast"].lat+","+bounds["_northEast"].lng }}
 
 						$.get(url, params).done(function(data) {
+							console.log(data);
 							var agebs = {"bbox":[-99.4853934353288,18.947871426163275,-98.62768607005094,19.9915355810107], "type":"FeatureCollection", "features": data};
 							polygonsManager.displayAGEBLayerWithData(agebs);
 							toggleActivityIndicator('hide');

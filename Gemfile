@@ -49,6 +49,7 @@ end
 gem 'pg'
 gem 'rgeo'
 gem 'rgeo-shapefile'
+gem 'rgeo-geojson'
 gem 'dbf'
 gem 'squeel'
 gem 'activerecord-postgis-adapter'

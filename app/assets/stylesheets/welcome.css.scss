@@ -23,6 +23,12 @@ body, html {
 	z-index: 99999999;
 }
 
+.download {
+	font-size: 17px;
+	text-align: right !important;
+	margin: 20px !important;
+}
+
 /* COMMONS BEGIN */
 
 .hidden {
@@ -51,6 +57,15 @@ a {
 
 .blue {
 	background-color: $blue;
+}
+
+.call-to-action {
+	color: $yellow;
+	text-decoration: none;
+}
+
+.call-to-action:hover {
+	text-decoration: none;
 }
 
 .yellow {

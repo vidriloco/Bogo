@@ -242,6 +242,9 @@ var PolygonsManager = function(map, tm, callback) {
 	      filter : filterByAgency
 			};
 
+			if(radiusDict[radius] != null) {
+				map.removeLayer(radiusDict[radius]);
+			}
 			radiusDict[radius] = L.geoJson(radiusLayer, geoJsonObj);
 
 	    map.addLayer(radiusDict[radius]);
@@ -311,9 +314,9 @@ var PolygonsManager = function(map, tm, callback) {
 
 	var assignStats = function(feature) {
 
-		$('#ageb_population').html(feature.properties.pob1.toLocaleString() || '--');
-		$('#ageb_houses').html(feature.properties.viv0.toLocaleString() || '--');
-		$('#ageb_density').html(feature.properties.densidad.toLocaleString() || '--');
+		$('#ageb_population').html(feature.properties.pob1.toLocaleString().replace('.', ',') || '--');
+		$('#ageb_houses').html(feature.properties.viv0.toLocaleString().replace('.', ',') || '--');
+		$('#ageb_density').html(feature.properties.densidad.toLocaleString().replace('.', ',') || '--');
 
 		$('#ageb_population_with_job').html(new Number(feature.properties.eco4_r).toPrecision(3) + " % " || '--');
 		$('#ageb_population_without_job').html(new Number(feature.properties.eco25_r).toPrecision(3) + " % " || '--');
@@ -573,19 +576,19 @@ var ColoringRanges = function() {
 
 		if (selectedAspect == 'ageb_population-aspect') {
 			return {
-				yellowPale: '0 - 4575',
-				yellow: '4576 - 9150',
-				orange: '9151 - 13725',
-				red: '13726 - 18300',
-				darkRed: '18301 - 22876'
+				yellowPale: '0 - 4,575',
+				yellow: '4,576 - 9,150',
+				orange: '9,151 - 13,725',
+				red: '13,726 - 18,300',
+				darkRed: '18,301 - 22,876'
 			}
 		} else if (selectedAspect == 'ageb_houses-aspect') {
 			return {
 				yellowPale: '0 - 584',
-				yellow: '585 - 1237',
-				orange: '1238 - 2077',
-				red: '2078 - 3797',
-				darkRed: '3798 - 10069'
+				yellow: '585 - 1,237',
+				orange: '1,238 - 2,077',
+				red: '2,078 - 3,797',
+				darkRed: '3,798 - 10,069'
 			}
 		} else if (selectedAspect == 'ageb_density-aspect') {
 			return {
