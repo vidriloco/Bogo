@@ -183,6 +183,10 @@ $(document).ready(function() {
 				map.on('dragend', function(e) {
 					AGEBUpdater();
 				});
+				
+				map.on('zoomend', function(e) {
+					AGEBUpdater();
+				});
 
 				//$('.loading-cover').fadeOut();
 				transportsManager = new TransportsManager(map);

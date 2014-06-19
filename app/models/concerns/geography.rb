@@ -1,5 +1,10 @@
 module Geography
   module ClassMethods
+    
+    def selected_fields
+      "*"
+    end
+    
     def build_polygon_from_params(coordinates_)
       return nil if coordinates_.nil?
       return nil if (coordinates_[:sw].blank? || coordinates_[:ne].blank? || coordinates_[:ne] == "{}" || coordinates_[:sw] == "{}")
@@ -14,7 +19,7 @@ module Geography
 
     def filter_nearby(viewport)
       window=build_polygon_from_params(viewport)
-      self.where{st_intersects(the_geom, window)}
+      self.select(selected_fields).where{st_intersects(the_geom, window)}
     end
 
     def find_nearby(viewport=nil)

@@ -1,6 +1,10 @@
 class Ageb < ActiveRecord::Base
   include Geography
 
+  def selected_fields
+    "gid, cvegeo, pob1, eco4, eco25, eco25_r, disc1, disc1_r, viv28, viv28_r, viv0, viv1, viv1_r, densidad, eco4_r, empleo, sup, empleo_r, nse, processed_geom, gmu"
+  end
+
   def prepare_geom
     return if self.the_geom.nil?
     
