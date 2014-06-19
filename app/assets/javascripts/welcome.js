@@ -1,6 +1,7 @@
 var AGEBUpdater;
 var prod_server = "http://50.56.30.227:3001";
 var dev_server = "http://127.0.0.1:3000";
+var default_server = prod_server;
 
 var toggleActivityIndicator = function(command) {
 	if(command=='show') {
@@ -165,14 +166,13 @@ $(document).ready(function() {
 				AGEBUpdater = function() {
 					if(polygonsManager.isAGEBLayerOn() && !$('#stats-panel').hasClass('hidden')) {
 						toggleActivityIndicator('show');
-						var url = dev_server+"/api/agebs.json";
+						var url = default_server+"/api/agebs.json";
 						var bounds = map.getBounds();
 						var params = {viewport: {
 							sw : bounds["_southWest"].lat+","+bounds["_southWest"].lng,
 							ne: bounds["_northEast"].lat+","+bounds["_northEast"].lng }}
 
 						$.get(url, params).done(function(data) {
-							console.log(data);
 							var agebs = {"bbox":[-99.4853934353288,18.947871426163275,-98.62768607005094,19.9915355810107], "type":"FeatureCollection", "features": data};
 							polygonsManager.displayAGEBLayerWithData(agebs);
 							toggleActivityIndicator('hide');

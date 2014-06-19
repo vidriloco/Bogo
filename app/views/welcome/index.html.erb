@@ -65,8 +65,9 @@
 					<div class="box">
 						<h3><%= t('app.sections.about.thanks_to') %></h3>
 						<ul class="thanks-to">
-							<li><%= link_to image_tag('uk_embassy_logo.png'), nil %></li>
-							<li><%= link_to image_tag('ITDP-small.png'), nil %></li>
+							<li><%= link_to image_tag('uk_embassy_logo.png'), 'https://www.gov.uk/government/world/organisations/british-embassy-mexico-city.es-419', target: "_blank" %></li>
+							<br><br/>
+							<li><%= link_to image_tag('ITDP-small.png'), 'http://itdp.mx', target: "_blank" %></li>
 						</ul>
 					</div>
 
@@ -93,6 +94,12 @@
 									<p class="subtitle"><%= t('app.sections.about.team.data_selection') %></p>
 								</div>
 							</li>
+							<li>
+								<div class="person">
+									<p class="title">Santiago Fernández</p>
+									<p class="subtitle"><%= t('app.sections.about.team.estimations') %></p>
+								</div>
+							</li>
 						</ul>
 					</div>
 					<div class="box box-downloads">
@@ -100,10 +107,13 @@
 						<br>
 						<ul>
 							<li><%= image_tag('note-icon.png', size: '40x40', alt: t('attributions.note_icon'), title: t('attributions.note_icon')) %>
-							<%= link_to t('app.sections.about.methodological_note'), nil %></li>
+							<%= link_to t('app.sections.about.methodological_note'), download_note_path, :target => "_blank" %></li>
 							<li><%= image_tag('download-icon.png', :size => '40x40', alt: t('attributions.download_icon'), title: t('attributions.download_icon')) %> 
-							<%= link_to t('app.sections.about.data'), nil %></li>
-							<li><%= image_tag('proposal-icon.png', :size => '40x40', alt: t('attributions.proposal_icon'), title: t('attributions.proposal_icon')) %> <%= link_to t('app.sections.about.proposal'), 'http://mexico.itdp.org/wp-content/uploads/Resumen-Ejecutivo-ZMVMb.pdf', :target => "_blank" %></li>
+							<%= link_to t('app.sections.about.data'), download_data_path, :target => "_blank" %></li>
+							<li>
+								<%= image_tag('proposal-icon.png', :size => '40x40', alt: t('attributions.proposal_icon'), title: t('attributions.proposal_icon')) %> 
+								<%= link_to t('app.sections.about.proposal'), 'http://mexico.itdp.org/wp-content/uploads/Resumen-Ejecutivo-ZMVMb.pdf', :target => "_blank" %>
+							</li>
 						</ul>
 					</div>
 				</div>

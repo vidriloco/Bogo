@@ -38,6 +38,7 @@ es_MX:
           coordination: "Coordinación"
           web_development: "Desarrollo web y SIG"
           data_selection: "Selección de datos y SIG"
+          estimations: "estimations"
       map:
         heatmap:
           title: "Rangos"

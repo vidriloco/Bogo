@@ -12,6 +12,8 @@ Bogo::Application.routes.draw do
   get '/:locale' => 'welcome#index'
   get '/radius/:radius' => 'radius#index'
   
+  get '/downloads/nota-metodologica' => 'downloads#note', :as => "download_note"
+  get '/downloads/data' => 'downloads#data', :as => "download_data"
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

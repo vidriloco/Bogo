@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>class Ageb - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>app/models/ageb.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">ActiveRecord::Base
+  
+</nav>
+
+    <!-- Included Modules -->
+<nav id="includes-section" class="section">
+  <h3 class="section-header">Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><a class="include" href="Geography.html">Geography</a>
+  
+  
+  </ul>
+</nav>
+
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-process_geoms">::process_geoms</a>
+    
+    <li><a href="#method-i-coordinate_list">#coordinate_list</a>
+    
+    <li><a href="#method-i-prepare_geom">#prepare_geom</a>
+    
+    <li><a href="#method-i-selected_fields">#selected_fields</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./README_rdoc.html">README</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./Api.html">Api</a>
+  
+    <li><a href="./Api/AgebsController.html">Api::AgebsController</a>
+  
+    <li><a href="./Geography.html">Geography</a>
+  
+    <li><a href="./Geography/ClassMethods.html">Geography::ClassMethods</a>
+  
+    <li><a href="./Ageb.html">Ageb</a>
+  
+    <li><a href="./AgebSerializer.html">AgebSerializer</a>
+  
+    <li><a href="./ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="./DownloadsController.html">DownloadsController</a>
+  
+    <li><a href="./DownloadsHelper.html">DownloadsHelper</a>
+  
+    <li><a href="./RadiusController.html">RadiusController</a>
+  
+    <li><a href="./WelcomeController.html">WelcomeController</a>
+  
+    <li><a href="./WelcomeHelper.html">WelcomeHelper</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class Ageb</h1>
+
+  <div id="description" class="description">
+    
+<p>Represents an <a href="Ageb.html">Ageb</a> entity with geo-statistical
+fields and a geometrical property</p>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-process_geoms" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">process_geoms</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Bulk pre-processes all the agebs on this database</p>
+          
+
+          
+          <div class="method-source-code" id="process_geoms-source">
+            <pre><span class="ruby-comment"># File app/models/ageb.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">process_geoms</span>
+  <span class="ruby-constant">Ageb</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ageb</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">ageb</span>.<span class="ruby-identifier">prepare_geom</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-identifier">p</span> <span class="ruby-node">&quot;Unprocessed features (marked for deletion): #{Ageb.where(:processed_geom =&gt; nil).count}&quot;</span>
+  
+  <span class="ruby-constant">Ageb</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:processed_geom</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">ageb</span><span class="ruby-operator">|</span> <span class="ruby-identifier">ageb</span>.<span class="ruby-identifier">destroy</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- process_geoms-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- process_geoms-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-coordinate_list" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">coordinate_list</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Evals the processed_geom text which is a stringified ruby hash</p>
+          
+
+          
+          <div class="method-source-code" id="coordinate_list-source">
+            <pre><span class="ruby-comment"># File app/models/ageb.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">coordinate_list</span>
+  <span class="ruby-identifier">eval</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">processed_geom</span>)[<span class="ruby-value">0</span>] <span class="ruby-operator">||</span> []
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- coordinate_list-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- coordinate_list-method -->
+
+    
+      <div id="method-i-prepare_geom" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">prepare_geom</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>This method is on charge of pre-processing the_geom</p>
+          
+
+          
+          <div class="method-source-code" id="prepare_geom-source">
+            <pre><span class="ruby-comment"># File app/models/ageb.rb, line 17</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">prepare_geom</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">the_geom</span>.<span class="ruby-identifier">nil?</span>
+  
+  <span class="ruby-identifier">factory</span> = <span class="ruby-constant">RGeo</span><span class="ruby-operator">::</span><span class="ruby-constant">GeoJSON</span><span class="ruby-operator">::</span><span class="ruby-constant">EntityFactory</span>.<span class="ruby-identifier">instance</span>
+  <span class="ruby-identifier">feature</span> = <span class="ruby-identifier">factory</span>.<span class="ruby-identifier">feature</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">the_geom</span>, <span class="ruby-keyword">nil</span>, { 
+      <span class="ruby-identifier">pob1</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">pob1</span>,
+      <span class="ruby-identifier">densidad</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">densidad</span>,
+      <span class="ruby-identifier">eco4_r</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">eco4_r</span>,
+      <span class="ruby-identifier">eco25_r</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">eco25_r</span>,
+      <span class="ruby-identifier">disc_r</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">disc1_r</span>,
+      <span class="ruby-identifier">viv0</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">viv0</span>,
+      <span class="ruby-identifier">viv1_r</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">viv1_r</span>,
+      <span class="ruby-identifier">viv28_r</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">viv28_r</span>,
+      <span class="ruby-identifier">nse</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">nse</span>,
+      <span class="ruby-identifier">gmu</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">gmu</span> 
+  })
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">update_attribute</span>(<span class="ruby-value">:processed_geom</span>, <span class="ruby-constant">RGeo</span><span class="ruby-operator">::</span><span class="ruby-constant">GeoJSON</span>.<span class="ruby-identifier">encode</span>(<span class="ruby-identifier">feature</span>).<span class="ruby-identifier">inspect</span>)
+  <span class="ruby-identifier">p</span> <span class="ruby-node">&quot;Processed feature: #{self.gid}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- prepare_geom-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- prepare_geom-method -->
+
+    
+      <div id="method-i-selected_fields" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">selected_fields</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The fields to use on the query for optimization</p>
+          
+
+          
+          <div class="method-source-code" id="selected_fields-source">
+            <pre><span class="ruby-comment"># File app/models/ageb.rb, line 10</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">selected_fields</span>
+  <span class="ruby-string">&quot;gid, cvegeo, pob1, eco4, eco25, eco25_r, disc1, disc1_r, viv28, viv28_r, viv0, viv1, viv1_r, densidad, eco4_r, empleo, sup, empleo_r, nse, processed_geom, gmu&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- selected_fields-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- selected_fields-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.2.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

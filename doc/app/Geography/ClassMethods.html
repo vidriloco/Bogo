@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>module Geography::ClassMethods - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
+
+
+<body id="top" class="module">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../index.html">Home</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>app/models/concerns/geography.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-build_polygon_from_params">#build_polygon_from_params</a>
+    
+    <li><a href="#method-i-filter_nearby">#filter_nearby</a>
+    
+    <li><a href="#method-i-find_nearby">#find_nearby</a>
+    
+    <li><a href="#method-i-selected_fields">#selected_fields</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../README_rdoc.html">README</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../Api.html">Api</a>
+  
+    <li><a href="../Api/AgebsController.html">Api::AgebsController</a>
+  
+    <li><a href="../Geography.html">Geography</a>
+  
+    <li><a href="../Geography/ClassMethods.html">Geography::ClassMethods</a>
+  
+    <li><a href="../Ageb.html">Ageb</a>
+  
+    <li><a href="../AgebSerializer.html">AgebSerializer</a>
+  
+    <li><a href="../ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="../ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="../DownloadsController.html">DownloadsController</a>
+  
+    <li><a href="../DownloadsHelper.html">DownloadsHelper</a>
+  
+    <li><a href="../RadiusController.html">RadiusController</a>
+  
+    <li><a href="../WelcomeController.html">WelcomeController</a>
+  
+    <li><a href="../WelcomeHelper.html">WelcomeHelper</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="module">module Geography::ClassMethods</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-build_polygon_from_params" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">build_polygon_from_params</span><span
+            class="method-args">(coordinates_)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="build_polygon_from_params-source">
+            <pre><span class="ruby-comment"># File app/models/concerns/geography.rb, line 8</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">build_polygon_from_params</span>(<span class="ruby-identifier">coordinates_</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">coordinates_</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> (<span class="ruby-identifier">coordinates_</span>[<span class="ruby-value">:sw</span>].<span class="ruby-identifier">blank?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">coordinates_</span>[<span class="ruby-value">:ne</span>].<span class="ruby-identifier">blank?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">coordinates_</span>[<span class="ruby-value">:ne</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;{}&quot;</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">coordinates_</span>[<span class="ruby-value">:sw</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;{}&quot;</span>)
+  <span class="ruby-identifier">lat_sw</span>, <span class="ruby-identifier">lon_sw</span> = <span class="ruby-identifier">coordinates_</span>[<span class="ruby-value">:sw</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">','</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">to_f</span> }
+  <span class="ruby-identifier">lat_ne</span>, <span class="ruby-identifier">lon_ne</span> = <span class="ruby-identifier">coordinates_</span>[<span class="ruby-value">:ne</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">','</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">to_f</span> }
+
+  <span class="ruby-identifier">geo_factory</span> = <span class="ruby-constant">RGeo</span><span class="ruby-operator">::</span><span class="ruby-constant">Cartesian</span>.<span class="ruby-identifier">factory</span>(<span class="ruby-identifier">srid</span><span class="ruby-operator">:</span> <span class="ruby-value">4326</span>)
+  <span class="ruby-identifier">sw</span>=<span class="ruby-identifier">geo_factory</span>.<span class="ruby-identifier">point</span>(<span class="ruby-identifier">lon_sw</span>, <span class="ruby-identifier">lat_sw</span>)
+  <span class="ruby-identifier">ne</span>=<span class="ruby-identifier">geo_factory</span>.<span class="ruby-identifier">point</span>(<span class="ruby-identifier">lon_ne</span>, <span class="ruby-identifier">lat_ne</span>)
+  <span class="ruby-constant">RGeo</span><span class="ruby-operator">::</span><span class="ruby-constant">Cartesian</span><span class="ruby-operator">::</span><span class="ruby-constant">BoundingBox</span>.<span class="ruby-identifier">create_from_points</span>(<span class="ruby-identifier">sw</span>, <span class="ruby-identifier">ne</span>).<span class="ruby-identifier">to_geometry</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- build_polygon_from_params-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- build_polygon_from_params-method -->
+
+    
+      <div id="method-i-filter_nearby" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">filter_nearby</span><span
+            class="method-args">(viewport)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="filter_nearby-source">
+            <pre><span class="ruby-comment"># File app/models/concerns/geography.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">filter_nearby</span>(<span class="ruby-identifier">viewport</span>)
+  <span class="ruby-identifier">window</span>=<span class="ruby-identifier">build_polygon_from_params</span>(<span class="ruby-identifier">viewport</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">select</span>(<span class="ruby-identifier">selected_fields</span>).<span class="ruby-identifier">where</span>{<span class="ruby-identifier">st_intersects</span>(<span class="ruby-identifier">the_geom</span>, <span class="ruby-identifier">window</span>)}
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- filter_nearby-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- filter_nearby-method -->
+
+    
+      <div id="method-i-find_nearby" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">find_nearby</span><span
+            class="method-args">(viewport=nil)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="find_nearby-source">
+            <pre><span class="ruby-comment"># File app/models/concerns/geography.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_nearby</span>(<span class="ruby-identifier">viewport</span>=<span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">viewport</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">filter_nearby</span>(<span class="ruby-identifier">viewport</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- find_nearby-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- find_nearby-method -->
+
+    
+      <div id="method-i-selected_fields" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">selected_fields</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="selected_fields-source">
+            <pre><span class="ruby-comment"># File app/models/concerns/geography.rb, line 4</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">selected_fields</span>
+  <span class="ruby-string">&quot;*&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- selected_fields-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- selected_fields-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.2.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+
