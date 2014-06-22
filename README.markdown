@@ -1,4 +1,3 @@
-== README
 
 This document explains how to deploy the ITPD México DOT visualization application. 
 
