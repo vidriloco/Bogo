@@ -29,17 +29,17 @@ ActiveRecord::Schema.define(version: 20140520053036) do
     t.float   "viv0"
     t.float   "viv1"
     t.float   "viv1_r"
-    t.integer "densidad"
+    t.integer "densidad",       limit: 2
     t.float   "eco4_r"
     t.integer "empleo"
     t.float   "sup"
     t.integer "empleo_r"
     t.string  "nse",            limit: 50
     t.string  "gmu",            limit: 50
-    t.spatial "the_geom",       limit: {:srid=>4326, :type=>"multi_polygon"}
+    t.spatial "geom",           limit: {:srid=>4326, :type=>"multi_polygon"}
     t.text    "processed_geom"
   end
 
-  add_index "agebs", ["the_geom"], :name => "agebs_the_geom_gist", :spatial => true
+  add_index "agebs", ["geom"], :name => "agebs_geom_gist", :spatial => true
 
 end

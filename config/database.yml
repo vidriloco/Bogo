@@ -5,7 +5,7 @@ development:
   encoding: unicode
   database: bogo
   pool: 5
-  username: postgres
+  username: spalatin
   password: <%= ENV['PSQL_PASSWD'] %>
 
 test:

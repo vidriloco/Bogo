@@ -38,7 +38,7 @@ en:
           coordination: "Coordination"
           web_development: "Web development and GIS"
           data_selection: "Data selection and GIS"
-          estimations: "estimations"
+          estimations: "Estimations"
       map:
         heatmap:
           title: "Ranges"
