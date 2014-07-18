@@ -61,6 +61,7 @@ a {
 }
 
 .call-to-action {
+	font-size: 18px;
 	color: $yellow;
 	text-decoration: none;
 }
@@ -494,7 +495,8 @@ a {
 	}
 
 	.intro {
-		font-size: 18px;
+		margin-top: 40px;
+		font-size: 16.5px;
 	}
 
 	.action {
@@ -516,12 +518,12 @@ a {
 	width: 90%;
 	height: 55px;
 	left: 5%;
-	bottom: 20px;
+	bottom: 0px;
 	position: absolute;
 	text-align: center;
 	color: #656565;
 	font-family: 'Oswald', 'sans-serif';
-	font-size: 18px;
+	font-size: 16px;
 	font-weight: 100;
 
 	ul {
@@ -585,7 +587,7 @@ a {
 	}
 
 	.supporters, .developers {
-		padding: 20px;
+		padding: 5px 20px 20px 5px;
 	}
 
 	.supporters {
@@ -597,8 +599,7 @@ a {
 	}
 
 	ul.dedication-of {
-		margin-top: 40px;
-		margin-bottom: 40px;
+		margin-bottom: 20px;
 		padding: 0px;
 		list-style: none;
 
@@ -606,7 +607,7 @@ a {
 			display: inline-block;
 
 			.person {
-				padding: 20px;
+				padding: 10px;
 				color: #646464;
 
 				.circle {
@@ -625,7 +626,7 @@ a {
 				}
 
 				.title {
-					margin-top: 20px;
+					margin-top: 10px;
 					margin-bottom: 0px;
 					font-size: 18px;
 				}
@@ -640,8 +641,7 @@ a {
 	}
 
 	.box-downloads {
-		margin-top: 20px;
-
+		margin-top: 10px !important;
 		ul {
 			list-style: none;
 
@@ -653,12 +653,12 @@ a {
 				}
 
 				margin-top: 10px;
-				margin-right: 30px;
+				margin-right: 20px;
 				display: inline-block;
 
 				a {
 					vertical-align: middle;
-					font-size: 18px;
+					font-size: 16px;
 				}
 			}
 		}
@@ -666,7 +666,12 @@ a {
 
 
 	.developers {
+		.box-downloads {
+			height: 150px !important;
+		}
 		.box {
+			height: 230px;
+			margin-top: 60px;
 			border-radius: 5px;
 			border: 1px solid #CEEEFF;
 		}
