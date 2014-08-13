@@ -64,7 +64,7 @@ es_MX:
             usage_notes: "Selecciona un rubro para acceder al mapa de calor correspondiente"
             total: "Total"
             population:
-              title: "Totales"
+              title: "Población"
               hectare: "Por hectárea"
               handicapped: "Discapacitada"
               employed: "Ocupada"
