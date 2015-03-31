@@ -1,3 +1,12 @@
+// Name of agencies on geoJSON file which contains the circles 
+// representing clickable agency stations
+var metrobusGEOJSON = 'Metrobús';
+var metroGEOJSON = 'Sistema de Transporte Colectivo';
+var mexibusGEOJSON = 'Mexibús';
+var suburbanoGEOJSON = 'Tren Suburbano';
+var steGEOJSON = 'STE';
+var itdpGEOJSON = 'ITDP';
+
 /*
  *  Transports Manager
  */
@@ -12,7 +21,7 @@ var TransportsManager = function(map) {
 	var STEDom = 'transporteselectricos';
 	var MexibusDom = 'mexibus';
 	var itdpDom = 'itdp';
-
+  
 	var metrobus = null;
 	var metro = null;
 	var suburbano = null;
@@ -46,18 +55,18 @@ var TransportsManager = function(map) {
 			pointToLayer: function (feature, latlng) {
            return new L.CircleMarker(latlng, {
                radius: 5,
-               fillColor: "transparent",
-               color: "transparent",
+               fillColor: "red",
+               color: "red",
                weight: 1,
                opacity: 1,
                fillOpacity: 1
            });
        },
 	    onEachFeature: function (feature, layer) {
-					layer.bindPopup("<p style='margin-top: 10px !important; margin-bottom: 0px !important; font-size: 13px'>"+feature.properties.stop_name+"</p>");
+					layer.bindPopup("<p style='margin-top: 10px !important; margin-bottom: 0px !important; font-size: 13px'>"+feature.properties.Nombre+"</p>");
 			},
 			filter: function(feature, layer) {
-				return thisInstance.isTransportEnabled(feature.properties.agency_id);
+				return thisInstance.isTransportEnabled(feature.properties.Agencia);
 			}
 	  });
 
@@ -95,7 +104,7 @@ var TransportsManager = function(map) {
 		}
 
 		togglePathLayerFor(suburbano, SuburbanoDom);
-		toggleStationsFor('SUB');
+		toggleStationsFor(suburbanoGEOJSON);
 	}
 
 	var toggleMetro = function() {
@@ -104,7 +113,7 @@ var TransportsManager = function(map) {
 		}
 
 		togglePathLayerFor(metro, MetroDom);
-		toggleStationsFor('METRO');
+		toggleStationsFor(metroGEOJSON);
 	}
 
 	var toggleMetrobus = function() {
@@ -113,7 +122,7 @@ var TransportsManager = function(map) {
 		}
 
 		togglePathLayerFor(metrobus, MetrobusDom);
-		toggleStationsFor('MB');
+		toggleStationsFor(metrobusGEOJSON);
 	}
 
 	var toggleSTE = function() {
@@ -122,7 +131,7 @@ var TransportsManager = function(map) {
 		}
 
 		togglePathLayerFor(electricos, STEDom);
-		toggleStationsFor('STE');
+		toggleStationsFor(steGEOJSON);
 	}
 
 	var toggleMexibus = function() {
@@ -131,7 +140,7 @@ var TransportsManager = function(map) {
 		}
 
 		togglePathLayerFor(mexibus, MexibusDom);
-		toggleStationsFor('Mexibus');
+		toggleStationsFor(mexibusGEOJSON);
 	}
 
 	var toggleITDP = function() {
@@ -140,7 +149,7 @@ var TransportsManager = function(map) {
 		}
 
 		togglePathLayerFor(itdp, itdpDom);
-		toggleStationsFor('ITDP');
+		toggleStationsFor(itdpGEOJSON);
 	}
 
 	/*
@@ -210,21 +219,7 @@ var PolygonsManager = function(map, tm, callback) {
 	}
 
 	var filterByAgency = function(feature, layer) {
-		var name = null;
-		var agency = feature.properties.AGENCIA;
-
-		if(agency == "Tren Suburbano") {
-			name = "SUB";
-		} else if(agency == "Metrobs" || agency == "Metrobús") {
-			name = "MB";
-		} else if(agency == "Sistema de Transporte Colectivo") {
-			name = "METRO";
-		} else if(agency == "Mexibs" || agency == "Mexibús") {
-			name = "Mexibus";
-		} else {
-      name = agency;
-    }
-		return transportsManager.isTransportEnabled(name);
+		return transportsManager.isTransportEnabled(feature.properties.Agency);
 	}
 
 	var loadRadius = function(radius) {

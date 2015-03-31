@@ -13,7 +13,7 @@
 					<p class="action"><%= link_to t('app.sections.start.action'), root_path.concat('#map'), :class => "call-to-action" %></p>
 				</div>
 				<div class="col-xs-6 col-md-4">
-					<p class="intro"><%= t('app.sections.start.intro') %></p>
+					<p class="intro"><%= t('app.sections.start.intro').html_safe %></p>
 				</div>
 				<div class="col-xs-6 col-md-4"><%= image_tag('df-logo.png') %></div>
 			</div>
@@ -114,7 +114,7 @@
 							<%= link_to t('app.sections.about.data'), download_data_path, :target => "_blank" %></li>
 							<li>
 								<%= image_tag('proposal-icon.png', :size => '40x40', alt: t('attributions.proposal_icon'), title: t('attributions.proposal_icon')) %> 
-								<%= link_to t('app.sections.about.proposal'), 'http://mexico.itdp.org/wp-content/uploads/Resumen-Ejecutivo-ZMVMb.pdf', :target => "_blank" %>
+								<%= link_to t('app.sections.about.proposal'), 'http://mexico.itdp.org/documentos/hacia-una-estrategia-de-desarrollo-orientado-al-transporte-para-el-distrito-federal/', :target => "_blank" %>
 							</li>
 						</ul>
 					</div>
