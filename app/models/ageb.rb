@@ -15,10 +15,10 @@ class Ageb < ActiveRecord::Base
   #  This method is on charge of pre-processing the_geom 
   #
   def prepare_geom
-    return if self.the_geom.nil?
+    return if self.geom.nil?
     
     factory = RGeo::GeoJSON::EntityFactory.instance
-    feature = factory.feature(self.the_geom, nil, { 
+    feature = factory.feature(self.geom, nil, { 
         pob1: self.pob1,
         densidad: self.densidad,
         eco4_r: self.eco4_r,

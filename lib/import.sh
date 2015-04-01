@@ -7,7 +7,12 @@
 # $2 Nombre de la tabla donde insertar los contenidos del shape
 # $3 Nombre de la base de datos
 # $4 Nombre del usuario
-# $5 Nombre de una tabla geoespacial existente 
+
+# Si tienes una base de datos con las funciones de PostGIS cargadas usa el flag '--template-db'
+# $5 Nombre de un DB template en postgresql que tenga definidas las funciones de PostGIS 
+
+# Ejemplo
+# import.sh src/shapes/ages/AGEBs.shp agebs bogo_prod <nombre-de-usuario>
 
 # ========== ENGLISH
 
@@ -20,20 +25,32 @@
 # $2 Table name where the shapefile contents will be dumped
 # $3 Database name
 # $4 Username
-# $5 Spatial enabled existen DB
+
+# If you have a DB template with geospatial functions already on it, then add the '--template-db' flag
+# $5 DB template name on postgresql with PostGIS defined functions 
+
+# Example
+# import.sh src/shapes/ages/AGEBs.shp agebs bogo_prod <user-name>
 
 echo "Drop existing db"
 dropdb $3 -U $4
 echo "Create db"
-createdb $3 -T $5 -U $4 
+
+if [[ $* == *--template-db* ]]; then
+createdb $3 -T $5 -U $4
+else
+createdb $3 -U $4
+psql -h localhost -d $3 -c "CREATE EXTENSION postgis;"
+fi
+
 echo "Import shapefile"
 shp2pgsql -I -i -D -s 4326 $1 $2 | psql -h localhost -d $3 -U $4
 echo "Attempting to migrate"
-rake db:migrate
+bundle exec rake db:migrate
 echo "Upgrading migration"
 psql -h localhost -d $3 -U $4 -c "INSERT INTO schema_migrations (version) VALUES ('20140519033920');"
 echo "Re-migrate"
-rake db:migrate
+bundle exec rake db:migrate
 echo "Pre-process geometries for optimization"
-rake transform:preprocess_geoms
+bundle exec rake transform:preprocess_geoms
 echo "Done!!"

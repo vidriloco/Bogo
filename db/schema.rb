@@ -17,35 +17,31 @@ ActiveRecord::Schema.define(version: 20140520053036) do
   enable_extension "plpgsql"
   enable_extension "postgis"
 
-  create_table "agebs", force: true do |t|
-    t.integer  "gid"
-    t.string   "cvegeo"
-    t.float    "pob1"
-    t.float    "sup1"
-    t.float    "sup2"
-    t.float    "eco4"
-    t.float    "eco25_r"
-    t.float    "disc1"
-    t.float    "disc1_r"
-    t.float    "viv28"
-    t.float    "viv28_r"
-    t.float    "viv0"
-    t.float    "viv1"
-    t.float    "viv1_r"
-    t.text     "nse_proxy"
-    t.text     "gmu2010"
-    t.integer  "densidad"
-    t.integer  "densidad_2"
-    t.float    "eco4_r"
-    t.string   "stc"
-    t.string   "ste"
-    t.string   "mb"
-    t.string   "mxb"
-    t.string   "tren"
-    t.spatial  "the_geom",       limit: {:srid=>4326, :type=>"polygon", :geographic=>true}
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.text     "processed_geom"
+  create_table "agebs", primary_key: "gid", force: true do |t|
+    t.string  "cvegeo",         limit: 13
+    t.float   "pob1"
+    t.float   "eco4"
+    t.float   "eco25"
+    t.float   "eco25_r"
+    t.float   "disc1"
+    t.float   "disc1_r"
+    t.float   "viv28"
+    t.float   "viv28_r"
+    t.float   "viv0"
+    t.float   "viv1"
+    t.float   "viv1_r"
+    t.integer "densidad"
+    t.float   "eco4_r"
+    t.integer "empleo"
+    t.float   "sup"
+    t.integer "empleo_r"
+    t.string  "nse",            limit: 50
+    t.string  "gmu",            limit: 50
+    t.decimal "sup1"
+    t.spatial "geom",           limit: {:srid=>4326, :type=>"multi_polygon"}
+    t.text    "processed_geom"
   end
+
+  add_index "agebs", ["geom"], :name => "agebs_geom_idx", :spatial => true
 
 end

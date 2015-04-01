@@ -55,8 +55,6 @@ var TransportsManager = function(map) {
 			pointToLayer: function (feature, latlng) {
            return new L.CircleMarker(latlng, {
                radius: 5,
-               fillColor: "red",
-               color: "red",
                weight: 1,
                opacity: 1,
                fillOpacity: 1
@@ -118,7 +116,7 @@ var TransportsManager = function(map) {
 
 	var toggleMetrobus = function() {
 		if(metrobus == null) {
-			metrobus = L.mapbox.tileLayer('vidriloco.nrr1yo7v');
+			metrobus = L.mapbox.tileLayer('vidriloco.egckno8c');
 		}
 
 		togglePathLayerFor(metrobus, MetrobusDom);
@@ -136,7 +134,7 @@ var TransportsManager = function(map) {
 
 	var toggleMexibus = function() {
 		if(mexibus == null) {
-			mexibus = L.mapbox.tileLayer('vidriloco.jxwkt7sa');
+			mexibus = L.mapbox.tileLayer('vidriloco.xgwi5728');
 		}
 
 		togglePathLayerFor(mexibus, MexibusDom);
