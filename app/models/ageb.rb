@@ -10,15 +10,19 @@ class Ageb < ActiveRecord::Base
   def selected_fields
     "gid, cvegeo, pob1, eco4, eco25, eco25_r, disc1, disc1_r, viv28, viv28_r, viv0, viv1, viv1_r, densidad, eco4_r, empleo, sup, empleo_r, nse, processed_geom, gmu"
   end
+  
+  def geometry_alias
+    self.respond_to?(:the_geom) ? send(:the_geom) : send(:geom)
+  end
 
   ##
   #  This method is on charge of pre-processing the_geom 
   #
   def prepare_geom
-    return if self.geom.nil?
+    return if self.geometry_alias.nil?
     
     factory = RGeo::GeoJSON::EntityFactory.instance
-    feature = factory.feature(self.geom, nil, { 
+    feature = factory.feature(self.geometry_alias, nil, { 
         pob1: self.pob1,
         densidad: self.densidad,
         eco4_r: self.eco4_r,
