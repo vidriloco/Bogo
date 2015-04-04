@@ -107,7 +107,7 @@ var TransportsManager = function(map) {
 
 	var toggleMetro = function() {
 		if(metro == null) {
-			metro = L.mapbox.tileLayer('vidriloco.xeh1mnlr');
+			metro = L.mapbox.tileLayer('vidriloco.nfshiwni');
 		}
 
 		togglePathLayerFor(metro, MetroDom);
@@ -116,7 +116,7 @@ var TransportsManager = function(map) {
 
 	var toggleMetrobus = function() {
 		if(metrobus == null) {
-			metrobus = L.mapbox.tileLayer('vidriloco.egckno8c');
+			metrobus = L.mapbox.tileLayer('vidriloco.4icvgs2r');
 		}
 
 		togglePathLayerFor(metrobus, MetrobusDom);
